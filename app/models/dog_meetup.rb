@@ -1,0 +1,2 @@
+class DogMeetup < ApplicationRecord
+end
