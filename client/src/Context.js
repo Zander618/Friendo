@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  // const [dogs, setDogs] = useState([])
 
   const loginUser = (currentUser) => {
     setUser(currentUser);
@@ -23,9 +24,9 @@ function UserProvider({ children }) {
       }
     });
 
-    // fetch("/games")
+    // fetch("/dogs")
     //   .then((r) => r.json())
-    //   .then(setGames);
+    //   .then(setDogs);
   }, []);
 
 
