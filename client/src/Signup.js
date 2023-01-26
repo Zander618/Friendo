@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from "./Context";
 
-const Signup = ( { onLogin }) => {
+const Signup = ( ) => {
+
+  const {loginUser} = useContext(UserContext)
+
+  console.log(loginUser)
+
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [country, setCountry] = useState("")
+  const [state, setState] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate()
 
   function handleSubmit(e) {
@@ -17,10 +27,14 @@ const Signup = ( { onLogin }) => {
       body: JSON.stringify({
         username,
         password,
+        firstName,
+        state,
+        country,
+        email
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
+        r.json().then((user) => loginUser(user));
         navigate("/")
       }
     });
@@ -50,7 +64,42 @@ const Signup = ( { onLogin }) => {
                     autoComplete="current-password"
           />
         </div>
-
+        <div>
+          <label htmlFor="first_name">First Name: </label>
+          <input 
+                    type="first_name"
+                    id="first_name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="country">Country: </label>
+          <input 
+                    type="country"
+                    id="country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="state">State: </label>
+          <input 
+                    type="state"
+                    id="state"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email Address: </label>
+          <input 
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
         <input type="submit" value="Create Account" />
       </form>
     </div>
