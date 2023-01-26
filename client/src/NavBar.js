@@ -32,6 +32,67 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  // const loggedInLinks = () => {
+  //   return (
+  //     <div>
+  //       <Button>
+  //         <Typography
+  //           noWrap
+  //           component="a"
+  //           href="/dogs"
+  //           sx={{
+  //             mr: 2,
+  //             display: { xs: "none", md: "flex" },
+  //             fontFamily: "monospace",
+  //             fontWeight: 700,
+  //             letterSpacing: ".3rem",
+  //             color: "white",
+  //             textDecoration: "none",
+  //           }}
+  //         >
+  //           Dogs
+  //         </Typography>
+  //       </Button>
+  //       <Button>
+  //         <Typography
+  //           noWrap
+  //           component="a"
+  //           href="/meetups"
+  //           sx={{
+  //             mr: 2,
+  //             display: { xs: "none", md: "flex" },
+  //             fontFamily: "monospace",
+  //             fontWeight: 700,
+  //             letterSpacing: ".3rem",
+  //             color: "white",
+  //             textDecoration: "none",
+  //           }}
+  //         >
+  //           Meetups
+  //         </Typography>
+  //       </Button>
+  //       <Button>
+  //         <Typography
+  //           noWrap
+  //           component="a"
+  //           href="/locations"
+  //           sx={{
+  //             mr: 2,
+  //             display: { xs: "none", md: "flex" },
+  //             fontFamily: "monospace",
+  //             fontWeight: 700,
+  //             letterSpacing: ".3rem",
+  //             color: "white",
+  //             textDecoration: "none",
+  //           }}
+  //         >
+  //           Locations
+  //         </Typography>
+  //       </Button>
+  //     </div>
+  //   );
+  // };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -83,61 +144,63 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             ></Menu>
+            {/* insert conditional for logged in logged out links */}
+            <Button>
+          <Typography
+            noWrap
+            component="a"
+            href="/dogs"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            Dogs
+          </Typography>
+        </Button>
+        <Button>
+          <Typography
+            noWrap
+            component="a"
+            href="/meetups"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            Meetups
+          </Typography>
+        </Button>
+        <Button>
+          <Typography
+            noWrap
+            component="a"
+            href="/locations"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "white",
+              textDecoration: "none",
+            }}
+          >
+            Locations
+          </Typography>
+        </Button>
           </Box>
-          <Button>
-            <Typography
-              noWrap
-              component="a"
-              href="/dogs"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              Dogs
-            </Typography>
-          </Button>
-          <Button>
-            <Typography
-              noWrap
-              component="a"
-              href="/meetups"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              Meetups
-            </Typography>
-          </Button>
-          <Button>
-            <Typography
-              noWrap
-              component="a"
-              href="/locations"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              Locations
-            </Typography>
-          </Button>
+
           <PetsIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -197,6 +260,18 @@ function ResponsiveAppBar() {
                   Sign Up
                 </Typography>
               </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  // use correct restful route
+                  href="/adddog"
+                  textAlign="center"
+                >
+                  Add Dog
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -204,4 +279,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
