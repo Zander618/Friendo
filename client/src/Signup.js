@@ -6,9 +6,6 @@ const Signup = ( ) => {
 
   const {loginUser} = useContext(UserContext)
 
-  console.log(loginUser)
-
-  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");

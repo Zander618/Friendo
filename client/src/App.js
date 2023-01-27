@@ -7,6 +7,7 @@ import Locations from './Locations';
 import Meetups from './Meetups';
 import Signup from './Signup';
 import Login from './Login';
+import AddDog from './AddDog';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/meetups" element={<Meetups/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/adddog" element={<AddDog/>} />
         </Routes>
       </Router>
   );
