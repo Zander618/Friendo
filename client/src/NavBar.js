@@ -97,13 +97,13 @@ function ResponsiveAppBar() {
           </Typography>
         </Button>
       </div>
-    );
+    )
   };
 
   const loggedOutLinks = () => {
     return (
       <div>
-  <h1>Please sign in or sign up to begin making friends. ----></h1>
+  <h4>Please sign in or sign up to begin making friends. </h4>
       </div>
     );
   };
