@@ -1,3 +1,3 @@
-class DogSerializer < ActiveModel::Serializer
-  attributes :id
-end
+# class DogSerializer < ActiveModel::Serializer
+#   attributes :id
+# end
