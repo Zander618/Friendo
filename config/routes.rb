@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :dog_meetups
   resources :dogs
   resources :users
+  resources :images
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
