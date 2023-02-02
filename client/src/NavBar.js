@@ -154,6 +154,18 @@ function ResponsiveAppBar() {
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            // use correct restful route
+            href="/mydog"
+            textAlign="center"
+          >
+            My Dog
+          </Typography>
+        </MenuItem>
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Typography
             onClick={handleLogout}
             variant="h6"
             noWrap
