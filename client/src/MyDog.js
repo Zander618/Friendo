@@ -1,8 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./Context";
 
 const MyDog = () => {
   const { user } = useContext(UserContext);
+  const [dogPhoto, setDogPhoto] = useState([])
+
+  useEffect (() => {
+    fetch('/images')
+    .then(res => res.json())
+    .then(data => setDogPhoto(data))
+  })
+
+  const handleSubmitPhoto = () => {
+    e.preventDefault()
+    // you need to add a dog_id column to images
+
+  }
 
 
   return  (
