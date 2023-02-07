@@ -4,7 +4,7 @@ import "./DogImage.css"
 
 const Dogs = () => {
 
-  const { user, dogs } = useContext(UserContext);
+  const { dogs } = useContext(UserContext);
 
 
   return dogs ? (

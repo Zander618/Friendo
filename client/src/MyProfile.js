@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css"
 
-const MyDog = () => {
-  const { user, dogs } = useContext(UserContext);
+const MyProfile = () => {
+  const { user } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
 
+  console.log(user)
 
 
   const handleSubmitPhoto = (e) => {
@@ -40,6 +41,7 @@ const MyDog = () => {
           return (
             <div key={dog.id}>
               <h2>{dog.name}</h2>
+              <img src={dog.dog_image} alt="this is a dog" className="dogImageSizing"/>
               <ul>
                 <li>{dog.breed}</li>
                 <li>{dog.traits}</li>
@@ -48,6 +50,7 @@ const MyDog = () => {
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
               <h3>Add Photo</h3>
+              {dog.dog_image ? "" :
               <form onSubmit={handleSubmitPhoto} id={dog.id}>
                 <h4>upload photo</h4>
                 <input
@@ -57,6 +60,7 @@ const MyDog = () => {
                 />
                 <input type="submit" />
               </form>
+        }
             </div>
           );
         })}
@@ -69,4 +73,4 @@ const MyDog = () => {
   )
 };
 
-export default MyDog;
+export default MyProfile;
