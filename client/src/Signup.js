@@ -8,7 +8,7 @@ const Signup = ( ) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [first_name, setFirst_name] = useState("");
   const [country, setCountry] = useState("")
   const [state, setState] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const Signup = ( ) => {
       body: JSON.stringify({
         username,
         password,
-        firstName,
+        first_name,
         state,
         country,
         email
@@ -66,8 +66,8 @@ const Signup = ( ) => {
           <input 
                     type="first_name"
                     id="first_name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    value={first_name}
+                    onChange={(e) => setFirst_name(e.target.value)}
           />
         </div>
         <div>

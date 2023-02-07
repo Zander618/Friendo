@@ -9,12 +9,10 @@ import Meetups from './Meetups';
 import Signup from './Signup';
 import Login from './Login';
 import AddDog from './AddDog';
-import MyDog from './MyDog';
-import { UserContext } from "./Context";
+import MyProfile from './MyProfile';
 
 function App() {
-  const { user } = useContext(UserContext);
-  return  user ? (
+  return (
       <Router>
         <NavBar />
         <Routes>
@@ -25,11 +23,9 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/adddog" element={<AddDog/>} />
-          <Route path="/mydog" element={<MyDog/>} />
+          <Route path="/myprofile" element={<MyProfile/>} />
         </Routes>
       </Router>
-  ): (
-    <h1>...Loading</h1>
   )
 }
 

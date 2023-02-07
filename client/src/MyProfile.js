@@ -6,7 +6,7 @@ const MyDog = () => {
   const { user, dogs } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
 
-console.log("in dog", dogs)
+
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -21,12 +21,20 @@ console.log("in dog", dogs)
     });
   };
 
-  return (
+  return user ? (
     <div>
       <br></br>
-      <h1>{user.first_name}</h1>
-      <h1>{user.username}'s Dogs</h1>
+      <h1>User Profile</h1>
+      <br></br>
+      <h2>First Name: {user.first_name}</h2>
+      <h2>Username: {user.username}</h2>
+      <h2>State: {user.state}</h2>
+      <h2>Country: {user.country}</h2>
+      <h2>Email: {user.email}</h2>
       {/* <img src={dogs[0].image.dog_image} alt="my dog" /> */}
+      <br></br>
+      <br></br>
+      <h1>{user.first_name}'s Dogs</h1>
       <div>
         {user.dogs.map((dog) => {
           return (
@@ -39,9 +47,9 @@ console.log("in dog", dogs)
                 <li>{dog.age}</li>
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
-              <h1>Add Photo</h1>
+              <h3>Add Photo</h3>
               <form onSubmit={handleSubmitPhoto} id={dog.id}>
-                <h3>upload photo</h3>
+                <h4>upload photo</h4>
                 <input
                   type="file"
                   accept="image/*"
@@ -53,8 +61,12 @@ console.log("in dog", dogs)
           );
         })}
       </div>
+      <br></br>
+      <br></br>
     </div>
-  );
+  ) : (
+    <h1>... Loading</h1>
+  )
 };
 
 export default MyDog;

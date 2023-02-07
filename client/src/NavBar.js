@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  console.log(loggedIn)
+
 
   const loggedInLinks = () => {
     return (
@@ -158,10 +158,10 @@ function ResponsiveAppBar() {
             noWrap
             component="a"
             // use correct restful route
-            href="/mydog"
+            href="/myprofile"
             textAlign="center"
           >
-            My Dog
+            My Profile
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
