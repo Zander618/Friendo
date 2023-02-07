@@ -6,7 +6,6 @@ const AddDog = () => {
 
   const {userId, dogs, setDogs} = useContext(UserContext)
 
-  console.log(userId)
 
   const [formData, setFormData] = useState({
    user_id: userId,
@@ -82,6 +81,7 @@ const AddDog = () => {
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label style={{ color: "black" }}>
             Breed:
             <input
@@ -93,6 +93,7 @@ const AddDog = () => {
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label style={{ color: "black" }}>
             Traits:
             <input
@@ -104,6 +105,7 @@ const AddDog = () => {
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label style={{ color: "black" }}>
             Enjoyed Activities:
             <input
@@ -115,6 +117,7 @@ const AddDog = () => {
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label style={{ color: "black" }}>
             Age:
             <input
@@ -126,6 +129,7 @@ const AddDog = () => {
               onChange={handleChange}
             />
           </label>
+          <br></br>
           <label style={{ color: "black" }}>
             Vaccination:
             <input

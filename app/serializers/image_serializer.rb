@@ -4,7 +4,7 @@ class ImageSerializer < ActiveModel::Serializer
   has_one :dog
 
   def dog_image
-    rails_blob_path(object.dog_image, only_path: true) if object.dog_image.attached?
+    rails_blob_path(object.dog_image, only_path: true) if object.dog_image.attached?  
   end
   
 end

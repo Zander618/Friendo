@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AddLocation from './AddLocation';
 
 const Locations = () => {
+  const [buttonPopup, setButtonPopup] = useState(false);
+
   return (
-    <div>Locations</div>
+    <div>
+      <button
+        onClick={() => {
+          setButtonPopup(true);
+        }}
+      >
+        Add Location
+      </button>
+      <AddLocation
+        trigger={buttonPopup}
+        setTrigger={setButtonPopup}
+      />
+    </div>
   )
 }
 

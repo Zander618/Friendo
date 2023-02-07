@@ -6,7 +6,6 @@ const Dogs = () => {
 
   const { user, dogs } = useContext(UserContext);
 
-  console.log("in dog", dogs)
 
   return dogs ? (
     <div>
