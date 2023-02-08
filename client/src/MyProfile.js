@@ -32,7 +32,6 @@ const MyProfile = () => {
       <h2>State: {user.state}</h2>
       <h2>Country: {user.country}</h2>
       <h2>Email: {user.email}</h2>
-      {/* <img src={dogs[0].image.dog_image} alt="my dog" /> */}
       <br></br>
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
@@ -41,7 +40,7 @@ const MyProfile = () => {
           return (
             <div key={dog.id}>
               <h2>{dog.name}</h2>
-              <img src={dog.dog_image} alt="this is a dog" className="dogImageSizing"/>
+              <img src={dog.uploaded_image} alt="Please Upload Your Dog's Photo Below" className="dogImageSizing"/>
               <ul>
                 <li>{dog.breed}</li>
                 <li>{dog.traits}</li>
@@ -50,7 +49,7 @@ const MyProfile = () => {
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
               <h3>Add Photo</h3>
-              {dog.dog_image ? "" :
+              {dog.uploaded_image ? "" :
               <form onSubmit={handleSubmitPhoto} id={dog.id}>
                 <h4>upload photo</h4>
                 <input

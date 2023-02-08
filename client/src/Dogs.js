@@ -14,7 +14,7 @@ const Dogs = () => {
         <div key={dog.id} className="dog-card">
           <h1>{dog.name}</h1>
           <h2>{dog.user.username}'s dog</h2>
-          <img src={dog.image ? dog.image.dog_image : "no photo"} alt="this is a dog" className="dogImageSizing"/>
+          <img src={dog.image ? dog.image.dog_image : "no photo"} alt="No Photo" className="dogImageSizing"/>
             <ul>
                 <li>{dog.breed}</li>
                 <li>{dog.traits}</li>
