@@ -1,10 +1,12 @@
 import React, { useState, useContext} from 'react'
 import { UserContext } from "./Context";
-// import ImageViewer from 'react-simple-image-viewer';
+import { useNavigate } from "react-router-dom";
+
 
 const AddDog = () => {
 
   const {userId, dogs, setDogs} = useContext(UserContext)
+  const navigate = useNavigate();
 
 
   const [formData, setFormData] = useState({
@@ -39,6 +41,7 @@ const AddDog = () => {
       .then((resp) => resp.json())
       .then((data) => {
         addUserDog(data)
+        navigate("/myprofile")
       });
     setFormData({
         user_id: userId,
@@ -62,6 +65,7 @@ const AddDog = () => {
 
   const addUserDog = (dog) => {
     const newDogList = [ ...dogs, dog ];
+    console.log(newDogList)
     setDogs(newDogList);
   };
 

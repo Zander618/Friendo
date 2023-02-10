@@ -1,13 +1,10 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
-import "./DogImage.css"
+import "./DogImage.css";
 
 const MyProfile = () => {
-  const { user } = useContext(UserContext);
+  const { user, dogs, setDogs } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
-
-  console.log(user)
-
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -19,7 +16,20 @@ const MyProfile = () => {
     fetch("/images", {
       method: "POST",
       body: formData,
-    });
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        addPhotoToDog(data);
+      });
+  };
+
+  const addPhotoToDog = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => (dog.id = data.dog.id));
+    dogToUpdate.uploaded_image = data.dog_image;
+    let unupdatedDogs = spreadDogs.filter((dog) => dog.id !== data.dog.id);
+    let updatedDogs = [...unupdatedDogs, dogToUpdate];
+    setDogs(updatedDogs)
   };
 
   return user ? (
@@ -40,7 +50,11 @@ const MyProfile = () => {
           return (
             <div key={dog.id}>
               <h2>{dog.name}</h2>
-              <img src={dog.uploaded_image} alt="Please Upload Your Dog's Photo Below" className="dogImageSizing"/>
+              <img
+                src={dog.uploaded_image}
+                alt="Please Upload Below"
+                className="dogImageSizing"
+              />
               <ul>
                 <li>{dog.breed}</li>
                 <li>{dog.traits}</li>
@@ -48,18 +62,23 @@ const MyProfile = () => {
                 <li>{dog.age}</li>
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
-              <h3>Add Photo</h3>
-              {dog.uploaded_image ? "" :
-              <form onSubmit={handleSubmitPhoto} id={dog.id}>
-                <h4>upload photo</h4>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setDogImage(e.target.files[0])}
-                />
-                <input type="submit" />
-              </form>
-        }
+
+              {dog.uploaded_image ? (
+                ""
+              ) : (
+                <div>
+                  <h3>Add Photo</h3>
+                  <form onSubmit={handleSubmitPhoto} id={dog.id}>
+                    <h4>upload photo</h4>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => setDogImage(e.target.files[0])}
+                    />
+                    <input type="submit" />
+                  </form>
+                </div>
+              )}
             </div>
           );
         })}
@@ -69,7 +88,7 @@ const MyProfile = () => {
     </div>
   ) : (
     <h1>... Loading</h1>
-  )
+  );
 };
 
 export default MyProfile;
