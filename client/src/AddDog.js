@@ -1,12 +1,19 @@
 import React, { useState, useContext} from 'react'
 import { UserContext } from "./Context";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select'
 
 
 const AddDog = () => {
 
-  const {userId, dogs, setDogs} = useContext(UserContext)
+  const {userId, addUserDog} = useContext(UserContext)
+  const [selected, setSelected] = useState("");
   const navigate = useNavigate();
+
+  const options = [
+    { value: 1, label: 'Vaccinated' },
+    { value: 0, label: 'Not Vaccinated Yet' }
+  ]
 
 
   const [formData, setFormData] = useState({
@@ -35,7 +42,7 @@ const AddDog = () => {
         enjoyed_activities: formData.enjoyed_activities,
         age: formData.age,
         image_data: "",
-        vaccination: formData.vaccination,
+        vaccination: selected.value
       }),
     })
       .then((resp) => resp.json())
@@ -62,13 +69,9 @@ const AddDog = () => {
     });
   };
 
-
-  const addUserDog = (dog) => {
-    const newDogList = [ ...dogs, dog ];
-    console.log(newDogList)
-    setDogs(newDogList);
+  const handleSelect = (selectedOption) => {
+    setSelected(selectedOption);
   };
-
 
   return (
     <div>
@@ -136,14 +139,7 @@ const AddDog = () => {
           <br></br>
           <label style={{ color: "black" }}>
             Vaccination:
-            <input
-              type="text"
-              name="vaccination"
-              spellCheck="true"
-              placeholder="Enter Yes or No to your dog being vaccinated"
-              value={formData.vaccination}
-              onChange={handleChange}
-            />
+            <Select options={options} onChange={handleSelect} autoFocus={true} />
           </label>
           <input type="submit" value="Submit" />
         </form>

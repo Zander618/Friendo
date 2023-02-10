@@ -6,8 +6,31 @@ const AddLocation = ( {trigger, setTrigger }) => {
     address: "",
     name: "",
     photo: "",
-    is_a_dog_park: "",
   });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`/locations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address: formData.address,
+        name: formData.name,
+        photo: formData.photo,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        addNewLocation(data)
+      });
+    setFormData({
+      address: "",
+      name: "",
+      photo: "",
+    });
+  };
 
   const handleChange = (event) => {
     setFormData({
@@ -16,12 +39,15 @@ const AddLocation = ( {trigger, setTrigger }) => {
     });
   };
 
+  const addNewLocation = (data) => {
+    console.log("This is data", data)
+  }
 
   return trigger ? (
     <div>
       <div >
         <h3 style={{ color: "black" }}>Add Location</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label style={{ color: "black" }}>
             Address:
             <input
@@ -50,7 +76,7 @@ const AddLocation = ( {trigger, setTrigger }) => {
             Photo:
             <input
               type="text"
-              name="name"
+              name="photo"
               placeholder="Copy url of location photo"
               value={formData.photo}
               onChange={handleChange}

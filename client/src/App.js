@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,13 +12,21 @@ import AddDog from './AddDog';
 import MyProfile from './MyProfile';
 
 function App() {
+  const [locations, setLocations] = useState([])
+
+  useEffect(() => {
+    fetch("/locations")
+      .then((r) => r.json())
+      .then(setLocations);
+  }, []);
+
   return (
       <Router>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/dogs" element={<Dogs/>} />
-          <Route path="/locations" element={<Locations/>} />
+          <Route path="/locations" element={<Locations locations={locations} setLocations={setLocations}/>} />
           <Route path="/meetups" element={<Meetups/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
