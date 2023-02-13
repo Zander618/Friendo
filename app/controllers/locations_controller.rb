@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[ show update destroy ]
 
   # GET /locations
   def index
@@ -46,6 +45,6 @@ class LocationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def location_params
-      params.require(:location).permit(:address, :name, :photo, :is_a_dog_park)
+      params.require(:location).permit(:address, :name, :photo)
     end
 end

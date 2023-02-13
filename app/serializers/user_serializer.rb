@@ -3,8 +3,4 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :dogs
 
-  # def dog_image
-  #   byebug
-  # end
-
 end

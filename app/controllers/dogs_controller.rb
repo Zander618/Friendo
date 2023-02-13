@@ -4,8 +4,7 @@ class DogsController < ApplicationController
   # GET /dogs
   def index
     @dogs = Dog.all
-
-    render json: @dogs
+    render json: @dogs, include: :dog_meetups
   end
 
   # GET /dogs/1
