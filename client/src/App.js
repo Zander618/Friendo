@@ -10,9 +10,11 @@ import Signup from './Signup';
 import Login from './Login';
 import AddDog from './AddDog';
 import MyProfile from './MyProfile';
+import MeetupLocation from "./MeetupLocation";
 
 function App() {
   const [locations, setLocations] = useState([])
+  const [dogId, setDogId] = useState("")
 
   useEffect(() => {
     fetch("/locations")
@@ -25,13 +27,14 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/dogs" element={<Dogs/>} />
+          <Route path="/dogs" element={<Dogs setDogId={setDogId}/>} />
           <Route path="/locations" element={<Locations locations={locations} setLocations={setLocations}/>} />
           <Route path="/meetups" element={<Meetups/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/adddog" element={<AddDog/>} />
           <Route path="/myprofile" element={<MyProfile/>} />
+          <Route path="/meetuplocation" element={<MeetupLocation dogId={dogId} locations={locations}/>} />
         </Routes>
       </Router>
   )
