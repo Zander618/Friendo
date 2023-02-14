@@ -19,11 +19,6 @@ function UserProvider({ children }) {
     setLoggedIn(false);
   };
 
-  const addUserDog = (dog) => {
-    const newDogList = [ ...dogs, dog ];
-    setDogs(newDogList);
-  };
-
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -42,7 +37,7 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, addUserDog }}
+      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId }}
     >
       {children}
     </UserContext.Provider>

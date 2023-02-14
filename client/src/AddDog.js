@@ -6,7 +6,7 @@ import Select from 'react-select'
 
 const AddDog = () => {
 
-  const {userId, addUserDog} = useContext(UserContext)
+  const {userId, dogs, setDogs} = useContext(UserContext)
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
 
@@ -15,6 +15,10 @@ const AddDog = () => {
     { value: 0, label: 'Not Vaccinated Yet' }
   ]
 
+  const addUserDog = (dog) => {
+    const newDogList = [ ...dogs, dog ];
+    setDogs(newDogList);
+  };
 
   const [formData, setFormData] = useState({
    user_id: userId,

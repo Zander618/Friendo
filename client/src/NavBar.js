@@ -15,6 +15,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PetsIcon from "@mui/icons-material/Pets";
 import { UserContext } from "./Context";
+import { Link } from "react-router-dom";
 
 function ResponsiveAppBar() {
   const { logoutUser, loggedIn } = useContext(UserContext);
@@ -45,8 +46,6 @@ function ResponsiveAppBar() {
         <Button>
           <Typography
             noWrap
-            component="a"
-            href="/dogs"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -57,14 +56,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Dogs
+            <Link to="/dogs">Dogs</Link>
           </Typography>
         </Button>
         <Button>
           <Typography
             noWrap
-            component="a"
-            href="/meetups"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -75,14 +72,12 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Meetups
+            <Link to="/meetups">Meetups</Link>
           </Typography>
         </Button>
         <Button>
           <Typography
             noWrap
-            component="a"
-            href="/locations"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -93,7 +88,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Locations
+            <Link to="/locations">Locations</Link>
           </Typography>
         </Button>
       </div>
@@ -115,22 +110,18 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/signup"
             textAlign="center"
           >
-            Sign Up
+            <Link to="/signup">Sign Up</Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/login"
             textAlign="center"
           >
-            Log in
+            <Link to="/login">Login</Link>
           </Typography>
         </MenuItem>
       </div>
@@ -144,24 +135,20 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
             // use correct restful route
-            href="/adddog"
             textAlign="center"
           >
-            Add Dog
+            <Link to="/adddog">Add Dog</Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
             variant="h6"
             noWrap
-            component="a"
             // use correct restful route
-            href="/myprofile"
             textAlign="center"
           >
-            My Profile
+            <Link to="/myprofile">My Profile</Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
@@ -169,7 +156,6 @@ function ResponsiveAppBar() {
             onClick={handleLogout}
             variant="h6"
             noWrap
-            component="a"
             // use correct restful route
             textAlign="center"
           >
@@ -198,8 +184,6 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -210,7 +194,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Friendo
+            <Link to="/">Friendo</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
