@@ -46,7 +46,7 @@ const AddDog = () => {
         enjoyed_activities: formData.enjoyed_activities,
         age: formData.age,
         image_data: "",
-        vaccination: selected.value
+        vaccination: selected
       }),
     })
       .then((resp) => resp.json())
@@ -74,7 +74,7 @@ const AddDog = () => {
   };
 
   const handleSelect = (selectedOption) => {
-    setSelected(selectedOption);
+    setSelected(selectedOption.value);
   };
 
   return (

@@ -15,12 +15,11 @@ class MeetupsController < ApplicationController
 
   # POST /meetups
   def create
-    @meetup = Meetup.new(meetup_params)
-
-    if @meetup.save
-      render json: @meetup, status: :created, location: @meetup
+    meetup = Meetup.create(meetup_params)
+    if meetup.valid?
+      render json: meetup, status: :created
     else
-      render json: @meetup.errors, status: :unprocessable_entity
+      render json: {errors: meetup.errors}, status: :unprocessable_entity
     end
   end
 
