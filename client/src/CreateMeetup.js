@@ -4,7 +4,7 @@ import { UserContext } from "./Context";
 import Select from "react-select";
 import Calendar from "react-calendar";
 
-const MeetupLocation = ({ dogId, locations }) => {
+const CreateMeetup = ({ dogId, locations }) => {
   // const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [date, setDate] = useState(new Date());
@@ -60,4 +60,4 @@ const MeetupLocation = ({ dogId, locations }) => {
   );
 };
 
-export default MeetupLocation;
+export default CreateMeetup;

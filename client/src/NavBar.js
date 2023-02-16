@@ -143,10 +143,9 @@ function ResponsiveAppBar() {
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
             noWrap
-            // use correct restful route
           >
             <Link
-              to="/adddog"
+              to="/dogs/new"
               style={{
                 mr: 4,
                 variant: "h4",
@@ -162,10 +161,9 @@ function ResponsiveAppBar() {
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
             noWrap
-            // use correct restful route
           >
             <Link
-              to="/myprofile"
+              to="/profile"
               style={{
                 mr: 4,
                 variant: "h4",

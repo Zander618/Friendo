@@ -10,7 +10,7 @@ import Signup from './Signup';
 import Login from './Login';
 import AddDog from './AddDog';
 import MyProfile from './MyProfile';
-import MeetupLocation from "./MeetupLocation";
+import CreateMeetup from "./CreateMeetup";
 
 function App() {
   const [locations, setLocations] = useState([])
@@ -32,9 +32,10 @@ function App() {
           <Route path="/meetups" element={<Meetups/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/adddog" element={<AddDog/>} />
-          <Route path="/myprofile" element={<MyProfile/>} />
-          <Route path="/meetuplocation" element={<MeetupLocation dogId={dogId} locations={locations}/>} />
+          <Route path="/dogs/new" element={<AddDog/>} />
+          <Route path="/profile" element={<MyProfile/>} />
+          {/* update route to dogs/{dogid}/meetups/new */}
+          <Route path="/meetuplocation" element={<CreateMeetup dogId={dogId} locations={locations}/>} />
         </Routes>
       </Router>
   )
