@@ -38,67 +38,71 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-
-
   const loggedInLinks = () => {
     return (
       <div>
         <Button>
-          <Typography
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            <Link to="/dogs">Dogs</Link>
+          <Typography noWrap>
+            <Link
+              to="/dogs"
+              style={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Dogs
+            </Link>
           </Typography>
         </Button>
         <Button>
-          <Typography
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            <Link to="/meetups">Meetups</Link>
+          <Typography noWrap>
+            <Link
+              to="/meetups"
+              style={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Meetups
+            </Link>
           </Typography>
         </Button>
         <Button>
-          <Typography
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            <Link to="/locations">Locations</Link>
+          <Typography noWrap>
+            <Link
+              to="/locations"
+              style={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Locations
+            </Link>
           </Typography>
         </Button>
       </div>
-    )
+    );
   };
 
   const loggedOutLinks = () => {
     return (
       <div>
-  <h4>Please sign in or sign up to begin making friends. </h4>
+        <h4>Please sign in or sign up to begin making friends. </h4>
       </div>
     );
   };
@@ -107,65 +111,95 @@ function ResponsiveAppBar() {
     return (
       <div>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography
-            variant="h6"
-            noWrap
-            textAlign="center"
-          >
-            <Link to="/signup">Sign Up</Link>
+          <Typography variant="h6" noWrap textAlign="center">
+            <Link
+              to="/signup"
+              style={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              Sign Up
+            </Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography
-            variant="h6"
-            noWrap
-            textAlign="center"
-          >
+          <Typography variant="h6" noWrap textAlign="center">
             <Link to="/login">Login</Link>
           </Typography>
         </MenuItem>
       </div>
     );
   };
-  
+
   const loggedInMenuItems = () => {
     return (
       <div>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
-            variant="h6"
             noWrap
             // use correct restful route
-            textAlign="center"
           >
-            <Link to="/adddog">Add Dog</Link>
+            <Link
+              to="/adddog"
+              style={{
+                mr: 4,
+                variant: "h4",
+                color: "black",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              Add Dog
+            </Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
-            variant="h6"
             noWrap
             // use correct restful route
-            textAlign="center"
           >
-            <Link to="/myprofile">My Profile</Link>
+            <Link
+              to="/myprofile"
+              style={{
+                mr: 4,
+                variant: "h4",
+                color: "black",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              My Profile
+            </Link>
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography
             onClick={handleLogout}
-            variant="h6"
             noWrap
             // use correct restful route
-            textAlign="center"
           >
-            Log Out
+            <Link
+              style={{
+                mr: 4,
+                variant: "h4",
+                color: "black",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              Log Out
+            </Link>
           </Typography>
         </MenuItem>
       </div>
     );
   };
-  
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -181,20 +215,21 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <PetsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <Link to="/">Friendo</Link>
+          <Typography variant="h6" noWrap>
+            <Link
+              to="/"
+              style={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Friendo
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
