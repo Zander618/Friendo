@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :locations
   resources :meetups
-  resources :dog_meetups
+  # resources :dog_meetups
   resources :dogs
   resources :users
   resources :images
