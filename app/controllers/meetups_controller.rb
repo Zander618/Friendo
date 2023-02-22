@@ -3,9 +3,8 @@ class MeetupsController < ApplicationController
 
   # GET /meetups
   def index
-    @meetups = Meetup.all
-
-    render json: @meetups
+    meetups = Meetup.all
+    render json: meetups
   end
 
   # GET /meetups/1
@@ -45,6 +44,6 @@ class MeetupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def meetup_params
-      params.require(:meetup).permit(:date, :location_id, :invitor_id, :invitee_id)
+      params.require(:meetup).permit(:date, :location_id, :invitor_id, :invitee_id, :time)
     end
 end

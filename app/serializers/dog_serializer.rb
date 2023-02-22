@@ -1,6 +1,6 @@
 class DogSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :user_id, :name, :breed, :traits, :enjoyed_activities, :age, :vaccination, :image, :uploaded_image, :owner_username
+  attributes :id, :user_id, :name, :breed, :traits, :enjoyed_activities, :age, :vaccination, :image, :uploaded_image, :owner_username, :meetups
   
   def uploaded_image
     if object.image
