@@ -14,7 +14,6 @@ class DogSerializer < ActiveModel::Serializer
     object.user.username
   end
 
-
   belongs_to :user 
   has_one :image
   has_many :sent_invitations, class_name: "Meetup", foreign_key: "invitor_id"

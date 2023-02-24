@@ -14,12 +14,17 @@ import CreateMeetup from "./CreateMeetup";
 
 function App() {
   const [locations, setLocations] = useState([])
+  const [meetups, setMeetups] = useState([])
   const [dogId, setDogId] = useState("")
 
   useEffect(() => {
     fetch("/locations")
       .then((r) => r.json())
       .then(setLocations);
+
+      fetch("/meetups")
+      .then((r) => r.json())
+      .then(setMeetups);
   }, []);
 
   return (
@@ -29,7 +34,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/dogs" element={<Dogs setDogId={setDogId}/>} />
           <Route path="/locations" element={<Locations locations={locations} setLocations={setLocations}/>} />
-          <Route path="/meetups" element={<Meetups/>} />
+          <Route path="/meetups" element={<Meetups meetups={meetups} />} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
