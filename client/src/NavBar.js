@@ -111,17 +111,15 @@ function ResponsiveAppBar() {
     return (
       <div>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography variant="h6" noWrap textAlign="center">
+          <Typography noWrap>
             <Link
               to="/signup"
               style={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
+                mr: 4,
+                variant: "h4",
+                color: "black",
                 textDecoration: "none",
+                textAlign: "center",
               }}
             >
               Sign Up
@@ -129,8 +127,19 @@ function ResponsiveAppBar() {
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography variant="h6" noWrap textAlign="center">
-            <Link to="/login">Login</Link>
+          <Typography noWrap>
+            <Link
+              to="/login"
+              style={{
+                mr: 4,
+                variant: "h4",
+                color: "black",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              Login
+            </Link>
           </Typography>
         </MenuItem>
       </div>
@@ -141,9 +150,7 @@ function ResponsiveAppBar() {
     return (
       <div>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography
-            noWrap
-          >
+          <Typography noWrap>
             <Link
               to="/dogs/new"
               style={{
@@ -159,9 +166,7 @@ function ResponsiveAppBar() {
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography
-            noWrap
-          >
+          <Typography noWrap>
             <Link
               to="/profile"
               style={{

@@ -7,12 +7,12 @@ function UserProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [dogs, setDogs] = useState([])
   const [userId, setUserId] = useState("")
-  const [userDogs, setUserDogs] = useState([]);
 
 
   const loginUser = (currentUser) => {
     setUser(currentUser);
     setLoggedIn(true);
+    setUserId(currentUser.id)
   };
 
   const logoutUser = () => {
@@ -21,19 +21,11 @@ function UserProvider({ children }) {
     setUserId("")
   };
 
-  const findUserDogs = (d) => {
-    let filteredDogs = d.filter((dog) => dog.user_id === user.id);
-    setUserDogs(filteredDogs);
-  }
-
-  console.log(userDogs)
-
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           loginUser(user)
-          setUserId(user.id)
         });
       }
     });
@@ -42,14 +34,13 @@ function UserProvider({ children }) {
       .then((r) => r.json())
       .then((data) => {
         setDogs(data)
-        findUserDogs(data)
       });
   }, []);
 
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, userDogs }}
+      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId }}
     >
       {children}
     </UserContext.Provider>

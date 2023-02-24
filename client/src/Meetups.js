@@ -2,14 +2,18 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
 
 const Meetups = ({ meetups }) => {
-  const { user, dogs, userId, userDogs } = useContext(UserContext);
-  
+  const { user, dogs, userId } = useContext(UserContext);
+  const [userDogs, setUserDogs] = useState([]);
   console.log("meetups", meetups);
   console.log("user", user);
   console.log("dogs", dogs);
   console.log("userDogs", userDogs);
   console.log("userId", userId);
 
+  useEffect(() => {
+    let filteredDogs = dogs.filter((dog) => dog.user_id === user.id);
+    setUserDogs(filteredDogs);
+  }, []);
 
   return (
     <div>
@@ -23,7 +27,10 @@ const Meetups = ({ meetups }) => {
                   <h2>Recieved Invitions</h2>
                   <h3>Date: {rI.date}</h3>
                   <h3>From: {rI.invitor.name}</h3>
-                  {/* <h3>Location: {rI.</h3> */}
+                  <h3>Location: {rI.location_name}</h3>
+                  <h3>Address: {rI.location_address}</h3>
+                  <button>Accept</button>
+                  <button>Decline</button>
                 </div>
               );
             })}
@@ -31,9 +38,12 @@ const Meetups = ({ meetups }) => {
               return (
                 <div key={sI.id}>
                   <h2>Sent Invitions</h2>
-                  <h3>Date: {sI.date}</h3>
                   <h3>To: {sI.invitee.name}</h3>
-                  {/* <h3>Location: {rI.</h3> */}
+                  <h3>Date: {sI.date}</h3>
+                  <h3>Location: {sI.location_name}</h3>
+                  <h3>Address: {sI.location_address}</h3>
+                  <button>Accept</button>
+                  <button>Decline</button>
                 </div>
               );
             })}
