@@ -1,5 +1,5 @@
 class MeetupSerializer < ActiveModel::Serializer
-  attributes :id, :date, :location_id, :invitor, :invitee, :location_name, :location_address
+  attributes :id, :date, :location_id, :invitor, :invitee, :location_name, :location_address, :time, :response
 
   def location_name
     object.location.name

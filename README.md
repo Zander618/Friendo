@@ -31,3 +31,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Meetup 0 = decline, 1= accepted, 2 = tentative

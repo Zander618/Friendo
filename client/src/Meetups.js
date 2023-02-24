@@ -11,9 +11,10 @@ const Meetups = ({ meetups }) => {
   console.log("userId", userId);
 
   useEffect(() => {
-    let filteredDogs = dogs.filter((dog) => dog.user_id === user.id);
+    let filteredDogs = dogs.filter((dog) => dog.user_id === userId);
     setUserDogs(filteredDogs);
-  }, []);
+  }, [dogs, userId]);
+
 
   return (
     <div>
@@ -29,6 +30,15 @@ const Meetups = ({ meetups }) => {
                   <h3>From: {rI.invitor.name}</h3>
                   <h3>Location: {rI.location_name}</h3>
                   <h3>Address: {rI.location_address}</h3>
+                  <h3>Time: {rI.time}</h3>
+                  {/* <h3> {(() => {
+                    switch (rI.response) {
+                      case 0: return "declined";
+                      case 1: return "accepted";
+                      case 2: return "tentative";
+                      default:  return "";
+                    }
+                  })}</h3> */}
                   <button>Accept</button>
                   <button>Decline</button>
                 </div>
@@ -42,8 +52,8 @@ const Meetups = ({ meetups }) => {
                   <h3>Date: {sI.date}</h3>
                   <h3>Location: {sI.location_name}</h3>
                   <h3>Address: {sI.location_address}</h3>
-                  <button>Accept</button>
-                  <button>Decline</button>
+                  <h3>Time: {sI.time}</h3>
+                  <button>Cancel</button>
                 </div>
               );
             })}
