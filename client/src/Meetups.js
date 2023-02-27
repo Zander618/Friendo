@@ -15,6 +15,18 @@ const Meetups = ({ meetups }) => {
     setUserDogs(filteredDogs);
   }, [dogs, userId]);
 
+  const returnResponseStatus = (response) => {
+    switch (response) {
+      case 0:
+        return "Declined";
+      case 1:
+        return "Accepted";
+      case 2:
+        return "Tentative";
+      default:
+        return "";
+    }
+  };
 
   return (
     <div>
@@ -31,14 +43,7 @@ const Meetups = ({ meetups }) => {
                   <h3>Location: {rI.location_name}</h3>
                   <h3>Address: {rI.location_address}</h3>
                   <h3>Time: {rI.time}</h3>
-                  {/* <h3> {(() => {
-                    switch (rI.response) {
-                      case 0: return "declined";
-                      case 1: return "accepted";
-                      case 2: return "tentative";
-                      default:  return "";
-                    }
-                  })}</h3> */}
+                  <h3>Status: {returnResponseStatus(rI.response)}</h3>
                   <button>Accept</button>
                   <button>Decline</button>
                 </div>
@@ -53,6 +58,7 @@ const Meetups = ({ meetups }) => {
                   <h3>Location: {sI.location_name}</h3>
                   <h3>Address: {sI.location_address}</h3>
                   <h3>Time: {sI.time}</h3>
+                  <h3>Status: {returnResponseStatus(sI.response)}</h3>
                   <button>Cancel</button>
                 </div>
               );
