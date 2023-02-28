@@ -91,6 +91,7 @@ const Meetups = ({ meetups }) => {
   return (
     <div>
       <h1>Once an Invite has been accepted you will recieve the owner's email address</h1>
+      <h1>Recieved Invites:</h1>
       {userDogs.map((dog) => {
         return (
           <div key={dog.id} className="meetup-card">
@@ -119,6 +120,14 @@ const Meetups = ({ meetups }) => {
                 </div>
               );
             })}
+            </div>
+        )
+            })}
+            <h1>Sent Invites:</h1>
+            {userDogs.map((dog) => {
+              return (
+                <div key={dog.id} className="meetup-card">
+                  <h1>{dog.name}</h1>
             {dog.sent_invitations.map((sI) => {
               return (
                 <div key={sI.id} className="meetup-card-inner">
