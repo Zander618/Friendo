@@ -1,0 +1,20 @@
+.meetup-card {
+  border: solid;
+  border-color: #3852c2;
+  padding: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  text-align: justify;
+  color: #1b4392;
+}
+
+.meetup-card-inner {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  text-align: center;
+  color: #1b4392;
+}
+
+.meetup-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(3, 7, 243, 0.685);
+}

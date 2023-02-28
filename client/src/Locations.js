@@ -5,7 +5,7 @@ import "./App.css"
 const Locations = ( {locations, setLocations}) => {
   const [buttonPopup, setButtonPopup] = useState(false);
   
-console.log(locations)
+
   return (
     <div>
       <div>
@@ -25,9 +25,14 @@ console.log(locations)
         {locations.map((location) => {
           return(
             <div key={location.id}>
-              <h1>{location.name}</h1>
-              <h2>{location.address}</h2>
-              <img src={location.photo} alt="dog park" className="dogParkImageSizing"/>
+              <ul>
+                <li>
+                  <h1>{location.name}</h1>
+                  <h2>{location.address}</h2>
+                  <img src={location.photo} alt="dog park" className="dogParkImageSizing"/> 
+                </li>
+              </ul>
+              <button>Edit</button>
             </div>
           )
         })}

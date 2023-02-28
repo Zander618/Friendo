@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
+import "./Meetup.css"
 
 const Meetups = ({ meetups }) => {
   const { user, dogs, userId } = useContext(UserContext);
@@ -29,7 +30,7 @@ const Meetups = ({ meetups }) => {
   };
 
 
-  const handleClick = (rI) => {
+  const handleAcceptedClick = (rI) => {
     fetch(`/meetups/${rI.id}`, {
       method: "PATCH",
       headers: {
@@ -58,17 +59,46 @@ const Meetups = ({ meetups }) => {
       });
   };
 
+  const handleDeclinedClick = (rI) => {
+    fetch(`/meetups/${rI.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: rI.date,
+        id: rI.id,
+        invitee: rI.invitee,
+        invitee_email: rI.invitee_email,
+        invitee_username: rI.invitee_username,
+        invitor: rI.invitor, 
+        invitor_email: rI.invitor_email,
+        invitor_username: rI.invitor_email,
+        location: "",
+        location_address: rI.location_address,
+        location_id: rI.location_id,
+        location_name: rI.location_name,
+        response: 0,
+        time: rI.time
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("sent update", data)
+      });
+  };
+
   return (
     <div>
       <h1>Once an Invite has been accepted you will recieve the owner's email address</h1>
       {userDogs.map((dog) => {
         return (
-          <div key={dog.id}>
+          <div key={dog.id} className="meetup-card">
             <h1>{dog.name}</h1>
             {dog.recieved_invitations.map((rI) => {
               return (
-                <div key={rI.id}>
-                  <h2>Recieved Invitions</h2>
+                <div key={rI.id} className="meetup-card-inner">
+                  <h2>Recieved Invition</h2>
                   <h2>Date: </h2>
                   <h3>{rI.date}</h3>
                   <h2>From: </h2>
@@ -84,15 +114,15 @@ const Meetups = ({ meetups }) => {
                   <h3>{returnResponseStatus(rI.response)}</h3>
                   <h2>Requester's Email:</h2>
                   <h3>{rI.response === 1 ? rI.invitor_email : ""}</h3>
-                  <button id={rI.id} onClick={handleClick(rI)}>Accept</button>
-                  <button>Decline</button>
+                  <button onClick={handleAcceptedClick(rI)}>Accept</button>
+                  <button onClick={handleDeclinedClick(rI)}>Decline</button>
                 </div>
               );
             })}
             {dog.sent_invitations.map((sI) => {
               return (
-                <div key={sI.id}>
-                  <h2>Sent Invitions</h2>
+                <div key={sI.id} className="meetup-card-inner">
+                  <h2>Sent Invition</h2>
                   <h2>Date: </h2>
                   <h3>{sI.date}</h3>
                   <h2>To: </h2>
