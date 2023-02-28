@@ -6,18 +6,20 @@ import { useNavigate } from "react-router-dom";
 const Dogs = ( {setDogId }) => {
   const navigate = useNavigate();
   
-  const { dogs } = useContext(UserContext);
+  const { dogs, userId } = useContext(UserContext);
 
   const handleClick = (e) => {
     setDogId(e.target.id)
     navigate("/meetuplocation")
   }
 
+  let filteredDogs = dogs.filter((dog) => dog.user_id !== userId)
+
   
 
   return dogs ? (
     <div>
-      {dogs.map((dog) => {
+      {filteredDogs.map((dog) => {
         return(
         <div key={dog.id} className="dog-card">
           <h1>{dog.name}</h1>

@@ -40,6 +40,7 @@ function App() {
           <Route path="/dogs/new" element={<AddDog/>} />
           <Route path="/profile" element={<MyProfile/>} />
           {/* update route to dogs/{dogid}/meetups/new */}
+          {/* This will not work because the dog id isn't decided until after the route is hit */}
           <Route path="/meetuplocation" element={<CreateMeetup dogId={dogId} locations={locations}/>} />
         </Routes>
       </Router>

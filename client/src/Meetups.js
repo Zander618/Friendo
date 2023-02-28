@@ -28,8 +28,39 @@ const Meetups = ({ meetups }) => {
     }
   };
 
+
+  const handleClick = (rI) => {
+    fetch(`/meetups/${rI.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: rI.date,
+        id: rI.id,
+        invitee: rI.invitee,
+        invitee_email: rI.invitee_email,
+        invitee_username: rI.invitee_username,
+        invitor: rI.invitor, 
+        invitor_email: rI.invitor_email,
+        invitor_username: rI.invitor_email,
+        location: "",
+        location_address: rI.location_address,
+        location_id: rI.location_id,
+        location_name: rI.location_name,
+        response: 1,
+        time: rI.time
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("sent update", data)
+      });
+  };
+
   return (
     <div>
+      <h1>Once an Invite has been accepted you will recieve the owner's email address</h1>
       {userDogs.map((dog) => {
         return (
           <div key={dog.id}>
@@ -38,13 +69,22 @@ const Meetups = ({ meetups }) => {
               return (
                 <div key={rI.id}>
                   <h2>Recieved Invitions</h2>
-                  <h3>Date: {rI.date}</h3>
-                  <h3>From: {rI.invitor.name}</h3>
-                  <h3>Location: {rI.location_name}</h3>
-                  <h3>Address: {rI.location_address}</h3>
-                  <h3>Time: {rI.time}</h3>
-                  <h3>Status: {returnResponseStatus(rI.response)}</h3>
-                  <button>Accept</button>
+                  <h2>Date: </h2>
+                  <h3>{rI.date}</h3>
+                  <h2>From: </h2>
+                  <h3>Username: {rI.invitor_username}</h3>
+                  <h3>Dog name: {rI.invitor.name}</h3>
+                  <h2>Location: </h2>
+                  <h3>{rI.location_name}</h3>
+                  <h2>Address:</h2>
+                  <h3>{rI.location_address}</h3>
+                  <h2>Time: </h2>
+                  <h3>{rI.time}</h3>
+                  <h2>Status: </h2>
+                  <h3>{returnResponseStatus(rI.response)}</h3>
+                  <h2>Requester's Email:</h2>
+                  <h3>{rI.response === 1 ? rI.invitor_email : ""}</h3>
+                  <button id={rI.id} onClick={handleClick(rI)}>Accept</button>
                   <button>Decline</button>
                 </div>
               );
@@ -53,12 +93,21 @@ const Meetups = ({ meetups }) => {
               return (
                 <div key={sI.id}>
                   <h2>Sent Invitions</h2>
-                  <h3>To: {sI.invitee.name}</h3>
-                  <h3>Date: {sI.date}</h3>
-                  <h3>Location: {sI.location_name}</h3>
-                  <h3>Address: {sI.location_address}</h3>
-                  <h3>Time: {sI.time}</h3>
-                  <h3>Status: {returnResponseStatus(sI.response)}</h3>
+                  <h2>Date: </h2>
+                  <h3>{sI.date}</h3>
+                  <h2>To: </h2>
+                  <h3>Username: {sI.invitee_username}</h3>
+                  <h3>Dog name: {sI.invitee.name}</h3>
+                  <h2>Location: </h2>
+                  <h3>{sI.location_name}</h3>
+                  <h2>Address:</h2>
+                  <h3>{sI.location_address}</h3>
+                  <h2>Time: </h2>
+                  <h3>{sI.time}</h3>
+                  <h2>Status: </h2>
+                  <h3>{returnResponseStatus(sI.response)}</h3>
+                  <h2>Invitee's Email:</h2>
+                  <h3>{sI.response === 1 ? sI.invitee_email : ""}</h3>
                   <button>Cancel</button>
                 </div>
               );
