@@ -6,7 +6,7 @@ class DogSerializer < ActiveModel::Serializer
     if object.image
       rails_blob_path(object.image.dog_image, only_path: true)
     else
-      false
+      "false"
     end
   end
 

@@ -25,15 +25,15 @@ const MyProfile = () => {
 
   const addPhotoToDog = (data) => {
     let spreadDogs = [...user.dogs];
-    let dogToUpdate = spreadDogs.filter((dog) => dog.id === data.dog.id);
-    let updatedDog = {...dogToUpdate, uploaded_image: data.dog_image} ;
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
+    let updatedDog = {...dogToUpdate, uploaded_image:data.dog_image}
     let unupdatedUserDogs = user.dogs.filter((dog) => dog.id !== data.dog.id);
     let updatedUserDogs = [...unupdatedUserDogs, updatedDog];
     const updatedUser = {
       ...user,
-      dogs: updatedUserDogs,
+      dogs:updatedUserDogs,
     };
-    console.log(updatedUser);
+    setUser(updatedUser)
   };
 
   return user ? (
@@ -67,7 +67,7 @@ const MyProfile = () => {
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
 
-              {dog.uploaded_image ? (
+              {dog.uploaded_image !== "false" ? (
                 ""
               ) : (
                 <div>
