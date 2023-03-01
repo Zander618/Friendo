@@ -3,7 +3,7 @@ import { UserContext } from "./Context";
 import "./DogImage.css";
 
 const MyProfile = () => {
-  const { user, dogs, setDogs } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
 
   const handleSubmitPhoto = (e) => {
@@ -24,12 +24,16 @@ const MyProfile = () => {
   };
 
   const addPhotoToDog = (data) => {
-    let spreadDogs = [...dogs];
-    let dogToUpdate = spreadDogs.find((dog) => (dog.id = data.dog.id));
-    dogToUpdate.uploaded_image = data.dog_image;
-    let unupdatedDogs = spreadDogs.filter((dog) => dog.id !== data.dog.id);
-    let updatedDogs = [...unupdatedDogs, dogToUpdate];
-    setDogs(updatedDogs)
+    let spreadDogs = [...user.dogs];
+    let dogToUpdate = spreadDogs.filter((dog) => dog.id === data.dog.id);
+    let updatedDog = {...dogToUpdate, uploaded_image: data.dog_image} ;
+    let unupdatedUserDogs = user.dogs.filter((dog) => dog.id !== data.dog.id);
+    let updatedUserDogs = [...unupdatedUserDogs, updatedDog];
+    const updatedUser = {
+      ...user,
+      dogs: updatedUserDogs,
+    };
+    console.log(updatedUser);
   };
 
   return user ? (

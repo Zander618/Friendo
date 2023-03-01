@@ -10,7 +10,7 @@ const Dogs = ( {setDogId }) => {
 
   const handleClick = (e) => {
     setDogId(e.target.id)
-    navigate("/meetuplocation")
+    navigate(`/dogs/${e.target.id}/meetups/new`)
   }
 
   let filteredDogs = dogs.filter((dog) => dog.user_id !== userId)

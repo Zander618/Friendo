@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import './App.css';
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -16,6 +16,7 @@ function App() {
   const [locations, setLocations] = useState([])
   const [meetups, setMeetups] = useState([])
   const [dogId, setDogId] = useState("")
+  
 
   useEffect(() => {
     fetch("/locations")
@@ -41,7 +42,7 @@ function App() {
           <Route path="/profile" element={<MyProfile/>} />
           {/* update route to dogs/{dogid}/meetups/new */}
           {/* This will not work because the dog id isn't decided until after the route is hit */}
-          <Route path="/meetuplocation" element={<CreateMeetup dogId={dogId} locations={locations}/>} />
+          <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations}/>} />
         </Routes>
       </Router>
   )

@@ -185,7 +185,6 @@ function ResponsiveAppBar() {
           <Typography
             onClick={handleLogout}
             noWrap
-            // use correct restful route
           >
             <Link
               style={{
