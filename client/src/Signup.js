@@ -9,7 +9,7 @@ const Signup = ( ) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [first_name, setFirst_name] = useState("");
-  const [country, setCountry] = useState("")
+  const [county, setCounty] = useState("")
   const [state, setState] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Signup = ( ) => {
         password,
         first_name,
         state,
-        country,
+        county,
         email
       }),
     }).then((r) => {
@@ -71,21 +71,21 @@ const Signup = ( ) => {
           />
         </div>
         <div>
-          <label htmlFor="country">Country: </label>
-          <input 
-                    type="country"
-                    id="country"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-          />
-        </div>
-        <div>
           <label htmlFor="state">State: </label>
           <input 
                     type="state"
                     id="state"
                     value={state}
                     onChange={(e) => setState(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="county">County: </label>
+          <input 
+                    type="county"
+                    id="county"
+                    value={county}
+                    onChange={(e) => setCounty(e.target.value)}
           />
         </div>
         <div>
