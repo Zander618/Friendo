@@ -5,11 +5,7 @@ import "./Meetup.css"
 const Meetups = ({ meetups }) => {
   const { user, dogs, userId } = useContext(UserContext);
   const [userDogs, setUserDogs] = useState([]);
-  console.log("meetups", meetups);
-  console.log("user", user);
-  console.log("dogs", dogs);
-  console.log("userDogs", userDogs);
-  console.log("userId", userId);
+
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id === userId);

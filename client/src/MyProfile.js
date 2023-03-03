@@ -19,7 +19,6 @@ const MyProfile = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data)
         addPhotoToDog(data);
       });
   };

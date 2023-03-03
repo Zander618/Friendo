@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./Context";
 import Select from "react-select";
 import Calendar from "react-calendar";
 
 
 const CreateMeetup = ({ dogId, locations }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedUserDog, setSelectedUserDog] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -155,6 +155,7 @@ const CreateMeetup = ({ dogId, locations }) => {
       .then((resp) => resp.json())
       .then((data) => {
         console.log("What i sent", data);
+        navigate("/meetups")
       });
   };
 
