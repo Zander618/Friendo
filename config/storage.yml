@@ -6,9 +6,8 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-amazon:
-  service: S3
-  access_key_id: ""
-  secret_access_key: ""
-  bucket: ""
-  region: "" # e.g. 'us-east-1'
+google:
+  service: GCS
+  project: todo-pic
+  credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].as_json %>
+  bucket: dog-photo-bucket
