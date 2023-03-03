@@ -53,6 +53,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :google
 
   # Use a different logger for distributed setups.
