@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
-import "./Meetup.css"
+import "./Meetup.css";
 
-const Meetups = ({ meetups }) => {
-  const { user, dogs, userId } = useContext(UserContext);
+const Meetups = () => {
+  const { dogs, userId } = useContext(UserContext);
   const [userDogs, setUserDogs] = useState([]);
-
+  // const [acceptingDog, setAcceptingDogs] = useState({});
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id === userId);
@@ -25,68 +25,104 @@ const Meetups = ({ meetups }) => {
     }
   };
 
+  const handleAcceptedClick = (e) => {
+    let meetupToUpdate = userDogs.map((dog) => {
+      let dogToPatch = dog.recieved_invitations.filter((invitation) => invitation.id === e.target.attributes.data.value)
+      return dogToPatch
+    } )
 
-  const handleAcceptedClick = (rI) => {
-    fetch(`/meetups/${rI.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: rI.date,
-        id: rI.id,
-        invitee: rI.invitee,
-        invitee_email: rI.invitee_email,
-        invitee_username: rI.invitee_username,
-        invitor: rI.invitor, 
-        invitor_email: rI.invitor_email,
-        invitor_username: rI.invitor_email,
-        location: "",
-        location_address: rI.location_address,
-        location_id: rI.location_id,
-        location_name: rI.location_name,
-        response: 1,
-        time: rI.time
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log("sent update", data)
-      });
+    // fetch(`/meetups/${rI.id}`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     date: rI.date,
+    //     id: rI.id,
+    //     invitee: rI.invitee,
+    //     invitee_email: rI.invitee_email,
+    //     invitee_username: rI.invitee_username,
+    //     invitor: rI.invitor,
+    //     invitor_email: rI.invitor_email,
+    //     invitor_username: rI.invitor_email,
+    //     location: "",
+    //     location_address: rI.location_address,
+    //     location_id: rI.location_id,
+    //     location_name: rI.location_name,
+    //     response: 1,
+    //     time: rI.time
+    //   }),
+    // })
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    console.log("handle accept click", meetupToUpdate);
+    // });
   };
 
-  const handleDeclinedClick = (rI) => {
-    fetch(`/meetups/${rI.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: rI.date,
-        id: rI.id,
-        invitee: rI.invitee,
-        invitee_email: rI.invitee_email,
-        invitee_username: rI.invitee_username,
-        invitor: rI.invitor, 
-        invitor_email: rI.invitor_email,
-        invitor_username: rI.invitor_email,
-        location: "",
-        location_address: rI.location_address,
-        location_id: rI.location_id,
-        location_name: rI.location_name,
-        response: 0,
-        time: rI.time
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log("sent update", data)
-      });
+  const handleDeclinedClick = () => {
+    //   fetch(`/meetups/${rI.id}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       date: rI.date,
+    //       id: rI.id,
+    //       invitee: rI.invitee,
+    //       invitee_email: rI.invitee_email,
+    //       invitee_username: rI.invitee_username,
+    //       invitor: rI.invitor,
+    //       invitor_email: rI.invitor_email,
+    //       invitor_username: rI.invitor_email,
+    //       location: "",
+    //       location_address: rI.location_address,
+    //       location_id: rI.location_id,
+    //       location_name: rI.location_name,
+    //       response: 0,
+    //       time: rI.time
+    //     }),
+    //   })
+    //     .then((resp) => resp.json())
+    //     .then((data) => {
+    //       console.log("handle declined click")
+    //     });
+  };
+
+  const handleCancelClick = () => {
+    //   fetch(`/meetups/${sI.id}`, {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       date: sI.date,
+    //       id: sI.id,
+    //       invitee: sI.invitee,
+    //       invitee_email: sI.invitee_email,
+    //       invitee_username: sI.invitee_username,
+    //       invitor: sI.invitor,
+    //       invitor_email: sI.invitor_email,
+    //       invitor_username: sI.invitor_email,
+    //       location: "",
+    //       location_address: sI.location_address,
+    //       location_id: sI.location_id,
+    //       location_name: sI.location_name,
+    //       response: 0,
+    //       time: sI.time
+    //     }),
+    //   })
+    //     .then((resp) => resp.json())
+    //     .then((data) => {
+    //       console.log("handle cancel click")
+    //     });
   };
 
   return (
     <div>
-      <h1>Once an Invite has been accepted you will recieve the owner's email address</h1>
+      <h1>
+        Once an Invite has been accepted you will recieve the owner's email
+        address
+      </h1>
       <h1>Recieved Invites:</h1>
       {userDogs.map((dog) => {
         return (
@@ -111,19 +147,26 @@ const Meetups = ({ meetups }) => {
                   <h3>{returnResponseStatus(rI.response)}</h3>
                   <h2>Requester's Email:</h2>
                   <h3>{rI.response === 1 ? rI.invitor_email : ""}</h3>
-                  <button onClick={handleAcceptedClick(rI)}>Accept</button>
-                  <button onClick={handleDeclinedClick(rI)}>Decline</button>
+                  <button
+                  data={rI.id}
+                    onClick={(e) => {
+                      handleAcceptedClick(e);
+                    }}
+                  >
+                    Accept
+                  </button>
+                  <button onClick={handleDeclinedClick}>Decline</button>
                 </div>
               );
             })}
-            </div>
-        )
-            })}
-            <h1>Sent Invites:</h1>
-            {userDogs.map((dog) => {
-              return (
-                <div key={dog.id} className="meetup-card">
-                  <h1>{dog.name}</h1>
+          </div>
+        );
+      })}
+      <h1>Sent Invites:</h1>
+      {userDogs.map((dog) => {
+        return (
+          <div key={dog.id} className="meetup-card">
+            <h1>{dog.name}</h1>
             {dog.sent_invitations.map((sI) => {
               return (
                 <div key={sI.id} className="meetup-card-inner">
@@ -143,7 +186,7 @@ const Meetups = ({ meetups }) => {
                   <h3>{returnResponseStatus(sI.response)}</h3>
                   <h2>Invitee's Email:</h2>
                   <h3>{sI.response === 1 ? sI.invitee_email : ""}</h3>
-                  <button>Cancel</button>
+                  <button onClick={handleCancelClick(sI)}>Cancel</button>
                 </div>
               );
             })}

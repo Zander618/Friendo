@@ -11,7 +11,7 @@ const CreateMeetup = ({ dogId, locations }) => {
   const [selectedUserDog, setSelectedUserDog] = useState("");
   const [startTime, setStartTime] = useState("");
   const [date, setDate] = useState(new Date());
-  const { dogs, user } = useContext(UserContext);
+  const { dogs, user, setDogs } = useContext(UserContext);
   const selectedDog = dogs.find((dog) => dog.id === parseInt(dogId));
 
 
@@ -137,6 +137,15 @@ const CreateMeetup = ({ dogId, locations }) => {
     setSelectedLocation(selectedOption.value);
   };
 
+  const updateUserDogs = (data) => {
+      let spreadDogs = [...dogs];
+      let dogToUpdate = spreadDogs.find((dog) => dog.id === data.invitor.id);
+      let updatedDog = {...dogToUpdate, sent_invitations: [...dogToUpdate.sent_invitations, data]}
+      let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id);
+      let updatedDogs = [...unupdatedDogs, updatedDog];
+      setDogs(updatedDogs)
+  }
+
   const handleSubmit = () => {
     fetch(`/meetups`, {
       method: "POST",
@@ -154,7 +163,7 @@ const CreateMeetup = ({ dogId, locations }) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("What i sent", data);
+        updateUserDogs(data)
         navigate("/meetups")
       });
   };
