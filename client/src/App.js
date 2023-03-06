@@ -9,7 +9,7 @@ import Meetups from './Meetups';
 import Signup from './Signup';
 import Login from './Login';
 import AddDog from './AddDog';
-import MyProfile from './MyProfile';
+import Profile from './Profile';
 import CreateMeetup from "./CreateMeetup";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
-          <Route path="/profile" element={<MyProfile/>} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations}/>} />
         </Routes>
       </Router>

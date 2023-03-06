@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css";
 
-const MyProfile = () => {
+const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
 
@@ -36,7 +36,7 @@ const MyProfile = () => {
     setUser(updatedUser)
   };
 
-  return user ? (
+  return user.dogs ? (
     <div>
       <br></br>
       <h1>User Profile</h1>
@@ -95,4 +95,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default Profile;
