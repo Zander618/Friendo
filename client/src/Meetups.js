@@ -3,9 +3,8 @@ import { UserContext } from "./Context";
 import "./Meetup.css";
 
 const Meetups = () => {
-  const { dogs, userId } = useContext(UserContext);
+  const { dogs, userId, setDogs } = useContext(UserContext);
   const [userDogs, setUserDogs] = useState([]);
-  // const [acceptingDog, setAcceptingDogs] = useState({});
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id === userId);
@@ -25,96 +24,159 @@ const Meetups = () => {
     }
   };
 
+  const updateUserDogsAcceptance = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.invitee.id);
+    let unupdatedMeetups = dogToUpdate.recieved_invitations.filter(
+      (invite) => invite.id !== data.id
+    );
+    let updatedDog = {
+      ...dogToUpdate,
+      recieved_invitations: [...unupdatedMeetups, data],
+    };
+    let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitee.id);
+    let updatedDogs = [...unupdatedDogs, updatedDog];
+    setDogs(updatedDogs);
+  };
+
+  const updateUserDogsDecline = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.invitee.id);
+    let unupdatedMeetups = dogToUpdate.recieved_invitations.filter(
+      (invite) => invite.id !== data.id
+    );
+    let updatedDog = {
+      ...dogToUpdate,
+      recieved_invitations: [...unupdatedMeetups, data],
+    };
+    let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitee.id);
+    let updatedDogs = [...unupdatedDogs, updatedDog];
+    setDogs(updatedDogs);
+  };
+
+  const updateUserDogsCancelation = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.invitor.id);
+    let unupdatedMeetups = dogToUpdate.sent_invitations.filter(
+      (invite) => invite.id !== data.id
+    );
+    let updatedDog = {
+      ...dogToUpdate,
+      sent_invitations: [...unupdatedMeetups, data],
+    };
+    let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id);
+    let updatedDogs = [...unupdatedDogs, updatedDog];
+    setDogs(updatedDogs);
+  }
+
   const handleAcceptedClick = (e) => {
-    let meetupToUpdate = userDogs.map((dog) => {
-      let dogToPatch = dog.recieved_invitations.filter((invitation) => invitation.id === e.target.attributes.data.value)
-      return dogToPatch
-    } )
+    let dogToUpdate = userDogs.find(
+      (dog) => dog.id === parseInt(e.target.attributes.dog.value)
+    );
+    let meetupToUpdate = dogToUpdate.recieved_invitations.find(
+      (invite) => invite.id === parseInt(e.target.attributes.invite.value)
+    );
 
-    // fetch(`/meetups/${rI.id}`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     date: rI.date,
-    //     id: rI.id,
-    //     invitee: rI.invitee,
-    //     invitee_email: rI.invitee_email,
-    //     invitee_username: rI.invitee_username,
-    //     invitor: rI.invitor,
-    //     invitor_email: rI.invitor_email,
-    //     invitor_username: rI.invitor_email,
-    //     location: "",
-    //     location_address: rI.location_address,
-    //     location_id: rI.location_id,
-    //     location_name: rI.location_name,
-    //     response: 1,
-    //     time: rI.time
-    //   }),
-    // })
-    //   .then((resp) => resp.json())
-    //   .then((data) => {
-    console.log("handle accept click", meetupToUpdate);
-    // });
+    fetch(`/meetups/${meetupToUpdate.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: meetupToUpdate.date,
+        id: meetupToUpdate.id,
+        invitee: meetupToUpdate.invitee,
+        invitee_email: meetupToUpdate.invitee_email,
+        invitee_username: meetupToUpdate.invitee_username,
+        invitor: meetupToUpdate.invitor,
+        invitor_email: meetupToUpdate.invitor_email,
+        invitor_username: meetupToUpdate.invitor_email,
+        location: "",
+        location_address: meetupToUpdate.location_address,
+        location_id: meetupToUpdate.location_id,
+        location_name: meetupToUpdate.location_name,
+        response: 1,
+        time: meetupToUpdate.time,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        updateUserDogsAcceptance(data);
+      });
   };
 
-  const handleDeclinedClick = () => {
-    //   fetch(`/meetups/${rI.id}`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       date: rI.date,
-    //       id: rI.id,
-    //       invitee: rI.invitee,
-    //       invitee_email: rI.invitee_email,
-    //       invitee_username: rI.invitee_username,
-    //       invitor: rI.invitor,
-    //       invitor_email: rI.invitor_email,
-    //       invitor_username: rI.invitor_email,
-    //       location: "",
-    //       location_address: rI.location_address,
-    //       location_id: rI.location_id,
-    //       location_name: rI.location_name,
-    //       response: 0,
-    //       time: rI.time
-    //     }),
-    //   })
-    //     .then((resp) => resp.json())
-    //     .then((data) => {
-    //       console.log("handle declined click")
-    //     });
+  const handleDeclinedClick = (e) => {
+    let dogToUpdate = userDogs.find(
+      (dog) => dog.id === parseInt(e.target.attributes.dog.value)
+    );
+    let meetupToUpdate = dogToUpdate.recieved_invitations.find(
+      (invite) => invite.id === parseInt(e.target.attributes.invite.value)
+    );
+
+    fetch(`/meetups/${meetupToUpdate.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: meetupToUpdate.date,
+        id: meetupToUpdate.id,
+        invitee: meetupToUpdate.invitee,
+        invitee_email: meetupToUpdate.invitee_email,
+        invitee_username: meetupToUpdate.invitee_username,
+        invitor: meetupToUpdate.invitor,
+        invitor_email: meetupToUpdate.invitor_email,
+        invitor_username: meetupToUpdate.invitor_email,
+        location: "",
+        location_address: meetupToUpdate.location_address,
+        location_id: meetupToUpdate.location_id,
+        location_name: meetupToUpdate.location_name,
+        response: 0,
+        time: meetupToUpdate.time,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        updateUserDogsDecline(data);
+      });
   };
 
-  const handleCancelClick = () => {
-    //   fetch(`/meetups/${sI.id}`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       date: sI.date,
-    //       id: sI.id,
-    //       invitee: sI.invitee,
-    //       invitee_email: sI.invitee_email,
-    //       invitee_username: sI.invitee_username,
-    //       invitor: sI.invitor,
-    //       invitor_email: sI.invitor_email,
-    //       invitor_username: sI.invitor_email,
-    //       location: "",
-    //       location_address: sI.location_address,
-    //       location_id: sI.location_id,
-    //       location_name: sI.location_name,
-    //       response: 0,
-    //       time: sI.time
-    //     }),
-    //   })
-    //     .then((resp) => resp.json())
-    //     .then((data) => {
-    //       console.log("handle cancel click")
-    //     });
+  const handleCancelClick = (e) => {
+
+    let dogToUpdate = userDogs.find(
+      (dog) => dog.id === parseInt(e.target.attributes.dog.value)
+    );
+    let meetupToUpdate = dogToUpdate.sent_invitations.find(
+      (invite) => invite.id === parseInt(e.target.attributes.invite.value)
+    );
+
+
+      fetch(`/meetups/${meetupToUpdate.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: meetupToUpdate.date,
+          id: meetupToUpdate.id,
+          invitee: meetupToUpdate.invitee,
+          invitee_email: meetupToUpdate.invitee_email,
+          invitee_username: meetupToUpdate.invitee_username,
+          invitor: meetupToUpdate.invitor,
+          invitor_email: meetupToUpdate.invitor_email,
+          invitor_username: meetupToUpdate.invitor_email,
+          location: "",
+          location_address: meetupToUpdate.location_address,
+          location_id: meetupToUpdate.location_id,
+          location_name: meetupToUpdate.location_name,
+          response: 0,
+          time: meetupToUpdate.time,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+        updateUserDogsCancelation(data)
+        });
   };
 
   return (
@@ -148,14 +210,23 @@ const Meetups = () => {
                   <h2>Requester's Email:</h2>
                   <h3>{rI.response === 1 ? rI.invitor_email : ""}</h3>
                   <button
-                  data={rI.id}
+                    invite={rI.id}
+                    dog={rI.invitee.id}
                     onClick={(e) => {
                       handleAcceptedClick(e);
                     }}
                   >
                     Accept
                   </button>
-                  <button onClick={handleDeclinedClick}>Decline</button>
+                  <button
+                    invite={rI.id}
+                    dog={rI.invitee.id}
+                    onClick={(e) => {
+                      handleDeclinedClick(e);
+                    }}
+                  >
+                    Decline
+                  </button>
                 </div>
               );
             })}
@@ -186,7 +257,15 @@ const Meetups = () => {
                   <h3>{returnResponseStatus(sI.response)}</h3>
                   <h2>Invitee's Email:</h2>
                   <h3>{sI.response === 1 ? sI.invitee_email : ""}</h3>
-                  <button onClick={handleCancelClick(sI)}>Cancel</button>
+                  <button
+                    invite={sI.id}
+                    dog={sI.invitor.id}
+                    onClick={(e) => {
+                      handleCancelClick(e);
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               );
             })}
