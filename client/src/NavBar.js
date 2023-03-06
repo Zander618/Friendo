@@ -168,7 +168,7 @@ function ResponsiveAppBar() {
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography noWrap>
             <Link
-              to="/profile"
+              to="/myprofile"
               style={{
                 mr: 4,
                 variant: "h4",
@@ -177,7 +177,7 @@ function ResponsiveAppBar() {
                 textAlign: "center",
               }}
             >
-              My Profile
+              Profile
             </Link>
           </Typography>
         </MenuItem>
