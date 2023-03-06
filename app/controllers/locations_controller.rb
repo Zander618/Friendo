@@ -9,7 +9,12 @@ class LocationsController < ApplicationController
 
   # GET /locations/1
   def show
-    render json: @location
+    location = Location.find_by(id: params[:id])
+    if location
+      render json: location
+    else
+      render json: { error:"Location not found"}, status: :not_found
+    end
   end
 
   # POST /locations
@@ -25,10 +30,12 @@ class LocationsController < ApplicationController
 
   # PATCH/PUT /locations/1
   def update
-    if @location.update(location_params)
-      render json: @location
+    location = Location.find_by(id: params[:id])
+    if location
+      location.update(location_params)
+      render json: location
     else
-      render json: @location.errors, status: :unprocessable_entity
+      render json: {error: "Location Not Found"}, status: :not_found
     end
   end
 

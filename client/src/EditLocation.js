@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+import "./PopUp.css";
 
-const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
-
+const EditReview = ({
+  trigger,
+  setTrigger,
+  locationId,
+  locations,
+  setLocations,
+  originalName,
+  originalAddress,
+  originalPhoto
+}) => {
   const [formData, setFormData] = useState({
-    address: "",
-    name: "",
-    photo: "",
+    address: originalAddress,
+    name: originalName,
+    photo: originalPhoto,
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(`/locations`, {
-      method: "POST",
+    fetch(`/locations/${locationId}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,7 +32,7 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        addNewLocation(data)
+        updatedLocations(data)
         setTrigger(false)
       });
     setFormData({
@@ -33,6 +42,7 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
     });
   };
 
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -40,24 +50,26 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
     });
   };
 
-  const addNewLocation = (data) => {
-    let newLocations = [...locations, data]
-    setLocations(newLocations)
-  }
+  const updatedLocations = (data) => {
+    const unupdatedLocations = locations.filter(
+      (location) => location.id !== data.id
+    );
+    const updatedLocations = [...unupdatedLocations, data];
+    setLocations(updatedLocations);
+  };
 
   return trigger ? (
-    <div>
-      <div >
-        <h3 style={{ color: "black" }}>Add Location</h3>
-        <form onSubmit={handleSubmit}>
+    <div className="edit-review-card">
+      <div>
+        <h3 style={{ color: "black" }}>Edit location</h3>
+        <form onSubmit={handleSubmit} id={locationId}>
           <label style={{ color: "black" }}>
             Address:
             <input
-              className="submissionfield"
+              className="editsubmissionfield"
               type="text"
               name="address"
               spellCheck="true"
-              placeholder="Enter Address"
               value={formData.address}
               onChange={handleChange}
             />
@@ -66,20 +78,21 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
           <label style={{ color: "black" }}>
             Name:
             <input
+              className="editsubmissionfield"
               type="text"
               name="name"
-              placeholder="Name of the Location"
+              spellCheck="true"
               value={formData.name}
               onChange={handleChange}
             />
           </label>
-          <br></br>
           <label style={{ color: "black" }}>
             Photo:
             <input
+              className="editsubmissionfield"
               type="text"
               name="photo"
-              placeholder="Copy url of location photo"
+              spellCheck="true"
               value={formData.photo}
               onChange={handleChange}
             />
@@ -97,4 +110,4 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
   );
 };
 
-export default AddLocation;
+export default EditReview;

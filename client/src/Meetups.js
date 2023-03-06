@@ -186,11 +186,11 @@ const Meetups = () => {
         address
       </h1>
       <h1>Recieved Invites:</h1>
-      {userDogs.map((dog) => {
+      {userDogs.sort((a, b) => (a.name > b.name ? 1 : -1)).map((dog) => {
         return (
           <div key={dog.id} className="meetup-card">
             <h1>{dog.name}</h1>
-            {dog.recieved_invitations.map((rI) => {
+            {dog.recieved_invitations.sort((a, b) => (a.date > b.date ? 1 : -1)).map((rI) => {
               return (
                 <div key={rI.id} className="meetup-card-inner">
                   <h2>Recieved Invition</h2>
@@ -234,11 +234,11 @@ const Meetups = () => {
         );
       })}
       <h1>Sent Invites:</h1>
-      {userDogs.map((dog) => {
+      {userDogs.sort((a, b) => (a.name > b.name ? 1 : -1)).map((dog) => {
         return (
           <div key={dog.id} className="meetup-card">
             <h1>{dog.name}</h1>
-            {dog.sent_invitations.map((sI) => {
+            {dog.sent_invitations.sort((a, b) => (a.date > b.date ? 1 : -1)).map((sI) => {
               return (
                 <div key={sI.id} className="meetup-card-inner">
                   <h2>Sent Invition</h2>
