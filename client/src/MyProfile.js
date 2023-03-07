@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css";
+import EditDog from "./EditDog";
 
 const MyProfile = () => {
   const { user, setUser } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
+  const [editButtonPopup, setEditButtonPopup] = useState(false);
+  const [popUpId, setPopUpId] = useState();
 
+  console.log(editButtonPopup);
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
 
@@ -26,14 +30,14 @@ const MyProfile = () => {
   const addPhotoToDog = (data) => {
     let spreadDogs = [...user.dogs];
     let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
-    let updatedDog = {...dogToUpdate, uploaded_image:data.dog_image}
+    let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
     let unupdatedUserDogs = user.dogs.filter((dog) => dog.id !== data.dog.id);
     let updatedUserDogs = [...unupdatedUserDogs, updatedDog];
     const updatedUser = {
       ...user,
-      dogs:updatedUserDogs,
+      dogs: updatedUserDogs,
     };
-    setUser(updatedUser)
+    setUser(updatedUser);
   };
 
   return user ? (
@@ -66,12 +70,33 @@ const MyProfile = () => {
                 <li>{dog.age}</li>
                 <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
               </ul>
+              {dog.id === popUpId && (
+                <EditDog
+                  trigger={editButtonPopup}
+                  setTrigger={setEditButtonPopup}
+                  dogId={popUpId}
+                  originalName={dog.name}
+                  originalBreed={dog.breed}
+                  originalTraits={dog.traits}
+                  originalAge={dog.age}
+                  originalEnjoyedActivities={dog.enjoyed_activities}
+                />
+              )}
 
               {dog.uploaded_image !== "false" ? (
-                <button>Edit</button>
+                <button
+                  id={dog.id}
+                  onClick={(e) => {
+                    setPopUpId(parseInt(e.target.id));
+                    setEditButtonPopup(true);
+                  }}
+                >
+                  Edit
+                </button>
               ) : (
                 <div>
                   <h3>Add Photo</h3>
+                  <h6>Once photo is added you may edit you dogs info.</h6>
                   <form onSubmit={handleSubmitPhoto} id={dog.id}>
                     <h4>upload photo</h4>
                     <input
