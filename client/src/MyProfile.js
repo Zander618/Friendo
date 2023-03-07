@@ -53,6 +53,7 @@ const MyProfile = () => {
       <br></br>
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
+      <button>Edit</button>
       <div>
         {user.dogs.map((dog) => {
           return (
@@ -110,6 +111,7 @@ const MyProfile = () => {
                   </form>
                 </div>
               )}
+              <button>Remove Dog</button>
             </div>
           );
         })}

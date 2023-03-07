@@ -3,8 +3,8 @@ class DogsController < ApplicationController
 
   # GET /dogs
   def index
-    @dogs = Dog.all
-    render json: @dogs
+    dogs = Dog.all
+    render json: dogs
   end
 
   # GET /dogs/1
