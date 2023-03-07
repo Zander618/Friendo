@@ -58,6 +58,8 @@ const MyProfile = () => {
           return (
             <div key={dog.id}>
               <h2>{dog.name}</h2>
+              <button>Change Photo</button>
+              <br></br>
               <img
                 src={dog.uploaded_image}
                 alt="Please Upload Below"
