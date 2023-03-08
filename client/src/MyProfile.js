@@ -45,6 +45,7 @@ const MyProfile = () => {
       <br></br>
       <h1>User Profile</h1>
       <br></br>
+      <button>Edit Profile Details</button>
       <h2>First Name: {user.first_name}</h2>
       <h2>Username: {user.username}</h2>
       <h2>State: {user.state}</h2>
@@ -53,9 +54,8 @@ const MyProfile = () => {
       <br></br>
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
-      <button>Edit</button>
       <div>
-        {user.dogs.map((dog) => {
+        {user.dogs.sort((a, b) => (a.name > b.name ? 1 : -1)).map((dog) => {
           return (
             <div key={dog.id}>
               <h2>{dog.name}</h2>
@@ -83,6 +83,8 @@ const MyProfile = () => {
                   originalTraits={dog.traits}
                   originalAge={dog.age}
                   originalEnjoyedActivities={dog.enjoyed_activities}
+                  originalVaccinationStatus={dog.vaccination}
+                  uploaded_image={dog.uploaded_image}
                 />
               )}
 
@@ -94,7 +96,7 @@ const MyProfile = () => {
                     setEditButtonPopup(true);
                   }}
                 >
-                  Edit
+                  Edit Dog Details
                 </button>
               ) : (
                 <div>
