@@ -8,7 +8,7 @@ const Locations = ( {locations, setLocations}) => {
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [popUpId, setPopUpId] = useState();
   
-
+console.log(locations)
   return (
     <div>
       <div>

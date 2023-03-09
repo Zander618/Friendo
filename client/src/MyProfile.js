@@ -4,12 +4,11 @@ import "./DogImage.css";
 import EditDog from "./EditDog";
 
 const MyProfile = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [popUpId, setPopUpId] = useState();
 
-  console.log(editButtonPopup);
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
 
@@ -23,11 +22,12 @@ const MyProfile = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        addPhotoToDog(data);
+        addPhotoToDogForUser(data);
+        addPhotoToDogForDogs(data);
       });
   };
 
-  const addPhotoToDog = (data) => {
+  const addPhotoToDogForUser = (data) => {
     let spreadDogs = [...user.dogs];
     let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
     let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
@@ -39,6 +39,26 @@ const MyProfile = () => {
     };
     setUser(updatedUser);
   };
+
+  const addPhotoToDogForDogs = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
+    let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
+    let unupdatedDogs = dogs.filter((dog) => dog.id !== data.dog.id);
+    let updatedDogs = [...unupdatedDogs, updatedDog];
+    setDogs(updatedDogs);
+    console.log(updatedDogs);
+  };
+
+  function handleDeleteClick(e) {
+    // fetch(`/dogs/${e.target.id}`, {
+    //   method: "DELETE",
+    // });
+    console.log(parseInt(e.target.id));
+  }
+
+  // const handleDeleteDog = () => {
+  // }
 
   return user ? (
     <div>
@@ -55,68 +75,74 @@ const MyProfile = () => {
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
       <div>
-        {user.dogs.sort((a, b) => (a.name > b.name ? 1 : -1)).map((dog) => {
-          return (
-            <div key={dog.id}>
-              <h2>{dog.name}</h2>
-              <button>Change Photo</button>
-              <br></br>
-              <img
-                src={dog.uploaded_image}
-                alt="Please Upload Below"
-                className="dogImageSizing"
-              />
-              <ul>
-                <li>{dog.breed}</li>
-                <li>{dog.traits}</li>
-                <li>{dog.enjoyed_activities}</li>
-                <li>{dog.age}</li>
-                <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
-              </ul>
-              {dog.id === popUpId && (
-                <EditDog
-                  trigger={editButtonPopup}
-                  setTrigger={setEditButtonPopup}
-                  dogId={popUpId}
-                  originalName={dog.name}
-                  originalBreed={dog.breed}
-                  originalTraits={dog.traits}
-                  originalAge={dog.age}
-                  originalEnjoyedActivities={dog.enjoyed_activities}
-                  originalVaccinationStatus={dog.vaccination}
-                  uploaded_image={dog.uploaded_image}
+        {user.dogs
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .map((dog) => {
+            return (
+              <div key={dog.id}>
+                <h2>{dog.name}</h2>
+                {dog.uploaded_image !== "false" ? (
+                  <button>Change Photo</button>
+                ) : (
+                  ""
+                )}
+                <br></br>
+                <img
+                  src={dog.uploaded_image}
+                  alt="Please Upload Below"
+                  className="dogImageSizing"
                 />
-              )}
+                <ul>
+                  <li>{dog.breed}</li>
+                  <li>{dog.traits}</li>
+                  <li>{dog.enjoyed_activities}</li>
+                  <li>{dog.age}</li>
+                  <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
+                </ul>
+                {dog.id === popUpId && (
+                  <EditDog
+                    trigger={editButtonPopup}
+                    setTrigger={setEditButtonPopup}
+                    dogId={popUpId}
+                    originalName={dog.name}
+                    originalBreed={dog.breed}
+                    originalTraits={dog.traits}
+                    originalAge={dog.age}
+                    originalEnjoyedActivities={dog.enjoyed_activities}
+                    originalVaccinationStatus={dog.vaccination}
+                    uploaded_image={dog.uploaded_image}
+                  />
+                )}
 
-              {dog.uploaded_image !== "false" ? (
-                <button
-                  id={dog.id}
-                  onClick={(e) => {
-                    setPopUpId(parseInt(e.target.id));
-                    setEditButtonPopup(true);
-                  }}
-                >
-                  Edit Dog Details
-                </button>
-              ) : (
-                <div>
-                  <h3>Add Photo</h3>
-                  <h6>Once photo is added you may edit you dogs info.</h6>
-                  <form onSubmit={handleSubmitPhoto} id={dog.id}>
-                    <h4>upload photo</h4>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setDogImage(e.target.files[0])}
-                    />
-                    <input type="submit" />
-                  </form>
-                </div>
-              )}
-              <button>Remove Dog</button>
-            </div>
-          );
-        })}
+                {dog.uploaded_image !== "false" ? (
+                  <button
+                    id={dog.id}
+                    onClick={(e) => {
+                      setPopUpId(parseInt(e.target.id));
+                      setEditButtonPopup(true);
+                    }}
+                  >
+                    Edit Dog Details
+                  </button>
+                ) : (
+                  <div>
+                    <h3>Add Photo</h3>
+                    <h6>Once photo is added you may edit you dogs info.</h6>
+                    <form onSubmit={handleSubmitPhoto} id={dog.id}>
+                      <h4>upload photo</h4>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setDogImage(e.target.files[0])}
+                      />
+                      <input type="submit" />
+                    </form>
+                  </div>
+                )}
+                <button id={dog.id} onClick={handleDeleteClick}>Remove Dog</button>
+              </div>
+            );
+          })}
       </div>
       <br></br>
       <br></br>

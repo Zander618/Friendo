@@ -24,7 +24,7 @@ const Dogs = ( {setDogId }) => {
         <div key={dog.id} className="dog-card">
           <h1>{dog.name}</h1>
           <h2>{dog.owner_username}'s dog</h2>
-          <img src={dog.image ? dog.uploaded_image : "no photo"} alt="Dog not added" className="dogImageSizing"/>
+          <img src={dog.uploaded_image ? dog.uploaded_image : "no photo"} alt="Dog not added" className="dogImageSizing"/>
             <ul>
                 <li>{dog.breed}</li>
                 <li>{dog.traits}</li>

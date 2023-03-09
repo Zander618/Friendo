@@ -137,14 +137,18 @@ const CreateMeetup = ({ dogId, locations }) => {
     setSelectedLocation(selectedOption.value);
   };
 
-  const updateUserDogs = (data) => {
+  const updateDogs = (data) => {
       let spreadDogs = [...dogs];
-      let dogToUpdate = spreadDogs.find((dog) => dog.id === data.invitor.id);
-      let updatedDog = {...dogToUpdate, sent_invitations: [...dogToUpdate.sent_invitations, data]}
-      let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id);
-      let updatedDogs = [...unupdatedDogs, updatedDog];
+      let dogToUpdateInvitor = spreadDogs.find((dog) => dog.id === data.invitor.id);
+      let dogToUpdateInvitee = spreadDogs.find((dog) => dog.id === data.invitee.id)
+      let updatedInvitorDog = {...dogToUpdateInvitor, sent_invitations: [...dogToUpdateInvitor.sent_invitations, data]}
+      let updatedInviteeDog = {...dogToUpdateInvitee, recieved_invitations: [...dogToUpdateInvitee.recieved_invitations, data]}
+      let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id && data.invitee.id);
+      let updatedDogs = [...unupdatedDogs, updatedInvitorDog, updatedInviteeDog];
       setDogs(updatedDogs)
+      console.log("updated Dogs", updatedDogs)
   }
+
 
   const handleSubmit = () => {
     fetch(`/meetups`, {
@@ -163,7 +167,7 @@ const CreateMeetup = ({ dogId, locations }) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        updateUserDogs(data)
+        updateDogs(data)
         navigate("/meetups")
       });
   };

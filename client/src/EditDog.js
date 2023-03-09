@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "./Context";
 import "./PopUp.css";
-import Select from 'react-select'
+import Select from "react-select";
 
 const EditDog = ({
   trigger,
@@ -12,14 +13,13 @@ const EditDog = ({
   originalAge,
   originalEnjoyedActivities,
   originalVaccinationStatus,
-  uploaded_image
+  uploaded_image,
 }) => {
-
   const options = [
-    { value: 1, label: 'Vaccinated' },
-    { value: 0, label: 'Not Vaccinated Yet' }
-  ]
-
+    { value: 1, label: "Vaccinated" },
+    { value: 0, label: "Not Vaccinated Yet" },
+  ];
+  const { user, setUser } = useContext(UserContext);
   const [selected, setSelected] = useState("");
 
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ const EditDog = ({
     enjoyed_activities: originalEnjoyedActivities,
     age: originalAge,
     image_data: uploaded_image,
-    vaccination: originalVaccinationStatus
+    vaccination: originalVaccinationStatus,
   });
 
   const handleSubmit = (event) => {
@@ -48,13 +48,13 @@ const EditDog = ({
         enjoyed_activities: formData.enjoyed_activities,
         age: formData.age,
         image_data: uploaded_image,
-        vaccination: selected
+        vaccination: selected,
       }),
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data)
-        setTrigger(false)
+        updateDog(data);
+        setTrigger(false);
       });
     setFormData({
       dog_id: dogId,
@@ -64,18 +64,20 @@ const EditDog = ({
       enjoyed_activities: "",
       age: "",
       image_data: uploaded_image,
-      vaccination: ""
+      vaccination: "",
     });
   };
 
-
-  // const updatedLocations = (data) => {
-  //   const unupdatedLocations = locations.filter(
-  //     (location) => location.id !== data.id
-  //   );
-  //   const updatedLocations = [...unupdatedLocations, data];
-  //   setLocations(updatedLocations);
-  // };
+  const updateDog = (data) => {
+    let spreadDogs = [...user.dogs];
+    let unupdatedUserDogs = spreadDogs.filter((dog) => dog.id !== data.id);
+    let updatedUserDogs = [...unupdatedUserDogs, data];
+    const updatedUser = {
+      ...user,
+      dogs: [...updatedUserDogs],
+    };
+    setUser(updatedUser);
+  };
 
   const handleChange = (event) => {
     setFormData({
@@ -152,7 +154,11 @@ const EditDog = ({
           <br></br>
           <label style={{ color: "black" }}>
             Vaccination:
-            <Select options={options} onChange={handleSelect} autoFocus={true} />
+            <Select
+              options={options}
+              onChange={handleSelect}
+              autoFocus={true}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -160,7 +166,6 @@ const EditDog = ({
           close
         </button>
       </div>
-
     </div>
   ) : (
     ""
