@@ -146,7 +146,9 @@ const CreateMeetup = ({ dogId, locations }) => {
       let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id && data.invitee.id);
       let updatedDogs = [...unupdatedDogs, updatedInvitorDog, updatedInviteeDog];
       setDogs(updatedDogs)
-      console.log("updated Dogs", updatedDogs)
+      console.log("unupdated Dogs", unupdatedDogs)
+      console.log("Updated Invitor Dog", updatedInvitorDog)
+      console.log("Updated Invitee Dog", updatedInviteeDog)
   }
 
 

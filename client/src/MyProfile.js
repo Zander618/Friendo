@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
+import DeleteDogConfirmation from "./DeleteDogConfirmation";
 import "./DogImage.css";
 import EditDog from "./EditDog";
 
@@ -7,7 +8,9 @@ const MyProfile = () => {
   const { user, setUser, dogs, setDogs } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
-  const [popUpId, setPopUpId] = useState();
+  const [editPopUpId, setEditPopUpId] = useState();
+  const [deletePopUpId, setDeletePopUpId] = useState();
+  const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -50,15 +53,6 @@ const MyProfile = () => {
     console.log(updatedDogs);
   };
 
-  function handleDeleteClick(e) {
-    // fetch(`/dogs/${e.target.id}`, {
-    //   method: "DELETE",
-    // });
-    console.log(parseInt(e.target.id));
-  }
-
-  // const handleDeleteDog = () => {
-  // }
 
   return user ? (
     <div>
@@ -99,11 +93,11 @@ const MyProfile = () => {
                   <li>{dog.age}</li>
                   <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
                 </ul>
-                {dog.id === popUpId && (
+                {dog.id === editPopUpId && (
                   <EditDog
                     trigger={editButtonPopup}
                     setTrigger={setEditButtonPopup}
-                    dogId={popUpId}
+                    dogId={editPopUpId}
                     originalName={dog.name}
                     originalBreed={dog.breed}
                     originalTraits={dog.traits}
@@ -118,7 +112,7 @@ const MyProfile = () => {
                   <button
                     id={dog.id}
                     onClick={(e) => {
-                      setPopUpId(parseInt(e.target.id));
+                      setEditPopUpId(parseInt(e.target.id));
                       setEditButtonPopup(true);
                     }}
                   >
@@ -139,7 +133,22 @@ const MyProfile = () => {
                     </form>
                   </div>
                 )}
-                <button id={dog.id} onClick={handleDeleteClick}>Remove Dog</button>
+                <button
+                  id={dog.id}
+                  onClick={(e) => {
+                    setDeletePopUpId(parseInt(e.target.id));
+                    setDeleteButtonPopup(true);
+                  }}
+                >
+                  Remove Dog
+                </button>
+                {dog.id === deletePopUpId && (
+                  <DeleteDogConfirmation
+                    trigger={deleteButtonPopup}
+                    setTrigger={setDeleteButtonPopup}
+                    dogId={deletePopUpId}
+                  />
+                )}
               </div>
             );
           })}

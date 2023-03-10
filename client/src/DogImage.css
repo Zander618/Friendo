@@ -2,7 +2,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 50%;
+  width: 70%;
   height: 50%;
 }
 
@@ -16,8 +16,8 @@
   float: left;
   text-align: center;
   color: #1b4392;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 700px;
 }
 
 .dog-card:hover {

@@ -25,14 +25,14 @@ const Dogs = ( {setDogId }) => {
           <h1>{dog.name}</h1>
           <h2>{dog.owner_username}'s dog</h2>
           <img src={dog.uploaded_image ? dog.uploaded_image : "no photo"} alt="Dog not added" className="dogImageSizing"/>
-            <ul>
-                <li>{dog.breed}</li>
-                <li>{dog.traits}</li>
-                <li>{dog.enjoyed_activities}</li>
-                <li>{dog.age}</li>
-                <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
-            </ul>
-          <button onClick={handleClick} id={dog.id}>Request a Meetup</button>
+            <ol>
+                <p>Breed: {dog.breed}</p>
+                <p>Personality Traits: {dog.traits}</p>
+                <p>Enjoyed Activites: {dog.enjoyed_activities}</p>
+                <p>Age: {dog.age}</p>
+                <p>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</p>
+                <button onClick={handleClick} id={dog.id}>Request a Meetup</button>
+            </ol>
         </div>
         )
       })}
