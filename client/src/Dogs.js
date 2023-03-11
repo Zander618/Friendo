@@ -19,7 +19,7 @@ const Dogs = ( {setDogId }) => {
 
   return dogs ? (
     <div>
-      {filteredDogs.map((dog) => {
+      {filteredDogs.sort((a, b) => (a.date > b.date ? 1 : -1)).map((dog) => {
         return(
         <div key={dog.id} className="dog-card">
           <h1>{dog.name}</h1>

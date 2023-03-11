@@ -143,12 +143,12 @@ const CreateMeetup = ({ dogId, locations }) => {
       let dogToUpdateInvitee = spreadDogs.find((dog) => dog.id === data.invitee.id)
       let updatedInvitorDog = {...dogToUpdateInvitor, sent_invitations: [...dogToUpdateInvitor.sent_invitations, data]}
       let updatedInviteeDog = {...dogToUpdateInvitee, recieved_invitations: [...dogToUpdateInvitee.recieved_invitations, data]}
-      let unupdatedDogs = dogs.filter((dog) => dog.id !== data.invitor.id && data.invitee.id);
+      // filters the invitor from the dogs array
+      let filteredInvitorDogs = dogs.filter((dog) => dog.id !== data.invitor.id);
+      // filters the invitee from the dog array
+      let unupdatedDogs = filteredInvitorDogs.filter((dog) => dog.id !== data.invitee.id);
       let updatedDogs = [...unupdatedDogs, updatedInvitorDog, updatedInviteeDog];
       setDogs(updatedDogs)
-      console.log("unupdated Dogs", unupdatedDogs)
-      console.log("Updated Invitor Dog", updatedInvitorDog)
-      console.log("Updated Invitee Dog", updatedInviteeDog)
   }
 
 

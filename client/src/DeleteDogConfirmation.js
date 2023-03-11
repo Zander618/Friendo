@@ -12,19 +12,20 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
     handleDeleteDogForDogsArray(e);
     handleDeleteDogInCurrentUser(e)
   }
+  console.log(dogs)
 
   const handleDeleteDogForDogsArray = () => {
     let spreadDogs = [...dogs]
     let remainingDogs = spreadDogs.filter((dog) => dog.id !== dogId)
+    // let remainingReceivedInvitations = spreadDogs.map((dog) => dog.recieved_invitations.invitor.id !== dogId)
+    // const updatedDogs = {
+    //   ...remainingDogs,
+    //   recieved_invitations: [...remainingReceivedInvitations]
+    // }
+    // setDogs(updatedDogs)
     setDogs(remainingDogs)
+    // console.log(updatedDogs)
   } 
-
-  // REMOVE RECEIVED INVITATIONS FROM OTHER DOGS!!!!!!!!!!!!!
-  // let remainingReceivedInvitations = remainingDogs.recieved_invitations.filter((invites) => invites.id !== dogId)
-  // const updatedDogs = {
-  //   ...dogs,
-  //   recieved_invitations: [...remainingReceivedInvitations]
-  // }
 
   const handleDeleteDogInCurrentUser = () => {
     let spreadDogs = [...user.dogs]
