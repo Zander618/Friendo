@@ -3,7 +3,7 @@ import { UserContext } from "./Context";
 import "./PopUp.css";
 
 const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
-  const { user, setUser, dogs, setDogs } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs, meetups, setMeetups } = useContext(UserContext);
 
   function handleDeleteClick(e) {
     fetch(`/dogs/${e.target.id}`, {
@@ -11,20 +11,13 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
     });
     handleDeleteDogForDogsArray(e);
     handleDeleteDogInCurrentUser(e)
+    // removeAllAssociatedMeetups(e)
   }
-  console.log(dogs)
 
   const handleDeleteDogForDogsArray = () => {
     let spreadDogs = [...dogs]
     let remainingDogs = spreadDogs.filter((dog) => dog.id !== dogId)
-    // let remainingReceivedInvitations = spreadDogs.map((dog) => dog.recieved_invitations.invitor.id !== dogId)
-    // const updatedDogs = {
-    //   ...remainingDogs,
-    //   recieved_invitations: [...remainingReceivedInvitations]
-    // }
-    // setDogs(updatedDogs)
     setDogs(remainingDogs)
-    // console.log(updatedDogs)
   } 
 
   const handleDeleteDogInCurrentUser = () => {
@@ -37,7 +30,22 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
     setUser(updatedUser)
   } 
 
-
+  // function removeTargetInvite() {
+  //   return dogs.map(dog => 
+  //     dog.recieved_invitations.map(invite => {
+  //     if (invite.invitor.id === dogId) {
+  
+  //       return {
+  //         language: book.language,
+  //         books: Object.assign(...Object.keys(book.books).map((key) => ({
+  //           [key]: book.books[key]
+  //         })).filter((e) => (Object.keys(e)[0] !== Object.keys(target)[0]) && Object.values(e)[0] !== Object.values(target)[0])),
+  //       }
+  //     } else {
+  //       return book
+  //     }
+  //   })
+  // }
 
   return trigger ? (
     <div className="popup">

@@ -34,7 +34,13 @@ class DogsController < ApplicationController
 
   # DELETE /dogs/1
   def destroy
-    @dog.destroy
+    dog = Dog.find_by(id: params[:id])
+    if dog
+      dog.destroy
+      head :no_content
+    else
+      render json: {error: "no dog found"}, status: :not_found
+    end
   end
 
   private

@@ -7,6 +7,7 @@ function UserProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [dogs, setDogs] = useState([])
   const [userId, setUserId] = useState("")
+  const [meetups, setMeetups] = useState([])
 
 
   const loginUser = (currentUser) => {
@@ -35,12 +36,16 @@ function UserProvider({ children }) {
       .then((data) => {
         setDogs(data)
       });
+
+    fetch("/meetups")
+      .then((r) => r.json())
+      .then(setMeetups);
   }, []);
 
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId }}
+      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups }}
     >
       {children}
     </UserContext.Provider>

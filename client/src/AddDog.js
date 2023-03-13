@@ -27,7 +27,6 @@ const AddDog = () => {
   const addNewDogToDogs = (dog) => {
     const updatedDogs = [...dogs, dog]
     setDogs(updatedDogs)
-    console.log(updatedDogs)
   }
 
   const [formData, setFormData] = useState({

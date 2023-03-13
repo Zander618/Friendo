@@ -11,7 +11,7 @@ const CreateMeetup = ({ dogId, locations }) => {
   const [selectedUserDog, setSelectedUserDog] = useState("");
   const [startTime, setStartTime] = useState("");
   const [date, setDate] = useState(new Date());
-  const { dogs, user, setDogs } = useContext(UserContext);
+  const { dogs, user, setDogs, meetups, setMeetups } = useContext(UserContext);
   const selectedDog = dogs.find((dog) => dog.id === parseInt(dogId));
 
 
@@ -151,6 +151,11 @@ const CreateMeetup = ({ dogId, locations }) => {
       setDogs(updatedDogs)
   }
 
+  const addNewMeetup = (data) => {
+    let updatedMeetups = [...meetups, data]
+    setMeetups(updatedMeetups)
+  } 
+
 
   const handleSubmit = () => {
     fetch(`/meetups`, {
@@ -170,6 +175,7 @@ const CreateMeetup = ({ dogId, locations }) => {
       .then((resp) => resp.json())
       .then((data) => {
         updateDogs(data)
+        addNewMeetup(data)
         navigate("/meetups")
       });
   };
