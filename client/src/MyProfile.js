@@ -3,6 +3,7 @@ import { UserContext } from "./Context";
 import DeleteDogConfirmation from "./DeleteDogConfirmation";
 import "./DogImage.css";
 import EditDog from "./EditDog";
+import EditImage from "./EditImage";
 import EditUser from "./EditUser";
 
 const MyProfile = () => {
@@ -12,7 +13,12 @@ const MyProfile = () => {
   const [editPopUpId, setEditPopUpId] = useState();
   const [editUserPopUp, setEditUserPopUp] = useState(false);
   const [deletePopUpId, setDeletePopUpId] = useState();
+  const [editImagePopUpId, setEditImagePopUpId] = useState();
+  const [editImagePopUp, setEditImagePopUp] = useState(false);
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
+  const [imageId, setImageId] = useState("")
+
+  console.log(imageId)
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -52,8 +58,9 @@ const MyProfile = () => {
     let unupdatedDogs = dogs.filter((dog) => dog.id !== data.dog.id);
     let updatedDogs = [...unupdatedDogs, updatedDog];
     setDogs(updatedDogs);
-    console.log(updatedDogs);
   };
+
+  console.log(dogs)
 
   return user ? (
     <div>
@@ -95,9 +102,27 @@ const MyProfile = () => {
               <div key={dog.id}>
                 <h2>{dog.name}</h2>
                 {dog.uploaded_image !== "false" ? (
-                  <button>Change Photo</button>
+                  <button
+                    id={dog.id}
+                    imageid={dog.image.id}
+                    onClick={(e) => {
+                      setEditImagePopUpId(parseInt(e.target.id));
+                      setImageId(parseInt(e.target.attributes.imageid.value))
+                      setEditImagePopUp(true);
+                    }}
+                  >
+                    Change Photo
+                  </button>
                 ) : (
                   ""
+                )}
+                {dog.id === editImagePopUpId && (
+                  <EditImage
+                    dogId={editImagePopUpId}
+                    trigger={editImagePopUp}
+                    setTrigger={setEditImagePopUp}
+                    imageId={imageId}
+                  />
                 )}
                 <br></br>
                 <img
@@ -110,7 +135,9 @@ const MyProfile = () => {
                   <li>Personality Traits: {dog.traits}</li>
                   <li>Enjoyed Activities: {dog.enjoyed_activities}</li>
                   <li>Age: {dog.age}</li>
-                  <li>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</li>
+                  <li>
+                    Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}
+                  </li>
                 </ul>
                 {dog.id === editPopUpId && (
                   <EditDog
