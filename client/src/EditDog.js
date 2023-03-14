@@ -19,7 +19,8 @@ const EditDog = ({
     { value: 1, label: "Vaccinated" },
     { value: 0, label: "Not Vaccinated Yet" },
   ];
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs, meetups, setMeetups } =
+    useContext(UserContext);
   const [selected, setSelected] = useState("");
 
   const [formData, setFormData] = useState({
@@ -53,7 +54,9 @@ const EditDog = ({
     })
       .then((resp) => resp.json())
       .then((data) => {
+        updateUserDog(data);
         updateDog(data);
+        updateMeetups(data);
         setTrigger(false);
       });
     setFormData({
@@ -68,7 +71,7 @@ const EditDog = ({
     });
   };
 
-  const updateDog = (data) => {
+  const updateUserDog = (data) => {
     let spreadDogs = [...user.dogs];
     let unupdatedUserDogs = spreadDogs.filter((dog) => dog.id !== data.id);
     let updatedUserDogs = [...unupdatedUserDogs, data];
@@ -77,6 +80,47 @@ const EditDog = ({
       dogs: [...updatedUserDogs],
     };
     setUser(updatedUser);
+  };
+
+  const updateDog = (data) => {
+    let spreadDogs = [...dogs];
+    let unupdatedDogs = spreadDogs.filter((dog) => dog.id !== data.id);
+    let updatedDogs = [...unupdatedDogs, data];
+    setDogs(updatedDogs);
+  };
+
+  const updateMeetups = (data) => {
+    let spreadMeetups = [...meetups];
+    let sentMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitor.id === data.id
+    );
+    let recievedMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitee.id === data.id
+    );
+    let updatedSentMeetups = sentMeetups.map((meetup) => {
+      return {
+        ...meetup,
+        invitee: { ...meetup.invitee, name: data.name },
+      };
+    });
+    let updatedRecievedMeetups = recievedMeetups.map((meetup) => {
+      return {
+        ...meetup,
+        invitee: { ...meetup.invitee, name: data.name },
+      };
+    });
+    let unupdatedSentMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitor.id !== data.id
+    );
+    let unupdatedSentAndRecievedMeetups = unupdatedSentMeetups.filter(
+      (meetup) => meetup.invitee.id !== data.id
+    );
+    let updatedMeetups = [
+      ...unupdatedSentAndRecievedMeetups,
+      ...updatedSentMeetups,
+      ...updatedRecievedMeetups,
+    ];
+    setMeetups(updatedMeetups);
   };
 
   const handleChange = (event) => {

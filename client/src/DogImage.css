@@ -6,6 +6,15 @@
   height: 50%;
 }
 
+.dogProfileImageSizing{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 40%;
+  height: 25%;
+}
+
+
 .dog-card {
   border: solid;
   border-color: #3852c2;

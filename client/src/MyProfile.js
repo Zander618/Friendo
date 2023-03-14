@@ -87,7 +87,6 @@ const MyProfile = () => {
       <br></br>
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
-
       <div>
         {user.dogs
           .sort((a, b) => (a.name > b.name ? 1 : -1))
@@ -104,14 +103,14 @@ const MyProfile = () => {
                 <img
                   src={dog.uploaded_image}
                   alt="Please Upload Below"
-                  className="dogImageSizing"
+                  className="dogProfileImageSizing"
                 />
                 <ul>
-                  <li>{dog.breed}</li>
-                  <li>{dog.traits}</li>
-                  <li>{dog.enjoyed_activities}</li>
-                  <li>{dog.age}</li>
-                  <li>{dog.vaccination ? "Yes" : "Not Yet"}</li>
+                  <li>Breed: {dog.breed}</li>
+                  <li>Personality Traits: {dog.traits}</li>
+                  <li>Enjoyed Activities: {dog.enjoyed_activities}</li>
+                  <li>Age: {dog.age}</li>
+                  <li>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</li>
                 </ul>
                 {dog.id === editPopUpId && (
                   <EditDog
