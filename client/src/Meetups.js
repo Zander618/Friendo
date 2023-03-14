@@ -3,13 +3,22 @@ import { UserContext } from "./Context";
 import "./Meetup.css";
 
 const Meetups = () => {
-  const { dogs, userId, setDogs} = useContext(UserContext);
+  const { dogs, userId, setDogs, meetups} = useContext(UserContext);
   const [userDogs, setUserDogs] = useState([]);
+  const [sentMeetupCount, setSentMeetupCount] = useState("")
+  const [receivedMeetupCount, setReceivedMeetupCount] = useState("")
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id === userId);
+    let sentCount = meetups.filter((meetup) => meetup.invitor.user_id  === userId)
+    let receivedCount = meetups.filter((meetup) => meetup.invitee.user_id  === userId)
+    setSentMeetupCount(sentCount.length)
+    setReceivedMeetupCount(receivedCount.length)
     setUserDogs(filteredDogs);
-  }, [dogs, userId]);
+    console.log("in meetups im triggered")
+  }, [receivedMeetupCount, dogs, userId, meetups]);
+
+  console.log(sentMeetupCount)
 
   const returnResponseStatus = (response) => {
     switch (response) {
@@ -204,7 +213,7 @@ const Meetups = () => {
         Once an Invite has been accepted you will recieve the owner's email
         address
       </h1>
-      <h1>Recieved Invites:</h1>
+      <h1>{receivedMeetupCount} Recieved Invites:</h1>
       {userDogs
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .map((dog) => {
@@ -256,7 +265,7 @@ const Meetups = () => {
             </div>
           );
         })}
-      <h1>Sent Invites:</h1>
+      <h1>{sentMeetupCount} Sent Invites:</h1>
       {userDogs
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .map((dog) => {

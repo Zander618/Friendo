@@ -8,10 +8,10 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
   function handleDeleteClick(e) {
     fetch(`/dogs/${e.target.id}`, {
       method: "DELETE",
-    });
-    handleDeleteDogForDogsArray(e);
+    })
     handleDeleteDogInCurrentUser(e)
-    // removeAllAssociatedMeetups(e)
+    removeAllAssociatedMeetups(e)
+    handleDeleteDogForDogsArray(e)
   }
 
   const handleDeleteDogForDogsArray = () => {
@@ -30,22 +30,14 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
     setUser(updatedUser)
   } 
 
-  // function removeTargetInvite() {
-  //   return dogs.map(dog => 
-  //     dog.recieved_invitations.map(invite => {
-  //     if (invite.invitor.id === dogId) {
-  
-  //       return {
-  //         language: book.language,
-  //         books: Object.assign(...Object.keys(book.books).map((key) => ({
-  //           [key]: book.books[key]
-  //         })).filter((e) => (Object.keys(e)[0] !== Object.keys(target)[0]) && Object.values(e)[0] !== Object.values(target)[0])),
-  //       }
-  //     } else {
-  //       return book
-  //     }
-  //   })
-  // }
+  const removeAllAssociatedMeetups = () => {
+    let spreadDogs = [...dogs]
+    let removedDog = spreadDogs.find((dog) => dog.id === dogId)
+    let spreadMeetups = [...meetups]
+    let unassociatedMeetups = spreadMeetups.filter((meetup) => meetup.invitor.id !== removedDog.id)
+    setMeetups(unassociatedMeetups)
+  }
+
 
   return trigger ? (
     <div className="popup">
