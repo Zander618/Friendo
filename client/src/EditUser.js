@@ -13,7 +13,7 @@ const EditUser = ({
   originalEmail,
   userDogs
 }) => {
-  const { setUser, dogs, setDogs } = useContext(UserContext);
+  const { setUser, dogs, setDogs, meetups, setMeetups } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     user_id: userId,
@@ -46,6 +46,7 @@ const EditUser = ({
       .then((data) => {
         setUser(data);
         updateDogs(data)
+        updateMeetups(data)
         setTrigger(false);
       });
     setFormData({
@@ -79,6 +80,30 @@ const EditUser = ({
     let unupdatedDogs = spreadDogs.filter((dog) => dog.user_id !== userId) 
     let updatedDogs = [...unupdatedDogs, ...updatedUserDogs]
     setDogs(updatedDogs)
+  }
+
+  const updateMeetups = (data) => {
+    let spreadMeetups = [...meetups]
+    let userSentMeetups = spreadMeetups.filter((meetup) => meetup.invitor.user_id === userId)
+    let userRecievedMeetups = spreadMeetups.filter((meetup) => meetup.invitee.user_id === userId)
+    let updatedSentMeetups = userSentMeetups.map((meetup) => {
+      return{
+      ...meetup,
+      invitor_username: data.username,
+      invitor_email: data.email
+      }
+    })
+    let updatedRecievedMeetups = userRecievedMeetups.map((meetup) => {
+      return{
+      ...meetup,
+      invitee_username: data.username,
+      invitee_email: data.email
+      }
+    })
+    let unupdatedSentMeetups = spreadMeetups.filter((meetup) => meetup.invitor.user_id !== userId)
+    let unupdatedSentAndRecievedMeetups = unupdatedSentMeetups.filter((meetup) => meetup.invitee.user_id !== userId) 
+    let updatedMeetups = [...unupdatedSentAndRecievedMeetups, ...updatedSentMeetups, ...updatedRecievedMeetups]
+    setMeetups(updatedMeetups)
   }
 
   return trigger ? (

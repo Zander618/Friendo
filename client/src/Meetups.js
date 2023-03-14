@@ -186,7 +186,7 @@ const Meetups = () => {
                 <h2>Date: </h2>
                 <h3>{invitation.date}</h3>
                 <h2>From: </h2>
-                <h3>Username: {invitation.invitor.owner_username}</h3>
+                <h3>Username: {invitation.invitor_username}</h3>
                 <h3>Dog name: {invitation.invitor.name}</h3>
                 <h2>Location: </h2>
                 <h3>{invitation.location_name}</h3>
@@ -234,7 +234,7 @@ const Meetups = () => {
                 <h2>Date: </h2>
                 <h3>{invitation.date}</h3>
                 <h2>To: </h2>
-                <h3>Username: {invitation.invitee.owner_username}</h3>
+                <h3>Username: {invitation.invitee_username}</h3>
                 <h3>Dog name: {invitation.invitee.name}</h3>
                 <h2>Location: </h2>
                 <h3>{invitation.location_name}</h3>
