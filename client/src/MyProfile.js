@@ -3,12 +3,14 @@ import { UserContext } from "./Context";
 import DeleteDogConfirmation from "./DeleteDogConfirmation";
 import "./DogImage.css";
 import EditDog from "./EditDog";
+import EditUser from "./EditUser";
 
 const MyProfile = () => {
-  const { user, setUser, dogs, setDogs } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [editPopUpId, setEditPopUpId] = useState();
+  const [editUserPopUp, setEditUserPopUp] = useState(false);
   const [deletePopUpId, setDeletePopUpId] = useState();
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
 
@@ -53,21 +55,39 @@ const MyProfile = () => {
     console.log(updatedDogs);
   };
 
-
   return user ? (
     <div>
       <br></br>
       <h1>User Profile</h1>
       <br></br>
-      <button>Edit Profile Details</button>
+      <button
+        id={userId}
+        onClick={() => {
+          setEditUserPopUp(true);
+        }}
+      >
+        Edit Profile Details
+      </button>
       <h2>First Name: {user.first_name}</h2>
       <h2>Username: {user.username}</h2>
       <h2>State: {user.state}</h2>
       <h2>County: {user.county}</h2>
       <h2>Email: {user.email}</h2>
+      <EditUser
+        trigger={editUserPopUp}
+        setTrigger={setEditUserPopUp}
+        userId={userId}
+        originalName={user.first_name}
+        originalUserName={user.username}
+        originalState={user.state}
+        originalCounty={user.county}
+        originalEmail={user.email}
+        userDogs={user.dogs}
+      />
       <br></br>
       <br></br>
       <h1>{user.first_name}'s Dogs</h1>
+
       <div>
         {user.dogs
           .sort((a, b) => (a.name > b.name ? 1 : -1))
