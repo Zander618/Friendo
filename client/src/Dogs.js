@@ -15,7 +15,6 @@ const Dogs = ( {setDogId }) => {
 
   let filteredDogs = dogs.filter((dog) => dog.user_id !== userId)
 
-  
 
   return dogs ? (
     <div>
