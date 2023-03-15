@@ -38,7 +38,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
           <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} />} />
+          <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} setLocations={setLocations} />} />
         </Routes>
       </Router>
   )

@@ -5,7 +5,7 @@ import Select from "react-select";
 import Calendar from "react-calendar";
 
 
-const CreateMeetup = ({ dogId, locations }) => {
+const CreateMeetup = ({ dogId, locations, setLocations }) => {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedUserDog, setSelectedUserDog] = useState("");
@@ -156,6 +156,20 @@ const CreateMeetup = ({ dogId, locations }) => {
     setMeetups(updatedMeetups)
   } 
 
+  const updateLocations = (data) => {
+    let spreadLocations = [...locations]
+    let locationToUpdate = spreadLocations.find((location) => location.id === data.location_id)
+    let unupdatedLocations = spreadLocations.filter((location) => location.id !== data.location_id)
+    let updatedMeetupsInUpdatedLocation = locationToUpdate.meetups.map((meetup) => {
+      return{
+        meetup 
+      }
+    })
+    let updatedLocation = {...locationToUpdate, meetups: [...updatedMeetupsInUpdatedLocation, data]}
+    let updatedLocations = [...unupdatedLocations, updatedLocation]
+    setLocations(updatedLocations)
+  }
+
 
   const handleSubmit = () => {
     fetch(`/meetups`, {
@@ -176,6 +190,7 @@ const CreateMeetup = ({ dogId, locations }) => {
       .then((data) => {
         updateDogs(data)
         addNewMeetup(data)
+        updateLocations(data)
         navigate("/meetups")
       });
   };

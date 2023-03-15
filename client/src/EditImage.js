@@ -19,8 +19,7 @@ const EditImage = ({dogId, trigger, setTrigger, imageId}) => {
   
   
   const handleSubmitPhoto = () => {
-    
-
+  
     const formData = new FormData();
     formData.append("dog_id", dogId);
     formData.append("dog_image", edittedDogImage);

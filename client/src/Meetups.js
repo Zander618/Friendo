@@ -37,6 +37,8 @@ const Meetups = () => {
         return "Accepted";
       case 2:
         return "Tentative";
+      case 3:
+        return "Canceled"
       default:
         return "";
     }
@@ -158,7 +160,7 @@ const Meetups = () => {
         location_address: meetupToUpdate.location_address,
         location_id: meetupToUpdate.location_id,
         location_name: meetupToUpdate.location_name,
-        response: 0,
+        response: 3,
         time: meetupToUpdate.time,
       }),
     })
@@ -180,44 +182,48 @@ const Meetups = () => {
         .map((invitation) => {
           return (
             <div key={invitation.id} className="meetup-card">
-              <h1>{invitation.invitee.name}</h1>
+              <h2>{invitation.invitee.name}</h2>
               <div className="meetup-card-inner">
-                <h2>Recieved Invition</h2>
-                <h2>Date: </h2>
-                <h3>{invitation.date}</h3>
-                <h2>From: </h2>
-                <h3>Username: {invitation.invitor_username}</h3>
-                <h3>Dog name: {invitation.invitor.name}</h3>
-                <h2>Location: </h2>
-                <h3>{invitation.location_name}</h3>
-                <h2>Address:</h2>
-                <h3>{invitation.location_address}</h3>
-                <h2>Time: </h2>
-                <h3>{invitation.time}</h3>
-                <h2>Status: </h2>
-                <h3>{returnResponseStatus(invitation.response)}</h3>
-                <h2>Requester's Email:</h2>
-                <h3>
+                <h3>Recieved Invition</h3>
+                <h3>Date: </h3>
+                <h4>{invitation.date}</h4>
+                <h3>From: </h3>
+                <h4>Username: {invitation.invitor_username}</h4>
+                <h4>Dog name: {invitation.invitor.name}</h4>
+                <h3>Location: </h3>
+                <h4>{invitation.location_name}</h4>
+                <h3>Address:</h3>
+                <h4>{invitation.location_address}</h4>
+                <h3>Time: </h3>
+                <h4>{invitation.time}</h4>
+                <h3>Status: </h3>
+                <h4>{returnResponseStatus(invitation.response)}</h4>
+                <h3>Requester's Email:</h3>
+                <h4>
                   {invitation.response === 1 ? invitation.invitor_email : ""}
-                </h3>
-                <button
-                  invite={invitation.id}
-                  dog={invitation.invitee.id}
-                  onClick={(e) => {
-                    handleAcceptedClick(e);
-                  }}
-                >
-                  Accept
-                </button>
-                <button
-                  invite={invitation.id}
-                  dog={invitation.invitee.id}
-                  onClick={(e) => {
-                    handleDeclinedClick(e);
-                  }}
-                >
-                  Decline
-                </button>
+                </h4>
+                {invitation.response === 3 ? "" : 
+                <div>
+                  <button
+                    invite={invitation.id}
+                    dog={invitation.invitee.id}
+                    onClick={(e) => {
+                      handleAcceptedClick(e);
+                    }}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    invite={invitation.id}
+                    dog={invitation.invitee.id}
+                    onClick={(e) => {
+                      handleDeclinedClick(e);
+                    }}
+                  >
+                    Decline
+                  </button>
+                </div>
+                }
               </div>
             </div>
           );
@@ -228,26 +234,26 @@ const Meetups = () => {
         .map((invitation) => {
           return (
             <div key={invitation.id} className="meetup-card">
-              <h1>{invitation.invitor.name}</h1>
+              <h2>{invitation.invitor.name}</h2>
               <div className="meetup-card-inner">
-                <h2>Sent Invition</h2>
-                <h2>Date: </h2>
-                <h3>{invitation.date}</h3>
-                <h2>To: </h2>
-                <h3>Username: {invitation.invitee_username}</h3>
-                <h3>Dog name: {invitation.invitee.name}</h3>
-                <h2>Location: </h2>
-                <h3>{invitation.location_name}</h3>
-                <h2>Address:</h2>
-                <h3>{invitation.location_address}</h3>
-                <h2>Time: </h2>
-                <h3>{invitation.time}</h3>
-                <h2>Status: </h2>
-                <h3>{returnResponseStatus(invitation.response)}</h3>
-                <h2>Invitee's Email:</h2>
-                <h3>
+                <h3>Sent Invition</h3>
+                <h3>Date: </h3>
+                <h4>{invitation.date}</h4>
+                <h3>To: </h3>
+                <h4>Username: {invitation.invitee_username}</h4>
+                <h4>Dog name: {invitation.invitee.name}</h4>
+                <h3>Location: </h3>
+                <h4>{invitation.location_name}</h4>
+                <h3>Address:</h3>
+                <h4>{invitation.location_address}</h4>
+                <h3>Time: </h3>
+                <h4>{invitation.time}</h4>
+                <h3>Status: </h3>
+                <h4>{returnResponseStatus(invitation.response)}</h4>
+                <h3>Invitee's Email:</h3>
+                <h4>
                   {invitation.response === 1 ? invitation.invitee_email : ""}
-                </h3>
+                </h4>
                 <button
                   invite={invitation.id}
                   dog={invitation.invitor.id}

@@ -35,6 +35,7 @@ console.log(locations)
                   <h1>{location.name}</h1>
                   <h2>{location.address}</h2>
                   <img src={location.photo} alt="dog park" className="dogParkImageSizing"/> 
+                  <p>Has hosted or is hosting a total of {location.meetups.length} meetups</p>
                 </li>
               </ul>
               <button

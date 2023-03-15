@@ -30,6 +30,8 @@ const Dogs = ( {setDogId }) => {
                 <p>Enjoyed Activites: {dog.enjoyed_activities}</p>
                 <p>Age: {dog.age}</p>
                 <p>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</p>
+                <p>Has sent {dog.sent_invitations.length} invitations</p>
+                <p>Has recieved {dog.recieved_invitations.length} invitations</p>
                 <button onClick={handleClick} id={dog.id}>Request a Meetup</button>
             </ol>
         </div>
