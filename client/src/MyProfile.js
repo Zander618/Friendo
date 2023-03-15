@@ -28,9 +28,6 @@ const MyProfile = () => {
 
     fetch("/images", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: formData,
     })
       .then((resp) => resp.json())
