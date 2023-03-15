@@ -18,7 +18,6 @@ const MyProfile = () => {
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
   const [imageId, setImageId] = useState("")
 
-  console.log(imageId)
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -60,7 +59,7 @@ const MyProfile = () => {
     setDogs(updatedDogs);
   };
 
-  console.log(dogs)
+
 
   return user ? (
     <div>

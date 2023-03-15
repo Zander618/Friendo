@@ -6,17 +6,28 @@ const EditImage = ({dogId, trigger, setTrigger, imageId}) => {
   const [edittedDogImage, setEdittedDogImage] = useState([]);
   const { user, setUser, dogs, setDogs } = useContext(UserContext);
 
-  const handleSubmitPhoto = (e) => {
+  
+  function handleDeleteClick(e) {
     e.preventDefault();
+    fetch(`/dogimage/${dogId}`, {
+      method: "DELETE",
+    })
+    handleSubmitPhoto()
+  }
+  
+  
+  
+  
+  const handleSubmitPhoto = () => {
+    
 
-    fetch(`/images/${imageId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        dog_image: edittedDogImage,
-      }),
+    const formData = new FormData();
+    formData.append("dog_id", dogId);
+    formData.append("dog_image", edittedDogImage);
+
+    fetch(`/images`, {
+      method: "POST",
+      body: formData,
     })
       .then((resp) => resp.json())
       .then((data) => {
@@ -50,7 +61,7 @@ const EditImage = ({dogId, trigger, setTrigger, imageId}) => {
 
   return trigger ? (
     <div className="edit-review-card">
-      <form onSubmit={handleSubmitPhoto}>
+      <form onSubmit={handleDeleteClick}>
         <h4>upload photo</h4>
         <input
           type="file"

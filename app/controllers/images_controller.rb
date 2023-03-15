@@ -9,11 +9,12 @@ class ImagesController < ApplicationController
     render json: image, status: :created
   end
 
-  def update
-    image = Image.find_by(id: params[:id])
-    if image
-      image.update(image_params)
-      render json: image
+
+  def purge
+    dog = Dog.find_by(id: params[:id])
+    if dog
+      dog.image.destroy
+      head :no_content
     else
       render json: {error: "Image Not Found"}, status: :not_found
     end
