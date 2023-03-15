@@ -6,11 +6,27 @@
 #   service: Disk
 #   root: <%= Rails.root.join("tmp/storage") %>
 
+# google:
+#   service: GCS
+#   project: Friendo
+#   credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].as_json %>
+#   credentials: <%= Rails.root.join("config/secrets/dog-photos.json") %>
+#   bucket: dog-photo-bucket
+
 google:
   service: GCS
+  credentials:
+    type: "service_account"
+    project_id: "positive-ivy-379421"
+    private_key_id: "9169efdc9e7d1416c6ecce2a2ebaff7f85972320"
+    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump %>
+    client_email: "friendo@positive-ivy-379421.iam.gserviceaccount.com"
+    client_id: "116645475926598650966"
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    token_uri: "https://oauth2.googleapis.com/token",
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/friendo%40positive-ivy-379421.iam.gserviceaccount.com"
   project: Friendo
-  # credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].as_json %>
-  credentials: <%= Rails.root.join("config/secrets/dog-photos.json") %>
   bucket: dog-photo-bucket
 
 google_dev:

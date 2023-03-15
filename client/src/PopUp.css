@@ -50,3 +50,28 @@ position:absolute;
 top:16px;
 right: 16px;
 }
+
+.delete-popup {
+  top: -20;
+  left: 20;
+  width: 100%;
+  height: 10vh;
+  display:flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.delete-popup-inner{
+text-size-adjust: large;
+position: relative;
+padding:20px;
+width: 100%;
+max-width: 1000px;
+background-color: rgb(255, 255, 255); 
+}
+
+.delete-popup-inner .close-btn{
+position:absolute;
+top:16px;
+right: 16px;
+}
