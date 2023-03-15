@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "./Context";
 import "./PopUp.css";
 
 const EditReview = ({
@@ -11,6 +12,7 @@ const EditReview = ({
   originalAddress,
   originalPhoto
 }) => {
+  const { meetups, setMeetups } = useContext(UserContext);
   const [formData, setFormData] = useState({
     address: originalAddress,
     name: originalName,
@@ -33,6 +35,7 @@ const EditReview = ({
       .then((resp) => resp.json())
       .then((data) => {
         updatedLocations(data)
+        updateMeetups(data)
         setTrigger(false)
       });
     setFormData({
@@ -57,6 +60,21 @@ const EditReview = ({
     const updatedLocations = [...unupdatedLocations, data];
     setLocations(updatedLocations);
   };
+
+  const updateMeetups = (data) => {
+    const spreadMeetups = [...meetups]
+    const meetupsToUpdate = spreadMeetups.filter((meetup) => meetup.location_id === data.id)
+    let updatedLocationMeetups = meetupsToUpdate.map((meetup) => {
+      return{
+        ...meetup,
+        location_address: data.address,
+        location_name: data.name
+      }
+    })
+    let unupdatedMeetups = spreadMeetups.filter((meetup) => meetup.location_id !== data.id)
+    let updatedMeetups = [...unupdatedMeetups, ...updatedLocationMeetups]
+    setMeetups(updatedMeetups)
+  }
 
   return trigger ? (
     <div className="edit-review-card">
