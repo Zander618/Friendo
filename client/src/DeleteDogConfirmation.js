@@ -40,8 +40,8 @@ const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
 
 
   return trigger ? (
-    <div className="popup">
-      <div className="popop-inner">
+    <div className="delete-popup">
+      <div className="delete-popup-inner">
       <h3>Are you sure you want to remove this dog?</h3>
       <button               
               id={dogId}
