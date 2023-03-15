@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import DeleteDogConfirmation from "./DeleteDogConfirmation";
 import "./DogImage.css";
@@ -7,8 +7,7 @@ import EditImage from "./EditImage";
 import EditUser from "./EditUser";
 
 const MyProfile = () => {
-  // const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
-  const { user, userId } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [editPopUpId, setEditPopUpId] = useState();
@@ -17,17 +16,7 @@ const MyProfile = () => {
   const [editImagePopUpId, setEditImagePopUpId] = useState();
   const [editImagePopUp, setEditImagePopUp] = useState(false);
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
-  const [imageId, setImageId] = useState("")
 
-
-  // useEffect(() => {
-  //   fetch("/images")
-  //   .then((resp) => resp.json())
-  //   .then((data) => {
-  //     addPhotoToDogForUser(data);
-  //     addPhotoToDogForDogs(data);
-  //   });
-  // }, [])
 
 
   const handleSubmitPhoto = (e) => {
@@ -41,29 +30,35 @@ const MyProfile = () => {
       method: "POST",
       body: formData,
     })
+      .then((resp) => resp.json())
+      .then((data) => {
+        addPhotoToDogForUser(data);
+        addPhotoToDogForDogs(data);
+      });
   };
 
-  // const addPhotoToDogForUser = (data) => {
-  //   let spreadDogs = [...user.dogs];
-  //   let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
-  //   let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
-  //   let unupdatedUserDogs = user.dogs.filter((dog) => dog.id !== data.dog.id);
-  //   let updatedUserDogs = [...unupdatedUserDogs, updatedDog];
-  //   const updatedUser = {
-  //     ...user,
-  //     dogs: updatedUserDogs,
-  //   };
-  //   setUser(updatedUser);
-  // };
+  const addPhotoToDogForUser = (data) => {
+    let spreadDogs = [...user.dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
+    let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
+    let unupdatedUserDogs = user.dogs.filter((dog) => dog.id !== data.dog.id);
+    let updatedUserDogs = [...unupdatedUserDogs, updatedDog];
+    const updatedUser = {
+      ...user,
+      dogs: updatedUserDogs,
+    };
+    setUser(updatedUser);
+  };
 
-  // const addPhotoToDogForDogs = (data) => {
-  //   let spreadDogs = [...dogs];
-  //   let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
-  //   let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
-  //   let unupdatedDogs = dogs.filter((dog) => dog.id !== data.dog.id);
-  //   let updatedDogs = [...unupdatedDogs, updatedDog];
-  //   setDogs(updatedDogs);
-  // };
+  const addPhotoToDogForDogs = (data) => {
+    let spreadDogs = [...dogs];
+    let dogToUpdate = spreadDogs.find((dog) => dog.id === data.dog.id);
+    let updatedDog = { ...dogToUpdate, uploaded_image: data.dog_image };
+    let unupdatedDogs = dogs.filter((dog) => dog.id !== data.dog.id);
+    let updatedDogs = [...unupdatedDogs, updatedDog];
+    setDogs(updatedDogs);
+  };
+
 
   return user ? (
     <div>
@@ -107,10 +102,8 @@ const MyProfile = () => {
                 {dog.uploaded_image !== "false" ? (
                   <button
                     id={dog.id}
-                    imageid={dog.image.id}
                     onClick={(e) => {
                       setEditImagePopUpId(parseInt(e.target.id));
-                      setImageId(parseInt(e.target.attributes.imageid.value))
                       setEditImagePopUp(true);
                     }}
                   >
@@ -124,7 +117,6 @@ const MyProfile = () => {
                     dogId={editImagePopUpId}
                     trigger={editImagePopUp}
                     setTrigger={setEditImagePopUp}
-                    imageId={imageId}
                   />
                 )}
                 <br></br>

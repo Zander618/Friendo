@@ -2,7 +2,7 @@ import React, {useState, useContext} from "react";
 import { UserContext } from "./Context";
 import "./PopUp.css";
 
-const EditImage = ({dogId, trigger, setTrigger, imageId}) => {
+const EditImage = ({dogId, trigger, setTrigger}) => {
   const [edittedDogImage, setEdittedDogImage] = useState([]);
   const { user, setUser, dogs, setDogs } = useContext(UserContext);
 
