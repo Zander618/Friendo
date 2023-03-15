@@ -221,7 +221,7 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
       <div>Selected date: {date.toDateString()}</div>
       <h2>Select Time</h2>
       <label style={{ color: "black" }}>
-        Select Your Location
+        Select Your Time
         <Select
           options={timeOptions}
           autoFocus={true}
