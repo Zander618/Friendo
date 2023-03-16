@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
-
+const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
   const [formData, setFormData] = useState({
     address: "",
     name: "",
     photo: "",
   });
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,8 +24,9 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        addNewLocation(data)
-        setTrigger(false)
+        addNewLocation(data);
+        setTrigger(false);
+        navigate("/locations");
       });
     setFormData({
       address: "",
@@ -41,13 +43,13 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
   };
 
   const addNewLocation = (data) => {
-    let newLocations = [...locations, data]
-    setLocations(newLocations)
-  }
+    let newLocations = [...locations, data];
+    setLocations(newLocations);
+  };
 
   return trigger ? (
     <div>
-      <div >
+      <div>
         <h3 style={{ color: "black" }}>Add Location</h3>
         <form onSubmit={handleSubmit}>
           <label style={{ color: "black" }}>
@@ -87,7 +89,13 @@ const AddLocation = ( {trigger, setTrigger, locations, setLocations }) => {
           <br></br>
           <input type="submit" value="Submit" />
         </form>
-        <button className="close-btn" onClick={() => setTrigger(false)}>
+        <button
+          className="close-btn"
+          onClick={() => {
+            setTrigger(false);
+            navigate("/locations");
+          }}
+        >
           close
         </button>
       </div>
