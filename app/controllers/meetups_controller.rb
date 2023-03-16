@@ -7,10 +7,10 @@ class MeetupsController < ApplicationController
     render json: meetups
   end
 
-  # GET /meetups/1
-  def show
-    render json: @meetup
-  end
+  # # GET /meetups/1
+  # def show
+  #   render json: @meetup
+  # end
 
   # POST /meetups
   def create
@@ -31,10 +31,10 @@ class MeetupsController < ApplicationController
     end
   end
 
-  # DELETE /meetups/1
-  def destroy
-    @meetup.destroy
-  end
+  # # DELETE /meetups/1
+  # def destroy
+  #   @meetup.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

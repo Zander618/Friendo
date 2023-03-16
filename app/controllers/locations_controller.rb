@@ -8,14 +8,14 @@ class LocationsController < ApplicationController
   end
 
   # GET /locations/1
-  def show
-    location = Location.find_by(id: params[:id])
-    if location
-      render json: location
-    else
-      render json: { error:"Location not found"}, status: :not_found
-    end
-  end
+  # def show
+  #   location = Location.find_by(id: params[:id])
+  #   if location
+  #     render json: location
+  #   else
+  #     render json: { error:"Location not found"}, status: :not_found
+  #   end
+  # end
 
   # POST /locations
   def create
@@ -40,9 +40,9 @@ class LocationsController < ApplicationController
   end
 
   # DELETE /locations/1
-  def destroy
-    @location.destroy
-  end
+  # def destroy
+  #   @location.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,11 +6,11 @@ Rails.application.routes.draw do
 
   get "/me", to: "users#show"
 
-  resources :locations
-  resources :meetups
+  resources :locations, only: [:index, :create, :update]
+  resources :meetups, only: [:index, :create, :update]
   resources :dogs
-  resources :users
-  resources :images
+  resources :users, only: [:create, :update, :show]
+  resources :images, only: [:index, :create]
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

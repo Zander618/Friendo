@@ -62,7 +62,7 @@ const AddDog = () => {
       .then((data) => {
         addNewDogToUser(data)
         addNewDogToDogs(data)
-        navigate("/myprofile")
+        navigate("/profile")
       });
     setFormData({
         user_id: userId,
