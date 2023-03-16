@@ -12,10 +12,11 @@ import AddDog from './AddDog';
 import CreateMeetup from "./CreateMeetup";
 import MyProfile from "./MyProfile";
 import AddLocation from "./AddLocation";
+import EditLocation from "./EditLocation";
+import EditDog from "./EditDog";
 
 function App() {
   const [locations, setLocations] = useState([])
-  
   const [dogId, setDogId] = useState("")
 
   
@@ -32,15 +33,16 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/dogs" element={<Dogs setDogId={setDogId}/>} />
+          <Route path="/dogs" element={<Dogs setDogId={setDogId}/>}/>
           <Route path="/locations/*" element={<Locations locations={locations} setLocations={setLocations}/>}>
             <Route path="new" element={<AddLocation />}/>
+            <Route path=":id" element={<EditLocation />}/>
           </Route>  
           <Route path="/meetups" element={<Meetups  />} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
-          <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/profile" element={<MyProfile />} />
           <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} setLocations={setLocations} />} />
         </Routes>
       </Router>

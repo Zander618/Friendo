@@ -18,7 +18,7 @@ import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
 
 function ResponsiveAppBar() {
-  const { logoutUser, loggedIn } = useContext(UserContext);
+  const { logoutUser, loggedIn, userId } = useContext(UserContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -168,7 +168,7 @@ function ResponsiveAppBar() {
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography noWrap>
             <Link
-              to="/myprofile"
+              to="/profile"
               style={{
                 mr: 4,
                 variant: "h4",
@@ -182,10 +182,7 @@ function ResponsiveAppBar() {
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleCloseUserMenu}>
-          <Typography
-            onClick={handleLogout}
-            noWrap
-          >
+          <Typography onClick={handleLogout} noWrap>
             <Link
               style={{
                 mr: 4,

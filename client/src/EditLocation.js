@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
+import { useNavigate } from "react-router-dom";
 import "./PopUp.css";
 
 const EditReview = ({
@@ -18,6 +19,7 @@ const EditReview = ({
     name: originalName,
     photo: originalPhoto,
   });
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,6 +39,7 @@ const EditReview = ({
         updatedLocations(data)
         updateMeetups(data)
         setTrigger(false)
+        navigate("/locations");
       });
     setFormData({
       address: "",
@@ -118,7 +121,13 @@ const EditReview = ({
           <br></br>
           <input type="submit" value="Submit" />
         </form>
-        <button className="close-btn" onClick={() => setTrigger(false)}>
+        <button
+          className="close-btn"
+          onClick={() => {
+            setTrigger(false);
+            navigate("/locations");
+          }}
+        >
           close
         </button>
       </div>

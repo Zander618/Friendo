@@ -5,6 +5,7 @@ import "./DogImage.css";
 import EditDog from "./EditDog";
 import EditImage from "./EditImage";
 import EditUser from "./EditUser";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
@@ -16,7 +17,7 @@ const MyProfile = () => {
   const [editImagePopUpId, setEditImagePopUpId] = useState();
   const [editImagePopUp, setEditImagePopUp] = useState(false);
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
-
+  const navigate = useNavigate();
 
 
   const handleSubmitPhoto = (e) => {

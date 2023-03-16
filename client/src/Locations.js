@@ -56,6 +56,7 @@ const Locations = ({ locations, setLocations }) => {
                   onClick={(e) => {
                     setPopUpId(parseInt(e.target.id));
                     setEditButtonPopup(true);
+                    navigate(`/locations/${e.target.id}`)
                   }}
                 >
                   Edit
