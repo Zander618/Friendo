@@ -13,7 +13,6 @@ import CreateMeetup from "./CreateMeetup";
 import MyProfile from "./MyProfile";
 import AddLocation from "./AddLocation";
 import EditLocation from "./EditLocation";
-import EditDog from "./EditDog";
 
 function App() {
   const [locations, setLocations] = useState([])
