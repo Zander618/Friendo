@@ -19,7 +19,7 @@ class DogsController < ApplicationController
     if @dog.save
       render json: @dog, status: :created, location: @dog
     else
-      render json: @dog.errors, status: :unprocessable_entity
+      render json: { errors: ["Please fill all portions of the form"] }, status: :unauthorized
     end
   end
 
@@ -28,7 +28,7 @@ class DogsController < ApplicationController
     if @dog.update(dog_params)
       render json: @dog
     else
-      render json: @dog.errors, status: :unprocessable_entity
+      render json: {error: "Fill out the form"}, status: :not_found
     end
   end
 
