@@ -14,12 +14,11 @@ class DogsController < ApplicationController
 
   # POST /dogs
   def create
-    @dog = Dog.new(dog_params)
-
-    if @dog.save
-      render json: @dog, status: :created, location: @dog
+    dog = Dog.new(dog_params)
+    if dog.valid?
+      render json: dog, status: :created
     else
-      render json: { errors: ["Please fill all portions of the form"] }, status: :unauthorized
+      render json: { errors: dog.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
