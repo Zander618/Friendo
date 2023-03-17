@@ -3,15 +3,15 @@ import { UserContext } from "./Context";
 import "./DogImage.css"
 import { useNavigate } from "react-router-dom";
 
-const Dogs = ( {setDogId }) => {
+const Dogs = ( { setDogId } ) => {
   const navigate = useNavigate();
   
   const { dogs, userId } = useContext(UserContext);
 
-  const handleClick = (e) => {
-    setDogId(e.target.id)
-    navigate(`/dogs/${e.target.id}/meetups/new`)
-  }
+  // const handleClick = (e) => {
+  //   setDogId(e.target.id)
+  //   navigate(`/dogs/:id/meetups/new`)
+  // }
 
   let filteredDogs = dogs.filter((dog) => dog.user_id !== userId)
 
@@ -32,7 +32,10 @@ const Dogs = ( {setDogId }) => {
                 <p>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</p>
                 <p>Has sent {dog.sent_invitations.length} invitations</p>
                 <p>Has recieved {dog.recieved_invitations.length} invitations</p>
-                <button onClick={handleClick} id={dog.id}>Request a Meetup</button>
+                <button onClick={() => {
+                  setDogId(dog.id)
+                  navigate(`/dogs/${dog.id}/meetups/new`)
+                  }} id={dog.id}>Request a Meetup</button>
             </ol>
         </div>
         )

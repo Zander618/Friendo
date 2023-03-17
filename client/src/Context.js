@@ -8,6 +8,7 @@ function UserProvider({ children }) {
   const [dogs, setDogs] = useState([])
   const [userId, setUserId] = useState("")
   const [meetups, setMeetups] = useState([])
+  const [userDogs, setUserDogs] = useState([])
 
 
   const loginUser = (currentUser) => {
@@ -22,11 +23,14 @@ function UserProvider({ children }) {
     setUserId("")
   };
 
+
+
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           loginUser(user)
+          setUserDogs(user.dogs)
         });
       }
     });
@@ -45,7 +49,7 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups }}
+      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs }}
     >
       {children}
     </UserContext.Provider>

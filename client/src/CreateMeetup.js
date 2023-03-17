@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "./Context";
 import Select from "react-select";
 import Calendar from "react-calendar";
@@ -10,9 +10,16 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedUserDog, setSelectedUserDog] = useState("");
   const [startTime, setStartTime] = useState("");
+  const [selectedDog, setSelectedDog] = useState({})
   const [date, setDate] = useState(new Date());
-  const { dogs, user, setDogs, meetups, setMeetups } = useContext(UserContext);
-  const selectedDog = dogs.find((dog) => dog.id === parseInt(dogId));
+  const { dogs, setDogs, meetups, setMeetups, userDogs } = useContext(UserContext);
+  const {id} = useParams()
+
+  useEffect(() => {
+    const dog = dogs.find((g) => g.id.toString() === id);
+    setSelectedDog(dog)
+  },[id, dogs, dogId])
+  
 
 
 
@@ -120,10 +127,11 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
     label: location.name,
   }));
 
-  const userDogOptions = user.dogs.map((dog) => ({
+  const userDogOptions = userDogs.map((dog) => ({
     value: dog.id,
     label: dog.name,
   }));
+
 
   const handleTimeSelect = (selectedOption) => {
     setStartTime(selectedOption.value);
@@ -195,7 +203,7 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
       });
   };
 
-  return (
+  return selectedDog ? (
     <div>
       <h1>
         You requested a Meetup with "{selectedDog.name}" the {selectedDog.breed}
@@ -230,6 +238,8 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
       </label>
       <button onClick={handleSubmit}>Submit</button>
     </div>
+  ) : (
+    <h1>...Loading</h1>
   );
 };
 

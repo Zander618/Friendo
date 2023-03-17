@@ -18,6 +18,9 @@ function App() {
   const [locations, setLocations] = useState([])
   const [dogId, setDogId] = useState("")
 
+
+
+
   
   useEffect(() => {
     fetch("/locations")
@@ -42,7 +45,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
           <Route path="/profile" element={<MyProfile />} />
-          <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} setLocations={setLocations} />} />
+          <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} setLocations={setLocations}  />} />
         </Routes>
       </Router>
   )
