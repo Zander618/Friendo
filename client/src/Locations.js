@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import AddLocation from "./AddLocation";
 import EditLocation from "./EditLocation";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
 
 const Locations = ({ locations, setLocations }) => {
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [popUpId, setPopUpId] = useState();
-  const navigate = useNavigate();
 
 
 
@@ -18,7 +16,6 @@ const Locations = ({ locations, setLocations }) => {
         <button
           onClick={() => {
             setAddButtonPopup(true);
-            navigate("/locations/new")
           }}
         >
           Add Location
@@ -56,7 +53,6 @@ const Locations = ({ locations, setLocations }) => {
                   onClick={(e) => {
                     setPopUpId(parseInt(e.target.id));
                     setEditButtonPopup(true);
-                    navigate(`/locations/${e.target.id}`)
                   }}
                 >
                   Edit

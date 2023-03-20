@@ -9,8 +9,9 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedUserDog, setSelectedUserDog] = useState("");
-  const [startTime, setStartTime] = useState("");
+  const [startTime, setStartTime] = useState();
   const [selectedDog, setSelectedDog] = useState({})
+  const [errors, setErrors] = useState([]);
   const [date, setDate] = useState(new Date());
   const { dogs, setDogs, meetups, setMeetups, userDogs } = useContext(UserContext);
   const {id} = useParams()
@@ -21,7 +22,7 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
   },[id, dogs, dogId])
   
 
-
+  console.log(startTime)
 
   const timeOptions = [
     { value: "12:00 am", label: "12:00 am"},
@@ -193,13 +194,17 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
         invitee_id: selectedDog.id,
         response: 2
       }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
+    }).then((resp) => {
+        if (resp.ok) {
+        resp.json().then((data) => {
         updateDogs(data)
         addNewMeetup(data)
         updateLocations(data)
         navigate("/meetups")
+      });
+    } else {
+      resp.json().then((errorData) => setErrors(errorData.errors));
+    }
       });
   };
 
@@ -237,6 +242,14 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
         />
       </label>
       <button onClick={handleSubmit}>Submit</button>
+      {errors.length > 0 && (
+        <ul style={{ color: "red" }}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
+      <br></br>
     </div>
   ) : (
     <h1>...Loading</h1>

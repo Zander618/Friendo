@@ -19,12 +19,11 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    @location = Location.new(location_params)
-
-    if @location.save
-      render json: @location, status: :created, location: @location
+    location = Location.new(location_params)
+    if location.valid?
+      render json: location, status: :created
     else
-      render json: @location.errors, status: :unprocessable_entity
+      render json: { errors: location.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -32,10 +31,10 @@ class LocationsController < ApplicationController
   def update
     location = Location.find_by(id: params[:id])
     if location
-      location.update(location_params)
+      location.update!(location_params)
       render json: location
     else
-      render json: {error: "Location Not Found"}, status: :not_found
+      render json: { errors: location.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

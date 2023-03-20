@@ -18,7 +18,7 @@ class MeetupsController < ApplicationController
     if meetup.valid?
       render json: meetup, status: :created
     else
-      render json: {errors: meetup.errors}, status: :unprocessable_entity
+      render json: {errors: meetup.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ class MeetupsController < ApplicationController
     if @meetup.update(meetup_params)
       render json: @meetup
     else
-      render json: {error: "Meetup Not Found! Dog has likely been removed"}, status: :not_found
+      render json: {errors: meetup.errors.full_messages}, status: :not_found
     end
   end
 

@@ -9,8 +9,6 @@ const AddDog = () => {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
-  console.log(errors)
-
   const options = [
     { value: 1, label: "Vaccinated" },
     { value: 0, label: "Not Vaccinated Yet" },

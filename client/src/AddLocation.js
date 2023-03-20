@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
   const [formData, setFormData] = useState({
@@ -7,7 +6,7 @@ const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
     name: "",
     photo: "",
   });
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,13 +20,16 @@ const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
         name: formData.name,
         photo: formData.photo,
       }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
+    }).then((resp) => {
+      if (resp.ok) {
+        resp.json().then((data) => {
         addNewLocation(data);
         setTrigger(false);
-        navigate("/locations");
       });
+    } else {
+      resp.json().then((errorData) => setErrors(errorData.errors));
+    }
+  })
     setFormData({
       address: "",
       name: "",
@@ -93,11 +95,17 @@ const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
           className="close-btn"
           onClick={() => {
             setTrigger(false);
-            navigate("/locations");
           }}
         >
           close
         </button>
+        {errors.length > 0 && (
+        <ul style={{ color: "red" }}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       </div>
     </div>
   ) : (

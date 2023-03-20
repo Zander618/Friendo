@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
-import { useNavigate } from "react-router-dom";
 import "./PopUp.css";
 
 const EditReview = ({
@@ -14,12 +13,12 @@ const EditReview = ({
   originalPhoto
 }) => {
   const { meetups, setMeetups } = useContext(UserContext);
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     address: originalAddress,
     name: originalName,
     photo: originalPhoto,
   });
-  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,20 +32,25 @@ const EditReview = ({
         name: formData.name,
         photo: formData.photo,
       }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
+    }).then((resp) => {
+      if (resp.ok) {
+        resp.json().then((data) => {
         updatedLocations(data)
         updateMeetups(data)
         setTrigger(false)
-        navigate("/locations");
       });
+    } else {
+      resp.json().then((errorData) => setErrors(errorData.errors));
+    }
+  })
     setFormData({
       address: "",
       name: "",
       photo: "",
     });
   };
+
+  console.log(errors)
 
 
   const handleChange = (event) => {
@@ -125,11 +129,17 @@ const EditReview = ({
           className="close-btn"
           onClick={() => {
             setTrigger(false);
-            navigate("/locations");
           }}
         >
           close
         </button>
+        {errors.length > 0 && (
+        <ul style={{ color: "red" }}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       </div>
     </div>
   ) : (
