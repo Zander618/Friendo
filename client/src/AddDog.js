@@ -60,7 +60,7 @@ const AddDog = () => {
         r.json().then((data) => {
           addNewDogToUser(data);
           addNewDogToDogs(data);
-          navigate("/profile");
+          navigate("/myprofile");
         });
       } else {
         r.json().then((errorData) => setErrors(errorData.errors));
