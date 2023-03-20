@@ -11,8 +11,9 @@ import Login from './Login';
 import AddDog from './AddDog';
 import CreateMeetup from "./CreateMeetup";
 import MyProfile from "./MyProfile";
-import AddLocation from "./AddLocation";
-import EditLocation from "./EditLocation";
+
+
+
 
 function App() {
   const [locations, setLocations] = useState([])
@@ -36,15 +37,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/dogs" element={<Dogs setDogId={setDogId}/>}/>
-          <Route path="/locations/*" element={<Locations locations={locations} setLocations={setLocations}/>}>
-            <Route path="new" element={<AddLocation />}/>
-            <Route path=":id" element={<EditLocation />}/>
-          </Route>  
+          <Route path="/locations/*" element={<Locations locations={locations} setLocations={setLocations}/>}/>
           <Route path="/meetups" element={<Meetups  />} />
+          <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/dogs/new" element={<AddDog/>} />
-          <Route path="/profile" element={<MyProfile />} />
           <Route path="/dogs/:id/meetups/new" element={<CreateMeetup dogId={dogId} locations={locations} setLocations={setLocations}  />} />
         </Routes>
       </Router>

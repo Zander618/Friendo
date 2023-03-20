@@ -10,10 +10,10 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
     if user
-      user.update(user_params)
+      user.update!(user_params)
       render json: user
     else
-      render json: {error: "User Not Found"}, status: :not_found
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

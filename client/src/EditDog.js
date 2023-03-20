@@ -22,6 +22,7 @@ const EditDog = ({
   const { user, setUser, dogs, setDogs, meetups, setMeetups } =
     useContext(UserContext);
   const [selected, setSelected] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
     dog_id: dogId,
@@ -51,14 +52,18 @@ const EditDog = ({
         image_data: uploaded_image,
         vaccination: selected,
       }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        updateUserDog(data);
-        updateDog(data);
-        updateMeetups(data);
-        setTrigger(false);
-      });
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          updateUserDog(data);
+          updateDog(data);
+          updateMeetups(data);
+          setTrigger(false);
+        });
+      } else {
+        r.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
     setFormData({
       dog_id: dogId,
       name: "",
@@ -209,6 +214,13 @@ const EditDog = ({
         <button className="close-btn" onClick={() => setTrigger(false)}>
           close
         </button>
+        {errors.length > 0 && (
+          <ul style={{ color: "red" }}>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   ) : (

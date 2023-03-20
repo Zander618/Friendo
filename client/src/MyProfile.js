@@ -5,10 +5,9 @@ import "./DogImage.css";
 import EditDog from "./EditDog";
 import EditImage from "./EditImage";
 import EditUser from "./EditUser";
-import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
-  const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [editPopUpId, setEditPopUpId] = useState();
@@ -17,7 +16,6 @@ const MyProfile = () => {
   const [editImagePopUpId, setEditImagePopUpId] = useState();
   const [editImagePopUp, setEditImagePopUp] = useState(false);
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
-  const navigate = useNavigate();
 
 
   const handleSubmitPhoto = (e) => {
@@ -61,13 +59,12 @@ const MyProfile = () => {
   };
 
 
-  return user ? (
+  return user ?  (
     <div>
-      <br></br>
       <h1>User Profile</h1>
       <br></br>
       <button
-        id={userId}
+        id={user.id}
         onClick={() => {
           setEditUserPopUp(true);
         }}
@@ -82,7 +79,7 @@ const MyProfile = () => {
       <EditUser
         trigger={editUserPopUp}
         setTrigger={setEditUserPopUp}
-        userId={userId}
+        userId={user.id}
         originalName={user.first_name}
         originalUserName={user.username}
         originalState={user.state}
@@ -195,7 +192,6 @@ const MyProfile = () => {
             );
           })}
       </div>
-      <br></br>
       <br></br>
     </div>
   ) : (

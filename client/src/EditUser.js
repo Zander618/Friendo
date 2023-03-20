@@ -11,9 +11,11 @@ const EditUser = ({
   originalState,
   originalCounty,
   originalEmail,
-  userDogs
+  userDogs,
 }) => {
-  const { setUser, dogs, setDogs, meetups, setMeetups } = useContext(UserContext);
+  const { setUser, dogs, setDogs, meetups, setMeetups } =
+    useContext(UserContext);
+  const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
     user_id: userId,
@@ -22,7 +24,7 @@ const EditUser = ({
     state: originalState,
     county: originalCounty,
     email: originalEmail,
-    dogs: userDogs
+    dogs: userDogs,
   });
 
   const handleSubmit = (event) => {
@@ -39,16 +41,20 @@ const EditUser = ({
         state: formData.state,
         county: formData.county,
         email: formData.email,
-        dogs: userDogs
+        dogs: userDogs,
       }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setUser(data);
-        updateDogs(data)
-        updateMeetups(data)
-        setTrigger(false);
-      });
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          setUser(data);
+          updateDogs(data);
+          updateMeetups(data);
+          setTrigger(false);
+        });
+      } else {
+        r.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
     setFormData({
       user_id: userId,
       username: "",
@@ -56,7 +62,7 @@ const EditUser = ({
       state: "",
       county: "",
       email: "",
-      dogs: userDogs
+      dogs: userDogs,
     });
   };
 
@@ -68,43 +74,55 @@ const EditUser = ({
   };
 
   const updateDogs = (data) => {
-    let spreadDogs = [...dogs]
-    let userDogs = spreadDogs.filter((dog) => dog.user_id === userId)
+    let spreadDogs = [...dogs];
+    let userDogs = spreadDogs.filter((dog) => dog.user_id === userId);
     let updatedUserDogs = userDogs.map((dog) => {
-      return{
-      ...dog,
-      owner_username: data.username,
-      user: data
-      }
-    })
-    let unupdatedDogs = spreadDogs.filter((dog) => dog.user_id !== userId) 
-    let updatedDogs = [...unupdatedDogs, ...updatedUserDogs]
-    setDogs(updatedDogs)
-  }
+      return {
+        ...dog,
+        owner_username: data.username,
+        user: data,
+      };
+    });
+    let unupdatedDogs = spreadDogs.filter((dog) => dog.user_id !== userId);
+    let updatedDogs = [...unupdatedDogs, ...updatedUserDogs];
+    setDogs(updatedDogs);
+  };
 
   const updateMeetups = (data) => {
-    let spreadMeetups = [...meetups]
-    let userSentMeetups = spreadMeetups.filter((meetup) => meetup.invitor.user_id === userId)
-    let userRecievedMeetups = spreadMeetups.filter((meetup) => meetup.invitee.user_id === userId)
+    let spreadMeetups = [...meetups];
+    let userSentMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitor.user_id === userId
+    );
+    let userRecievedMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitee.user_id === userId
+    );
     let updatedSentMeetups = userSentMeetups.map((meetup) => {
-      return{
-      ...meetup,
-      invitor_username: data.username,
-      invitor_email: data.email
-      }
-    })
+      return {
+        ...meetup,
+        invitor_username: data.username,
+        invitor_email: data.email,
+      };
+    });
     let updatedRecievedMeetups = userRecievedMeetups.map((meetup) => {
-      return{
-      ...meetup,
-      invitee_username: data.username,
-      invitee_email: data.email
-      }
-    })
-    let unupdatedSentMeetups = spreadMeetups.filter((meetup) => meetup.invitor.user_id !== userId)
-    let unupdatedSentAndRecievedMeetups = unupdatedSentMeetups.filter((meetup) => meetup.invitee.user_id !== userId) 
-    let updatedMeetups = [...unupdatedSentAndRecievedMeetups, ...updatedSentMeetups, ...updatedRecievedMeetups]
-    setMeetups(updatedMeetups)
-  }
+      return {
+        ...meetup,
+        invitee_username: data.username,
+        invitee_email: data.email,
+      };
+    });
+    let unupdatedSentMeetups = spreadMeetups.filter(
+      (meetup) => meetup.invitor.user_id !== userId
+    );
+    let unupdatedSentAndRecievedMeetups = unupdatedSentMeetups.filter(
+      (meetup) => meetup.invitee.user_id !== userId
+    );
+    let updatedMeetups = [
+      ...unupdatedSentAndRecievedMeetups,
+      ...updatedSentMeetups,
+      ...updatedRecievedMeetups,
+    ];
+    setMeetups(updatedMeetups);
+  };
 
   return trigger ? (
     <div className="edit-review-card">
@@ -172,6 +190,13 @@ const EditUser = ({
         <button className="close-btn" onClick={() => setTrigger(false)}>
           close
         </button>
+        {errors.length > 0 && (
+        <ul style={{ color: "red" }}>
+          {errors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       </div>
     </div>
   ) : (
@@ -179,5 +204,4 @@ const EditUser = ({
   );
 };
 
-
-export default EditUser
+export default EditUser;

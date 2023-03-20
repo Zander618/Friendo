@@ -24,10 +24,12 @@ class DogsController < ApplicationController
 
   # PATCH/PUT /dogs/1
   def update
-    if @dog.update(dog_params)
-      render json: @dog
+    dog = Dog.find_by(id: params[:id])
+    if dog
+      dog.update!(dog_params)
+      render json: dog
     else
-      render json: {error: "Fill out the form"}, status: :not_found
+      render json: { errors: dog.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
