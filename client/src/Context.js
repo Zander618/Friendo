@@ -15,13 +15,17 @@ function UserProvider({ children }) {
     setUser(currentUser);
     setLoggedIn(true);
     setUserId(currentUser.id)
+    setUserDogs(currentUser.dogs)
   };
 
   const logoutUser = () => {
     setUser({});
     setLoggedIn(false);
     setUserId("")
+    setUserDogs([])
   };
+  
+  console.log(userDogs)
 
 
 
@@ -30,7 +34,6 @@ function UserProvider({ children }) {
       if (r.ok) {
         r.json().then((user) => {
           loginUser(user)
-          setUserDogs(user.dogs)
         });
       }
     });
@@ -49,7 +52,7 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs }}
+      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs, setUserDogs }}
     >
       {children}
     </UserContext.Provider>

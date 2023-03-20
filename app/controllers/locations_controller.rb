@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    location = Location.new(location_params)
+    location = Location.create(location_params)
     if location.valid?
       render json: location, status: :created
     else

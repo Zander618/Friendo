@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 const AddDog = () => {
-  const { user, setUser, userId, dogs, setDogs } = useContext(UserContext);
+  const { user, setUser, userId, dogs, setDogs, setUserDogs } = useContext(UserContext);
   const [selected, setSelected] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
@@ -25,6 +25,11 @@ const AddDog = () => {
   const addNewDogToDogs = (dog) => {
     const updatedDogs = [...dogs, dog];
     setDogs(updatedDogs);
+  };
+
+  const addNewDogToUserDogs = (dog) => {
+    const updatedDogs = [...user.dogs, dog];
+    setUserDogs(updatedDogs);
   };
 
   const [formData, setFormData] = useState({
@@ -60,6 +65,7 @@ const AddDog = () => {
         r.json().then((data) => {
           addNewDogToUser(data);
           addNewDogToDogs(data);
+          addNewDogToUserDogs(data)
           navigate("/myprofile");
         });
       } else {

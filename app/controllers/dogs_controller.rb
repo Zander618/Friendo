@@ -14,7 +14,7 @@ class DogsController < ApplicationController
 
   # POST /dogs
   def create
-    dog = Dog.new(dog_params)
+    dog = Dog.create(dog_params)
     if dog.valid?
       render json: dog, status: :created
     else

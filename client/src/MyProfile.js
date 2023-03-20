@@ -7,7 +7,7 @@ import EditImage from "./EditImage";
 import EditUser from "./EditUser";
 
 const MyProfile = () => {
-  const { user, setUser, dogs, setDogs } = useContext(UserContext);
+  const { user, setUser, dogs, setDogs, userId } = useContext(UserContext);
   const [dogImage, setDogImage] = useState([]);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [editPopUpId, setEditPopUpId] = useState();
@@ -64,7 +64,7 @@ const MyProfile = () => {
       <h1>User Profile</h1>
       <br></br>
       <button
-        id={user.id}
+        id={userId}
         onClick={() => {
           setEditUserPopUp(true);
         }}
@@ -79,7 +79,7 @@ const MyProfile = () => {
       <EditUser
         trigger={editUserPopUp}
         setTrigger={setEditUserPopUp}
-        userId={user.id}
+        userId={userId}
         originalName={user.first_name}
         originalUserName={user.username}
         originalState={user.state}
