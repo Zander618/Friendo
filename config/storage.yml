@@ -17,5 +17,5 @@ local:
 google:
   service: GCS
   project: Friendo
-  credentials: <%= Rails.root.join("config/secrets/friendo-photo-storage.json") %>
+  credentials: "/etc/secrets/friendo-photo-storage.json"
   bucket: friendo-dog-photo
