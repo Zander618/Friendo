@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_02_194400) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_162424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_194400) do
     t.integer "invitee_id"
     t.integer "dog_id"
     t.integer "response"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "invitor_id"
+    t.integer "invitee_id"
+    t.integer "meetup_id"
+    t.string "text"
+    t.string "date"
+    t.string "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
