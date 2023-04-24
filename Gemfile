@@ -36,4 +36,6 @@ group :development do
   # gem "spring"
 end
 
+gem 'actioncable', '~> 7.0.4.1'
+
 gem "active_model_serializers", "~> 0.10.12"
