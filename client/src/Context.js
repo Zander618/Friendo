@@ -25,7 +25,6 @@ function UserProvider({ children }) {
     setUserDogs([])
   };
   
-  console.log(userDogs)
 
 
 

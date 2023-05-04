@@ -22,7 +22,7 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
   },[id, dogs, dogId])
   
 
-  console.log(startTime)
+
 
   const timeOptions = [
     { value: "12:00 am", label: "12:00 am"},

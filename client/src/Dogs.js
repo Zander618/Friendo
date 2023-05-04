@@ -31,7 +31,7 @@ const Dogs = ( { setDogId } ) => {
                 <p>Age: {dog.age}</p>
                 <p>Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}</p>
                 <p>Has sent {dog.sent_invitations.length} invitations</p>
-                <p>Has recieved {dog.recieved_invitations.length} invitations</p>
+                <p>Has received {dog.recieved_invitations.length} invitations</p>
                 <button onClick={() => {
                   setDogId(dog.id)
                   navigate(`/dogs/${dog.id}/meetups/new`)

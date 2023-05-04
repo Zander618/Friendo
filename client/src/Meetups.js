@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
 import "./Meetup.css";
+// import { useNavigate } from "react-router-dom";
 
-const Meetups = () => {
+const Meetups = ({setMeetupId}) => {
+  // const navigate = useNavigate();
   const { userId, meetups, setMeetups } = useContext(UserContext);
   const [userDogsRecievedInvitations, setUserDogsRecievedInvitations] =
     useState([]);
@@ -38,7 +40,7 @@ const Meetups = () => {
       case 2:
         return "Tentative";
       case 3:
-        return "Canceled"
+        return "Canceled";
       default:
         return "";
     }
@@ -170,13 +172,17 @@ const Meetups = () => {
       });
   };
 
+  // const goToMessages = (e) => {
+  //   navigate("/chat");
+  // };
+
   return (
     <div>
       <h1>
-        Once an Invite has been accepted you will recieve the owner's email
+        Once an Invite has been accepted you will receive the owner's email
         address
       </h1>
-      <h1>{receivedMeetupCount} Recieved Invitations:</h1>
+      <h1>{receivedMeetupCount} Received Invitations:</h1>
       {userDogsRecievedInvitations
         .sort((a, b) => (a.name > b.name ? 1 : -1))
         .map((invitation) => {
@@ -184,7 +190,7 @@ const Meetups = () => {
             <div key={invitation.id} className="meetup-card">
               <h2>{invitation.invitee.name}</h2>
               <div className="meetup-card-inner">
-                <h3>Recieved Invition</h3>
+                <h3>Received Invition</h3>
                 <h3>Date: </h3>
                 <h4>{invitation.date}</h4>
                 <h3>From: </h3>
@@ -200,30 +206,44 @@ const Meetups = () => {
                 <h4>{returnResponseStatus(invitation.response)}</h4>
                 <h3>Requester's Email:</h3>
                 <h4>
-                  {invitation.response === 1 ? invitation.invitor_email : ""}
+                  {invitation.response === 1
+                    ? invitation.invitor_email
+                        // <button
+                        //   id={invitation.id}
+                        //   onClick={(e) => {
+                        //     goToMessages(e)
+                        //     setMeetupId(e.target.id);
+                        //   }}
+                        // >
+                        //   Message
+                        // </button>
+                    
+                    : ""}
                 </h4>
-                {invitation.response === 3 ? "" : 
-                <div>
-                  <button
-                    invite={invitation.id}
-                    dog={invitation.invitee.id}
-                    onClick={(e) => {
-                      handleAcceptedClick(e);
-                    }}
-                  >
-                    Accept
-                  </button>
-                  <button
-                    invite={invitation.id}
-                    dog={invitation.invitee.id}
-                    onClick={(e) => {
-                      handleDeclinedClick(e);
-                    }}
-                  >
-                    Decline
-                  </button>
-                </div>
-                }
+                {invitation.response === 3 ? (
+                  ""
+                ) : (
+                  <div>
+                    <button
+                      invite={invitation.id}
+                      dog={invitation.invitee.id}
+                      onClick={(e) => {
+                        handleAcceptedClick(e);
+                      }}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      invite={invitation.id}
+                      dog={invitation.invitee.id}
+                      onClick={(e) => {
+                        handleDeclinedClick(e);
+                      }}
+                    >
+                      Decline
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           );
