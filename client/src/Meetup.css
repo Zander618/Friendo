@@ -1,6 +1,7 @@
 .meetup-card {
   border: solid;
   border-color: #3852c2;
+  
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 10px;
@@ -11,8 +12,25 @@
 .meetup-card-inner {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 5px;
-  text-align: center;
+  display: fit-content;
+  /* text-align: center; */
+  /* width:min-content;
+  height: min-content; */
   color: #1b4392;
+}
+
+.meetup-image-left{
+  text-align: left;
+  margin: 20px;
+  width: 400px;
+  height: 400px;
+}
+
+.meetup-image-right{
+  text-align: right;
+  margin: 20px;
+  width: 400px;
+  height: 400px;
 }
 
 .meetup-card:hover {
