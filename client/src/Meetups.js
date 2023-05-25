@@ -12,6 +12,7 @@ const Meetups = ({ setMeetupId }) => {
   const [sentMeetupCount, setSentMeetupCount] = useState("");
   const [receivedMeetupCount, setReceivedMeetupCount] = useState("");
   const [showMoreReceivedDetails, setShowMoreReceivedDetails] = useState("");
+  const [showMoreSentDetails, setShowMoreSentDetails] = useState("");
 
   useEffect(() => {
     let filteredDogsRecievedInvitations = meetups.filter(
@@ -173,13 +174,20 @@ const Meetups = ({ setMeetupId }) => {
       });
   };
 
-  const showDetails = (e) => {
+  const showReceivedDetails = (e) => {
     setShowMoreReceivedDetails(e.target.id);
-    console.log(e);
   };
 
-  const hideDetails = () => {
+  const hideReceivedDetails = () => {
     setShowMoreReceivedDetails("");
+  };
+
+  const showSentDetails = (e) => {
+    setShowMoreSentDetails(e.target.id);
+  };
+
+  const hideSentDetails = () => {
+    setShowMoreSentDetails("");
   };
 
   // const goToMessages = (e) => {
@@ -193,143 +201,178 @@ const Meetups = ({ setMeetupId }) => {
         address
       </h1>
       <h1>{receivedMeetupCount} Received Invitations:</h1>
-      {userDogsRecievedInvitations
-        .map((invitation) => {
-          console.log(invitation)
-          return (
-            <div key={invitation.id} className="meetup-card">
-              <h2>{invitation.invitee.name}</h2>
-              <div className="meetup-card-inner">
-                <h3>Received Invition</h3>
-                <img
-                  src={invitation.invitee.uploaded_image}
-                  alt="invitee dog"
-                  className="meetup-image-left"
-                />
-                <img
-                  src={invitation.invitor.uploaded_image}
-                  alt="invitee dog"
-                  className="meetup-image-right"
-                />
-                <br />
-                <h3>{invitation.invitee.name} is being requested to meet with {invitation.invitor.name}</h3>
-                <button
-                  id={invitation.id}
-                  onClick={(e) => {
-                    showDetails(e);
-                  }}
-                >
-                  Show Details
-                </button>
-                <button
-                  onClick={() => {
-                    hideDetails();
-                  }}
-                >
-                  Close Details
-                </button>
-                {parseInt(showMoreReceivedDetails) === invitation.id ? (
-                  <div>
-                    <h3>Date: </h3>
-                    <h4>{invitation.date}</h4>
-                    <h3>From: </h3>
-                    <h4>Username: {invitation.invitor_username}</h4>
-                    <h4>Dog name: {invitation.invitor.name}</h4>
-                    <h3>Location: </h3>
-                    <h4>{invitation.location_name}</h4>
-                    <h3>Address:</h3>
-                    <h4>{invitation.location_address}</h4>
-                    <h3>Time: </h3>
-                    <h4>{invitation.time}</h4>
-                    <h3>Status: </h3>
-                    <h4>{returnResponseStatus(invitation.response)}</h4>
-                    <h3>Requester's Email:</h3>
-                    <h4>
-                      {invitation.response === 1
-                        ? invitation.invitor_email
-                        : // <button
-                          //   id={invitation.id}
-                          //   onClick={(e) => {
-                          //     goToMessages(e)
-                          //     setMeetupId(e.target.id);
-                          //   }}
-                          // >
-                          //   Message
-                          // </button>
+      {userDogsRecievedInvitations.map((invitation) => {
+        return (
+          <div key={invitation.id} className="meetup-card">
+            <h2>{invitation.invitee.name}</h2>
+            <div className="meetup-card-inner">
+              <h3>Received Invition</h3>
+              <img
+                src={invitation.invitee.uploaded_image}
+                alt="invitee dog"
+                className="meetup-image-left"
+              />
+              <img
+                src={invitation.invitor.uploaded_image}
+                alt="invitee dog"
+                className="meetup-image-right"
+              />
+              <br />
+              <h3>
+                {invitation.invitee.name} is being requested to meet with{" "}
+                {invitation.invitor.name}
+              </h3>
+              <button
+                id={invitation.id}
+                onClick={(e) => {
+                  showReceivedDetails(e);
+                }}
+              >
+                Show Details
+              </button>
+              <button
+                onClick={() => {
+                  hideReceivedDetails();
+                }}
+              >
+                Close Details
+              </button>
+              {parseInt(showMoreReceivedDetails) === invitation.id ? (
+                <div>
+                  <h3>Date: </h3>
+                  <h4>{invitation.date}</h4>
+                  <h3>From: </h3>
+                  <h4>Username: {invitation.invitor_username}</h4>
+                  <h4>Dog name: {invitation.invitor.name}</h4>
+                  <h3>Location: </h3>
+                  <h4>{invitation.location_name}</h4>
+                  <h3>Address:</h3>
+                  <h4>{invitation.location_address}</h4>
+                  <h3>Time: </h3>
+                  <h4>{invitation.time}</h4>
+                  <h3>Status: </h3>
+                  <h4>{returnResponseStatus(invitation.response)}</h4>
+                  <h3>Requester's Email:</h3>
+                  <h4>
+                    {invitation.response === 1
+                      ? invitation.invitor_email
+                      : // <button
+                        //   id={invitation.id}
+                        //   onClick={(e) => {
+                        //     goToMessages(e)
+                        //     setMeetupId(e.target.id);
+                        //   }}
+                        // >
+                        //   Message
+                        // </button>
 
-                          ""}
-                    </h4>
-                    {invitation.response === 3 ? (
-                      ""
-                    ) : (
-                      <div>
-                        <button
-                          invite={invitation.id}
-                          dog={invitation.invitee.id}
-                          onClick={(e) => {
-                            handleAcceptedClick(e);
-                          }}
-                        >
-                          Accept
-                        </button>
-                        <button
-                          invite={invitation.id}
-                          dog={invitation.invitee.id}
-                          onClick={(e) => {
-                            handleDeclinedClick(e);
-                          }}
-                        >
-                          Decline
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
+                        ""}
+                  </h4>
+                  {invitation.response === 3 ? (
+                    ""
+                  ) : (
+                    <div>
+                      <button
+                        invite={invitation.id}
+                        dog={invitation.invitee.id}
+                        onClick={(e) => {
+                          handleAcceptedClick(e);
+                        }}
+                      >
+                        Accept
+                      </button>
+                      <button
+                        invite={invitation.id}
+                        dog={invitation.invitee.id}
+                        onClick={(e) => {
+                          handleDeclinedClick(e);
+                        }}
+                      >
+                        Decline
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
-          );
-        })}
+          </div>
+        );
+      })}
       <h1>{sentMeetupCount} Sent Invitations:</h1>
-      {userDogsSentInvitations
-        .sort((a, b) => (a.name > b.name ? 1 : -1))
-        .map((invitation) => {
-          return (
-            <div key={invitation.id} className="meetup-card">
-              <h2>{invitation.invitor.name}</h2>
-              <div className="meetup-card-inner">
-                <h3>Sent Invition</h3>
-                <h3>Date: </h3>
-                <h4>{invitation.date}</h4>
-                <h3>To: </h3>
-                <h4>Username: {invitation.invitee_username}</h4>
-                <h4>Dog name: {invitation.invitee.name}</h4>
-                <h3>Location: </h3>
-                <h4>{invitation.location_name}</h4>
-                <h3>Address:</h3>
-                <h4>{invitation.location_address}</h4>
-                <h3>Time: </h3>
-                <h4>{invitation.time}</h4>
-                <h3>Status: </h3>
-                <h4>{returnResponseStatus(invitation.response)}</h4>
-                <h3>Invitee's Email:</h3>
-                <h4>
-                  {invitation.response === 1 ? invitation.invitee_email : ""}
-                </h4>
-                <button
-                  invite={invitation.id}
-                  dog={invitation.invitor.id}
-                  onClick={(e) => {
-                    handleCancelClick(e);
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
+      {userDogsSentInvitations.map((invitation) => {
+        return (
+          <div key={invitation.id} className="meetup-card">
+            <h2>{invitation.invitor.name}</h2>
+            <div className="meetup-card-inner">
+              <h3>Sent Invition</h3>
+              <img
+                src={invitation.invitor.uploaded_image}
+                alt="invitee dog"
+                className="meetup-image-left"
+              />
+              <img
+                src={invitation.invitee.uploaded_image}
+                alt="invitee dog"
+                className="meetup-image-right"
+              />
+              <br />
+              <h3>
+                {invitation.invitor.name} is requesting a meeting with{" "}
+                {invitation.invitee.name}
+              </h3>
+              <button
+                id={invitation.id}
+                onClick={(e) => {
+                  showSentDetails(e);
+                }}
+              >
+                Show Details
+              </button>
+              <button
+                onClick={() => {
+                  hideSentDetails();
+                }}
+              >
+                Close Details
+              </button>
+              {parseInt(showMoreSentDetails) === invitation.id ? (
+                <div>
+                  <h3>Date: </h3>
+                  <h4>{invitation.date}</h4>
+                  <h3>To: </h3>
+                  <h4>Username: {invitation.invitee_username}</h4>
+                  <h4>Dog name: {invitation.invitee.name}</h4>
+                  <h3>Location: </h3>
+                  <h4>{invitation.location_name}</h4>
+                  <h3>Address:</h3>
+                  <h4>{invitation.location_address}</h4>
+                  <h3>Time: </h3>
+                  <h4>{invitation.time}</h4>
+                  <h3>Status: </h3>
+                  <h4>{returnResponseStatus(invitation.response)}</h4>
+                  <h3>Invitee's Email:</h3>
+                  <h4>
+                    {invitation.response === 1 ? invitation.invitee_email : ""}
+                  </h4>
+                  <button
+                    invite={invitation.id}
+                    dog={invitation.invitor.id}
+                    onClick={(e) => {
+                      handleCancelClick(e);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
-          );
-        })}
+          </div>
+        );
+      })}
     </div>
   );
 };
