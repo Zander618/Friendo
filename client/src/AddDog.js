@@ -5,7 +5,7 @@ import Select from "react-select";
 
 const AddDog = () => {
   const { user, setUser, userId, dogs, setDogs, setUserDogs } = useContext(UserContext);
-  const [selected, setSelected] = useState("");
+  const [selectedVaccinationStatus, setSelectedVaccinationStatus] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
@@ -58,7 +58,7 @@ const AddDog = () => {
         enjoyed_activities: formData.enjoyed_activities,
         age: formData.age,
         image_data: "",
-        vaccination: selected,
+        vaccination: selectedVaccinationStatus,
       }),
     }).then((r) => {
       if (r.ok) {
@@ -91,8 +91,8 @@ const AddDog = () => {
     });
   };
 
-  const handleSelect = (selectedOption) => {
-    setSelected(selectedOption.value);
+  const handleSelectedVaccination = (selectedOption) => {
+    setSelectedVaccinationStatus(selectedOption.value);
   };
 
   return (
@@ -161,7 +161,7 @@ const AddDog = () => {
         <br></br>
         <label style={{ color: "black" }}>
           Vaccination:
-          <Select options={options} onChange={handleSelect} autoFocus={true} />
+          <Select options={options} onChange={handleSelectedVaccination} autoFocus={true} />
         </label>
         <input type="submit" value="Submit" />
       </form>
