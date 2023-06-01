@@ -8,11 +8,6 @@ const Dogs = ({ setDogId }) => {
 
   const { dogs, userId } = useContext(UserContext);
 
-  // const handleClick = (e) => {
-  //   setDogId(e.target.id)
-  //   navigate(`/dogs/:id/meetups/new`)
-  // }
-
   let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
 
   return dogs ? (
