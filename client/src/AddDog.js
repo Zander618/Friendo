@@ -56,6 +56,7 @@ const AddDog = () => {
     { value: 23, label: "Bull Terrier" },
     { value: 24, label: "Bulldog" },
     { value: 25, label: "Bullmastiff" },
+<<<<<<< HEAD
     { value: 26, label: "Cairn Terrier" },
     { value: 27, label: "Cane Corso" },
     { value: 28, label: "Cardigan Welsh Corgi" },
@@ -131,6 +132,33 @@ const AddDog = () => {
     { value: 98, label: "Yorkshire Terrier" },
     { value: 99, label: "Mixed" },
     { value: 100, label: "Other" },
+=======
+    { value: 26, label: "Vaccinated" },
+    { value: 27, label: "Not Vaccinated Yet" },
+    { value: 28, label: "Vaccinated" },
+    { value: 29, label: "Not Vaccinated Yet" },
+    { value: 30, label: "Vaccinated" },
+    { value: 31, label: "Not Vaccinated Yet" },
+    { value: 32, label: "Vaccinated" },
+    { value: 33, label: "Not Vaccinated Yet" },
+    { value: 34, label: "Vaccinated" },
+    { value: 35, label: "Not Vaccinated Yet" },
+    { value: 36, label: "Vaccinated" },
+    { value: 37, label: "Not Vaccinated Yet" },
+    { value: 38, label: "Vaccinated" },
+    { value: 39, label: "Not Vaccinated Yet" },
+    { value: 40, label: "Vaccinated" },
+    { value: 41, label: "Not Vaccinated Yet" },
+    { value: 42, label: "Vaccinated" },
+    { value: 43, label: "Not Vaccinated Yet" },
+    { value: 44, label: "Vaccinated" },
+    { value: 45, label: "Not Vaccinated Yet" },
+    { value: 46, label: "Vaccinated" },
+    { value: 47, label: "Not Vaccinated Yet" },
+    { value: 48, label: "Vaccinated" },
+    { value: 49, label: "Not Vaccinated Yet" },
+
+>>>>>>> bc0002a (Revert "continuing dog breed list")
   ];
 
   const addNewDogToUser = (dog) => {
