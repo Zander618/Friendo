@@ -220,6 +220,7 @@ const AddDog = () => {
 
   return (
     <div>
+    <div>
       <h1>Add Dog</h1>
       <form onSubmit={handleSubmit}>
         <label style={{ color: "black" }}>
@@ -234,6 +235,14 @@ const AddDog = () => {
           />
         </label>
         <br></br>
+        <label style={{ color: "black" }}>
+          Breed:
+          <Select
+            options={breedOptions}
+            onChange={handleSelectedBreed}
+            autoFocus={true}
+          />
+        </label>
         <label style={{ color: "black" }}>
           Breed:
           <Select
@@ -304,6 +313,7 @@ const AddDog = () => {
           ))}
         </ul>
       )}
+    </div>
     </div>
   );
 };
