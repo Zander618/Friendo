@@ -4,15 +4,15 @@
   
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 10px;
-  text-align: justify;
+  margin: auto;
+  text-align: center;
   color: #1b4392;
 }
 
 .meetup-card-inner {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 5px;
-  display: fit-content;
+  margin: auto;
+  /* display: fit-content; */
   /* text-align: center; */
   /* width:min-content;
   height: min-content; */

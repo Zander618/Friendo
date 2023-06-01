@@ -24,7 +24,6 @@ const Home = () => {
         <li>Growling</li>
         <li>Baring Teeth</li>
       </ul>
-      <h1>Change something</h1>
     </div>
   );
 };
