@@ -1,25 +1,15 @@
-import React, { useState, useContext, MouseEventHandler } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
 import { useNavigate } from "react-router-dom";
-import Select, {
-  components,
-  MultiValueGenericProps,
-  MultiValueProps,
-  OnChangeValue,
-  Props,
-} from 'react-select';
-import {
-  SortableContainer,
-  SortableContainerProps,
-  SortableElement,
-  SortEndHandler,
-  SortableHandle,
-} from 'react-sortable-hoc';
-import { ColourOption, colourOptions } from '../data';
+import Select from "react-select";
 
 const AddDog = () => {
-  const { user, setUser, userId, dogs, setDogs, setUserDogs } = useContext(UserContext);
-  const [selectedVaccinationStatus, setSelectedVaccinationStatus] = useState("");
+  const { user, setUser, userId, dogs, setDogs, setUserDogs } = useContext(
+    UserContext
+  );
+  const [selectedVaccinationStatus, setSelectedVaccinationStatus] = useState(
+    ""
+  );
   const [selectedBreed, setSelectedBreed] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
@@ -27,6 +17,16 @@ const AddDog = () => {
   const vaccinationOptions = [
     { value: 1, label: "Vaccinated" },
     { value: 0, label: "Not Vaccinated Yet" },
+  ];
+
+  const colourOptions = [
+    { value: 0, label: "Red" },
+    { value: 1, label: "Orange" },
+    { value: 2, label: "Yellow" },
+    { value: 3, label: "Green" },
+    { value: 4, label: "Blue" },
+    { value: 5, label: "Indigo" },
+    { value: 6, label: "Violet" },
   ];
 
   const breedOptions = [
@@ -184,7 +184,7 @@ const AddDog = () => {
         r.json().then((data) => {
           addNewDogToUser(data);
           addNewDogToDogs(data);
-          addNewDogToUserDogs(data)
+          addNewDogToUserDogs(data);
           navigate("/myprofile");
         });
       } else {
@@ -218,62 +218,6 @@ const AddDog = () => {
     setSelectedBreed(selectedOption.value);
   };
 
-
-// Testing new select feature
-
-
-function arrayMove<T>(array: readonly T[], from: number, to: number) {
-  const slicedArray = array.slice();
-  slicedArray.splice(
-    to < 0 ? array.length + to : to,
-    0,
-    slicedArray.splice(from, 1)[0]
-  );
-  return slicedArray;
-}
-
-const SortableMultiValue = SortableElement(
-  (props: MultiValueProps<ColourOption>) => {
-    // this prevents the menu from being opened/closed when the user clicks
-    // on a value to begin dragging it. ideally, detecting a click (instead of
-    // a drag) would still focus the control and toggle the menu, but that
-    // requires some magic with refs that are out of scope for this example
-    const onMouseDown: MouseEventHandler<HTMLDivElement> = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-    const innerProps = { ...props.innerProps, onMouseDown };
-    return <components.MultiValue {...props} innerProps={innerProps} />;
-  }
-);
-
-const SortableMultiValueLabel = SortableHandle(
-  (props: MultiValueGenericProps) => <components.MultiValueLabel {...props} />
-);
-
-const SortableSelect = SortableContainer(Select) as React.ComponentClass<
-  Props<ColourOption, true> & SortableContainerProps
->;
-
-export default function MultiSelectSort() {
-  const [selected, setSelected] = React.useState<readonly ColourOption[]>([
-    colourOptions[4],
-    colourOptions[5],
-  ]);
-
-  const onChange = (selectedOptions: OnChangeValue<ColourOption, true>) =>
-    setSelected(selectedOptions);
-
-  const onSortEnd: SortEndHandler = ({ oldIndex, newIndex }) => {
-    const newValue = arrayMove(selected, oldIndex, newIndex);
-    setSelected(newValue);
-    console.log(
-      'Values sorted:',
-      newValue.map((i) => i.value)
-    );
-  };
-
-
   return (
     <div>
       <h1>Add Dog</h1>
@@ -292,7 +236,11 @@ export default function MultiSelectSort() {
         <br></br>
         <label style={{ color: "black" }}>
           Breed:
-          <Select options={breedOptions} onChange={handleSelectedBreed} autoFocus={true} />
+          <Select
+            options={breedOptions}
+            onChange={handleSelectedBreed}
+            autoFocus={true}
+          />
         </label>
         <br></br>
         <label style={{ color: "black" }}>
@@ -333,10 +281,22 @@ export default function MultiSelectSort() {
         <br></br>
         <label style={{ color: "black" }}>
           Vaccination:
-          <Select options={vaccinationOptions} onChange={handleSelectedVaccination} autoFocus={true} />
+          <Select
+            options={vaccinationOptions}
+            onChange={handleSelectedVaccination}
+            autoFocus={true}
+          />
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <Select
+        defaultValue={[colourOptions[2], colourOptions[3]]}
+        isMulti
+        name="colors"
+        options={colourOptions}
+        className="basic-multi-select"
+        classNamePrefix="select"
+      />
       {errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
