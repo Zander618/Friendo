@@ -19,15 +19,15 @@ const AddDog = () => {
     { value: 0, label: "Not Vaccinated Yet" },
   ];
 
-  // const colourOptions = [
-  //   { value: 0, label: "Red" },
-  //   { value: 1, label: "Orange" },
-  //   { value: 2, label: "Yellow" },
-  //   { value: 3, label: "Green" },
-  //   { value: 4, label: "Blue" },
-  //   { value: 5, label: "Indigo" },
-  //   { value: 6, label: "Violet" },
-  // ];
+  const colourOptions = [
+    { value: 0, label: "Red" },
+    { value: 1, label: "Orange" },
+    { value: 2, label: "Yellow" },
+    { value: 3, label: "Green" },
+    { value: 4, label: "Blue" },
+    { value: 5, label: "Indigo" },
+    { value: 6, label: "Violet" },
+  ];
 
   const breedOptions = [
     { value: 0, label: "Airedale Terrier" },
@@ -218,6 +218,13 @@ const AddDog = () => {
     setSelectedBreed(selectedOption.value);
   };
 
+  const handleSelectedColour = (selectedOption) => {
+    console.log(selectedOption.map((label) => {
+      return(
+        label.label
+      )}));
+  };
+
   return (
     <div>
       <h1>Add Dog</h1>
@@ -289,14 +296,15 @@ const AddDog = () => {
         </label>
         <input type="submit" value="Submit" />
       </form>
-      {/* <Select
+      <Select
         defaultValue={[colourOptions[2], colourOptions[3]]}
         isMulti
         name="colors"
         options={colourOptions}
         className="basic-multi-select"
         classNamePrefix="select"
-      /> */}
+        onChange={handleSelectedColour}
+      />
       {errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (

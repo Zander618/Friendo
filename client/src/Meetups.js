@@ -13,6 +13,7 @@ const Meetups = ({ setMeetupId }) => {
   const [receivedMeetupCount, setReceivedMeetupCount] = useState("");
   const [showMoreReceivedDetails, setShowMoreReceivedDetails] = useState("");
   const [showMoreSentDetails, setShowMoreSentDetails] = useState("");
+  // const [show, setShow] = useState(true)
 
   useEffect(() => {
     let filteredDogsRecievedInvitations = meetups.filter(
