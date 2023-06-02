@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 const AddDog = () => {
-  const { user, setUser, userId, dogs, setDogs, setUserDogs } = useContext(
-    UserContext
-  );
-  const [selectedVaccinationStatus, setSelectedVaccinationStatus] = useState(
-    ""
-  );
+  const { user, setUser, userId, dogs, setDogs, setUserDogs } =
+    useContext(UserContext);
+  const [selectedVaccinationStatus, setSelectedVaccinationStatus] =
+    useState("");
   const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedTraits, setSelectedTraits] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
@@ -19,14 +18,15 @@ const AddDog = () => {
     { value: 0, label: "Not Vaccinated Yet" },
   ];
 
-  const colourOptions = [
-    { value: 0, label: "Red" },
-    { value: 1, label: "Orange" },
-    { value: 2, label: "Yellow" },
-    { value: 3, label: "Green" },
-    { value: 4, label: "Blue" },
-    { value: 5, label: "Indigo" },
-    { value: 6, label: "Violet" },
+  const traitOptions = [
+    { value: 0, label: "Energetic" },
+    { value: 1, label: "Playful" },
+    { value: 2, label: "Lazy" },
+    { value: 3, label: "Loud" },
+    { value: 4, label: "Friendly" },
+    { value: 5, label: "Relaxed" },
+    { value: 6, label: "Calm" },
+    { value: 7, label: "Patient" },
   ];
 
   const breedOptions = [
@@ -154,13 +154,14 @@ const AddDog = () => {
   const [formData, setFormData] = useState({
     user_id: userId,
     name: "",
-    breed: "",
     traits: "",
     enjoyed_activities: "",
     age: "",
     image_data: "",
     vaccination: "",
   });
+
+  console.log(selectedTraits);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -173,7 +174,7 @@ const AddDog = () => {
         user_id: userId,
         name: formData.name,
         breed: selectedBreed,
-        traits: formData.traits,
+        traits: selectedTraits,
         enjoyed_activities: formData.enjoyed_activities,
         age: formData.age,
         image_data: "",
@@ -194,8 +195,6 @@ const AddDog = () => {
     setFormData({
       user_id: userId,
       name: "",
-      breed: "",
-      traits: "",
       enjoyed_activities: "",
       age: "",
       image_data: "",
@@ -218,11 +217,12 @@ const AddDog = () => {
     setSelectedBreed(selectedOption.value);
   };
 
-  const handleSelectedColour = (selectedOption) => {
-    console.log(selectedOption.map((label) => {
-      return(
-        label.label
-      )}));
+  const handleSelectedTraits = (selectedOption) => {
+    const obj = selectedOption.map((label) => {
+      return " " + label.label;
+    });
+    const stringObj = obj.toString();
+    setSelectedTraits(stringObj.split().join());
   };
 
   return (
@@ -252,13 +252,13 @@ const AddDog = () => {
         <br></br>
         <label style={{ color: "black" }}>
           Traits:
-          <input
-            type="text"
-            name="traits"
-            spellCheck="true"
-            placeholder="Enter Dog's Traits"
-            value={formData.traits}
-            onChange={handleChange}
+          <Select
+            isMulti
+            name="colors"
+            options={traitOptions}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleSelectedTraits}
           />
         </label>
         <br></br>
@@ -296,15 +296,6 @@ const AddDog = () => {
         </label>
         <input type="submit" value="Submit" />
       </form>
-      <Select
-        defaultValue={[colourOptions[2], colourOptions[3]]}
-        isMulti
-        name="colors"
-        options={colourOptions}
-        className="basic-multi-select"
-        classNamePrefix="select"
-        onChange={handleSelectedColour}
-      />
       {errors.length > 0 && (
         <ul style={{ color: "red" }}>
           {errors.map((error) => (
