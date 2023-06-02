@@ -214,7 +214,7 @@ const AddDog = () => {
   };
 
   const handleSelectedBreed = (selectedOption) => {
-    setSelectedBreed(selectedOption.value);
+    setSelectedBreed(selectedOption.label);
   };
 
   const handleSelectedTraits = (selectedOption) => {
