@@ -10,6 +10,7 @@ const AddDog = () => {
     useState("");
   const [selectedBreed, setSelectedBreed] = useState("");
   const [selectedTraits, setSelectedTraits] = useState("");
+  const [selectedActivities, setSelectedActivities] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
@@ -178,14 +179,12 @@ const AddDog = () => {
   const [formData, setFormData] = useState({
     user_id: userId,
     name: "",
-    traits: "",
-    enjoyed_activities: "",
     age: "",
     image_data: "",
     vaccination: "",
   });
 
-  console.log(selectedTraits);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -199,7 +198,7 @@ const AddDog = () => {
         name: formData.name,
         breed: selectedBreed,
         traits: selectedTraits,
-        enjoyed_activities: formData.enjoyed_activities,
+        enjoyed_activities: selectedActivities,
         age: formData.age,
         image_data: "",
         vaccination: selectedVaccinationStatus,
@@ -219,7 +218,6 @@ const AddDog = () => {
     setFormData({
       user_id: userId,
       name: "",
-      enjoyed_activities: "",
       age: "",
       image_data: "",
       vaccination: "",
@@ -247,6 +245,14 @@ const AddDog = () => {
     });
     const stringObj = obj.toString();
     setSelectedTraits(stringObj.split().join());
+  };
+
+  const handleSelectedActivities = (selectedOption) => {
+    const obj = selectedOption.map((label) => {
+      return " " + label.label;
+    });
+    const stringObj = obj.toString();
+    setSelectedActivities(stringObj.split().join());
   };
 
   return (
