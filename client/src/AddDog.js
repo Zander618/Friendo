@@ -288,13 +288,13 @@ const AddDog = () => {
         <br></br>
         <label style={{ color: "black" }}>
           Enjoyed Activities:
-          <input
-            type="text"
-            name="enjoyed_activities"
-            spellCheck="true"
-            placeholder="Enter Activities Your Dog Enjoys"
-            value={formData.enjoyed_activities}
-            onChange={handleChange}
+          <Select
+            isMulti
+            name="colors"
+            options={activityOptions}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleSelectedActivities}
           />
         </label>
         <br></br>
