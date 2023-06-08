@@ -23,6 +23,12 @@ const Home = () => {
         <li>Growling</li>
         <li>Baring Teeth</li>
       </ul>
+      <p>Start here by clicking the sign up button. You can also sign up or login using the user icon on the top right.
+        <br/>
+        After signing up or logging in you can add a dog using the same user tab in the top right. 
+        <br/>
+        Once signed in you can explore dogs and start creating meetups.
+      </p>
       <Link
         to="/signup"
         style={{
