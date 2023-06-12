@@ -12,6 +12,14 @@ const Dogs = ({ setDogId }) => {
 
   return dogs ? (
     <div>
+      <br />
+      <h3>Filters : </h3>
+      <button>Age</button>
+      <button>Activities</button>
+      <button>Traits</button>
+      <button>Breed</button>
+      <br />
+      <br/>
       {filteredDogs
         .sort((a, b) => (a.date > b.date ? 1 : -1))
         .map((dog) => {
@@ -20,11 +28,11 @@ const Dogs = ({ setDogId }) => {
               <div>
                 <h1>{dog.name}</h1>
                 <h2>{dog.owner_username}'s dog</h2>
-                  <img
-                    src={dog.uploaded_image ? dog.uploaded_image : "no photo"}
-                    alt="Dog not added"
-                    className="dogImageSizing"
-                  />
+                <img
+                  src={dog.uploaded_image ? dog.uploaded_image : "no photo"}
+                  alt="Dog not added"
+                  className="dogImageSizing"
+                />
                 <div className="side-content-center">
                   <ol>
                     <p>Breed: {dog.breed}</p>
