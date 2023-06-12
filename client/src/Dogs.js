@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css";
 import { useNavigate } from "react-router-dom";
@@ -10,16 +10,32 @@ const Dogs = ({ setDogId }) => {
 
   let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
 
+  // const [formData, setFormData] = useState({
+  //   age: "",
+  // });
+
   return dogs ? (
     <div>
-      <br />
+      {/* <br />
       <h3>Filters : </h3>
-      <button>Age</button>
+      <form>
+        <label>
+          Age:
+          <input>
+            type="integer"
+            name="age"
+            placeholder="Enter You Dog's Age"
+            value={formData.age}
+            onChange={filterAges}
+          </input>
+          <input type="submit" value="Submit" />
+        </label>
+      </form>
       <button>Activities</button>
       <button>Traits</button>
       <button>Breed</button>
       <br />
-      <br/>
+      <br /> */}
       {filteredDogs
         .sort((a, b) => (a.date > b.date ? 1 : -1))
         .map((dog) => {
