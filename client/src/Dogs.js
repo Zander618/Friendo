@@ -69,9 +69,9 @@ const Dogs = ({ setDogId }) => {
             <input type="submit" value="Submit" />
           </label>
         </form>
-        <button>Activities</button>
+        {/* <button>Activities</button>
         <button>Traits</button>
-        <button>Breed</button>
+        <button>Breed</button> */}
         <br />
         <br />
       </div>
