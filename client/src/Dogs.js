@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css";
 import { useNavigate } from "react-router-dom";
@@ -8,35 +8,74 @@ const Dogs = ({ setDogId }) => {
 
   const { dogs, userId } = useContext(UserContext);
 
-  let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
+  const [dogsToDisplay, setDogsToDisplay] = useState([])
 
-  // const [formData, setFormData] = useState({
-  //   age: "",
-  // });
+  useEffect(() => {
+    let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
+    setDogsToDisplay(filteredDogs)
+  }, [dogs, userId])
+  
+
+  const handleClickAllDogs = () => {
+    let dogsToFilter = [...dogs]
+    let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
+    setDogsToDisplay(allDogs);
+  };
+
+  const [formData, setFormData] = useState({
+    age: "",
+  });
+
+  let filterAges = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleSubmitAgeFilter = (event) => {
+    event.preventDefault();
+    let dogsToFilter = [...dogs]
+    let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
+    let dogByAges = allDogs.filter(
+      (dog) => dog.age === parseInt(formData.age)
+    );
+    setDogsToDisplay(dogByAges);
+  };
 
   return dogs ? (
     <div>
-      {/* <br />
-      <h3>Filters : </h3>
-      <form>
-        <label>
-          Age:
-          <input>
-            type="integer"
-            name="age"
-            placeholder="Enter You Dog's Age"
-            value={formData.age}
-            onChange={filterAges}
-          </input>
-          <input type="submit" value="Submit" />
-        </label>
-      </form>
-      <button>Activities</button>
-      <button>Traits</button>
-      <button>Breed</button>
-      <br />
-      <br /> */}
-      {filteredDogs
+      <div>
+        <br />
+        <h3>Filters : </h3>
+        <button
+          onClick={() => {
+            handleClickAllDogs();
+          }}
+        >
+          All Dogs
+        </button>
+        <form onSubmit={(event) => {
+          handleSubmitAgeFilter(event);
+        }}>
+          <label>
+            Age:
+            <input
+              type="integer"
+              name="age"
+              placeholder="Enter You Dog's Age"
+              value={formData.age}
+              onChange={filterAges}
+            />
+            <input type="submit" value="Submit" />
+          </label>
+        </form>
+        <button>Activities</button>
+        <button>Traits</button>
+        <button>Breed</button>
+        <br />
+        <br />
+      </div>
+      {dogsToDisplay
         .sort((a, b) => (a.date > b.date ? 1 : -1))
         .map((dog) => {
           return (
