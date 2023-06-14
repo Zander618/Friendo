@@ -9,6 +9,35 @@ const Dogs = ({ setDogId }) => {
   const { dogs, userId } = useContext(UserContext);
 
   const [dogsToDisplay, setDogsToDisplay] = useState([])
+  const [selectedActivities, setSelectedActivities] = useState("");
+
+  const activityOptions = [
+    { value: 0, label: "Fetch" },
+    { value: 1, label: "Tug" },
+    { value: 2, label: "Running" },
+    { value: 3, label: "Chase" },
+    { value: 4, label: "Wrestling" },
+    { value: 5, label: "Racing" },
+    { value: 6, label: "Napping" },
+    { value: 7, label: "Zoomies" },
+    { value: 8, label: "Sniffing" },
+    { value: 9, label: "Spinning" },
+    { value: 10, label: "Rolling" },
+    { value: 11, label: "Walks" },
+    { value: 12, label: "Eating" },
+    { value: 13, label: "Digging" },
+    { value: 14, label: "Agility" },
+    { value: 15, label: "Sleeping" },
+    { value: 16, label: "Swimming" },
+    { value: 17, label: "Chewing" },
+    { value: 18, label: "Chasing" },
+    { value: 19, label: "Bubbles" },
+    { value: 20, label: "Hoses" },
+    { value: 21, label: "Kiddie Pools" },
+    { value: 22, label: "Frisbee" },
+    { value: 23, label: "Exploring" },
+    { value: 24, label: "Other" },
+  ];
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
