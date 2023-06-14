@@ -8,8 +8,8 @@ const Dogs = ({ setDogId }) => {
 
   const { dogs, userId } = useContext(UserContext);
 
-  const [dogsToDisplay, setDogsToDisplay] = useState([])
-  const [selectedActivities, setSelectedActivities] = useState("");
+  const [dogsToDisplay, setDogsToDisplay] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState("");
 
   const activityOptions = [
     { value: 0, label: "Fetch" },
@@ -41,12 +41,11 @@ const Dogs = ({ setDogId }) => {
 
   useEffect(() => {
     let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
-    setDogsToDisplay(filteredDogs)
-  }, [dogs, userId])
-  
+    setDogsToDisplay(filteredDogs);
+  }, [dogs, userId]);
 
   const handleClickAllDogs = () => {
-    let dogsToFilter = [...dogs]
+    let dogsToFilter = [...dogs];
     let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
     setDogsToDisplay(allDogs);
   };
@@ -61,14 +60,25 @@ const Dogs = ({ setDogId }) => {
       [event.target.name]: event.target.value,
     });
   };
+
   const handleSubmitAgeFilter = (event) => {
     event.preventDefault();
-    let dogsToFilter = [...dogs]
+    let dogsToFilter = [...dogs];
     let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
-    let dogByAges = allDogs.filter(
-      (dog) => dog.age === parseInt(formData.age)
-    );
+    let dogByAges = allDogs.filter((dog) => dog.age === parseInt(formData.age));
     setDogsToDisplay(dogByAges);
+  };
+
+  const handleSubmitActivityFilter = (event) => {
+    event.preventDefault();
+    let dogsToFilter = [...dogs];
+    let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
+    let dogByAges = allDogs.filter((dog) => dog.enjoyed_activities == selectedActivity);
+    setDogsToDisplay(dogByAges);
+  };
+
+  const handleSelectedActivity = (selectedOption) => {
+    setSelectedActivity(selectedOption.label);
   };
 
   return dogs ? (
@@ -83,9 +93,11 @@ const Dogs = ({ setDogId }) => {
         >
           All Dogs
         </button>
-        <form onSubmit={(event) => {
-          handleSubmitAgeFilter(event);
-        }}>
+        <form
+          onSubmit={(event) => {
+            handleSubmitAgeFilter(event);
+          }}
+        >
           <label>
             Age:
             <input
@@ -98,8 +110,21 @@ const Dogs = ({ setDogId }) => {
             <input type="submit" value="Submit" />
           </label>
         </form>
-        {/* <button>Activities</button>
-        <button>Traits</button>
+        <form
+          onSubmit={(event) => {
+            handleSubmitActivityFilter(event);
+          }}
+        >
+          <label style={{ color: "black" }}>
+            Traits:
+            <Select
+              options={activityOptions}
+              onChange={handleSelectedActivity}
+              autoFocus={true}
+            />
+          </label>
+        </form>
+        {/* <button>Traits</button>
         <button>Breed</button> */}
         <br />
         <br />
