@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Context";
 import "./DogImage.css";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 const Dogs = ({ setDogId }) => {
   const navigate = useNavigate();
@@ -69,12 +70,17 @@ const Dogs = ({ setDogId }) => {
     setDogsToDisplay(dogByAges);
   };
 
-  const handleSubmitActivityFilter = (event) => {
-    event.preventDefault();
+  const handleSubmitActivityFilter = (e) => {
+    e.preventDefault();
     let dogsToFilter = [...dogs];
     let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
-    let dogByAges = allDogs.filter((dog) => dog.enjoyed_activities == selectedActivity);
-    setDogsToDisplay(dogByAges);
+    let dogByActivity = allDogs.filter((dog) => dog.enjoyed_activities.includes(selectedActivity) );
+    if (dogByActivity.length === 0){
+    return alert("No Matching Dogs")
+    }else{
+    setDogsToDisplay(dogByActivity)
+    }
+    console.log(dogByActivity)
   };
 
   const handleSelectedActivity = (selectedOption) => {
@@ -122,6 +128,7 @@ const Dogs = ({ setDogId }) => {
               onChange={handleSelectedActivity}
               autoFocus={true}
             />
+            <input type="submit" value="Submit" />
           </label>
         </form>
         {/* <button>Traits</button>
