@@ -182,8 +182,9 @@ const AddDog = () => {
     { value: 20, label: "Hoses" },
     { value: 21, label: "Kiddie Pools" },
     { value: 22, label: "Frisbee" },
-    { value: 23, label: "Exploring" },
-    { value: 24, label: "Other" },
+    { value: 23, label: "Ball" },
+    { value: 24, label: "Exploring" },
+    { value: 25, label: "Other" },
   ];
 
   const addNewDogToUser = (dog) => {
