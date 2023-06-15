@@ -122,7 +122,7 @@ const Dogs = ({ setDogId }) => {
           }}
         >
           <label style={{ color: "black" }}>
-            Traits:
+            Trait:
             <Select
               options={activityOptions}
               onChange={handleSelectedActivity}
@@ -131,8 +131,22 @@ const Dogs = ({ setDogId }) => {
             <input type="submit" value="Submit" />
           </label>
         </form>
-        {/* <button>Traits</button>
-        <button>Breed</button> */}
+        <form
+          onSubmit={(event) => {
+            handleSubmitBreedFilter(event);
+          }}
+        >
+          <label style={{ color: "black" }}>
+            Breed:
+            <Select
+              options={breedOptions}
+              onChange={handleSelectedBreed}
+              autoFocus={true}
+            />
+            <input type="submit" value="Submit" />
+          </label>
+        </form>
+        {/* <button>Traits</button> */}
         <br />
         <br />
       </div>
