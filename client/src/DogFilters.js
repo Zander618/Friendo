@@ -7,6 +7,7 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
   const { dogs, userId } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedTraits, setSelectedTraits] = useState("");
 
     const activityOptions = [
     { value: 0, label: "Fetch" },
@@ -139,6 +140,41 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
     { value: 98, label: "Yorkshire Terrier" },
     { value: 99, label: "Mixed" },
     { value: 100, label: "Other" },
+  ];
+
+  const traitOptions = [
+    { value: 0, label: "Energetic" },
+    { value: 1, label: "Playful" },
+    { value: 2, label: "Lazy" },
+    { value: 3, label: "Loud" },
+    { value: 4, label: "Friendly" },
+    { value: 5, label: "Relaxed" },
+    { value: 6, label: "Calm" },
+    { value: 7, label: "Patient" },
+    { value: 8, label: "Obedient" },
+    { value: 9, label: "Gentle" },
+    { value: 10, label: "Trustworthy" },
+    { value: 11, label: "Intelligent" },
+    { value: 12, label: "Loyal" },
+    { value: 13, label: "Protective" },
+    { value: 14, label: "Affectionate" },
+    { value: 15, label: "Happy" },
+    { value: 16, label: "Social" },
+    { value: 17, label: "Agile" },
+    { value: 18, label: "Loving" },
+    { value: 19, label: "Sociable" },
+    { value: 20, label: "Sensitive" },
+    { value: 21, label: "Kind" },
+    { value: 22, label: "Good-natured" },
+    { value: 23, label: "Reliable" },
+    { value: 24, label: "Athletic" },
+    { value: 25, label: "Well-behaved" },
+    { value: 26, label: "Strong" },
+    { value: 27, label: "Cautious" },
+    { value: 28, label: "Mellow" },
+    { value: 29, label: "Graceful" },
+    { value: 30, label: "Quick" },
+    { value: 31, label: "Caring" }
   ];
 
   const handleClickAllDogs = () => {
