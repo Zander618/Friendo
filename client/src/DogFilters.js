@@ -7,7 +7,7 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
   const { dogs, userId } = useContext(UserContext);
   const [selectedActivity, setSelectedActivity] = useState("");
   const [selectedBreed, setSelectedBreed] = useState("");
-  const [selectedTraits, setSelectedTraits] = useState("");
+  const [selectedTrait, setSelectedTrait] = useState("");
 
     const activityOptions = [
     { value: 0, label: "Fetch" },
@@ -202,6 +202,24 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
     setDogsToDisplay(dogByAges);
   };
 
+  const handleSubmitTraitFilter = (e) => {
+    e.preventDefault();
+    let dogsToFilter = [...dogs];
+    let allDogs = dogsToFilter.filter((dog) => dog.user_id !== userId);
+    let dogByTraits = allDogs.filter((dog) =>
+      dog.traits.includes(selectedTrait)
+    );
+    if (dogByTraits.length === 0) {
+      return alert("No Matching Dogs");
+    } else {
+      setDogsToDisplay(dogByTraits);
+    }
+  };
+
+  const handleSelectedTrait = (selectedOption) => {
+    setSelectedTrait(selectedOption.label);
+  };
+
   const handleSubmitActivityFilter = (e) => {
     e.preventDefault();
     let dogsToFilter = [...dogs];
@@ -269,10 +287,25 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
         }}
       >
         <label style={{ color: "black" }}>
-          Enjoyed Activities:
+          Enjoyed Activity:
           <Select
             options={activityOptions}
             onChange={handleSelectedActivity}
+            autoFocus={true}
+          />
+          <input type="submit" value="Submit" />
+        </label>
+      </form>
+      <form
+        onSubmit={(event) => {
+          handleSubmitTraitFilter(event);
+        }}
+      >
+        <label style={{ color: "black" }}>
+          Trait:
+          <Select
+            options={traitOptions}
+            onChange={handleSelectedTrait}
             autoFocus={true}
           />
           <input type="submit" value="Submit" />
