@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./App.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="background">
       <h1>Welcome to Friendo</h1>
       <h3>We aim to find your dog or dogs their new dog best friend.</h3>
       <p>
@@ -41,6 +42,19 @@ const Home = () => {
       >
         <button>Sign Up</button>
       </Link>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 };
