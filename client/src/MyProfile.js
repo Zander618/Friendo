@@ -61,7 +61,7 @@ const MyProfile = () => {
 
   return user ?  (
     <div>
-      <h1>User Profile</h1>
+      <h1>{user.first_name}'s' Profile</h1>
       <br></br>
       <button
         id={userId}
