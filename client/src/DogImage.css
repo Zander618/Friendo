@@ -45,3 +45,9 @@
 .dog-card:hover {
   box-shadow: 0 8px 16px 0 rgba(3, 7, 243, 0.685);
 }
+
+
+.background{
+  background: linear-gradient(white, rgb(0, 110, 255)
+  );
+}

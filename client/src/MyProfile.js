@@ -60,7 +60,7 @@ const MyProfile = () => {
 
 
   return user ?  (
-    <div>
+    <div className="background">
       <h1>{user.first_name}'s' Profile</h1>
       <br></br>
       <button
