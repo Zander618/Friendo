@@ -12,7 +12,7 @@
 }
 
 .banner {
-  background-image: url("/home/zander618/Development/code/phase-5/Friendo/client/public/banner3.PNG");
+  background-image: linear-gradient(#e66465, #9198e5);
   background-color: #cccccc;
   background-position: center;
   background-repeat: no-repeat;
