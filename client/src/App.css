@@ -10,3 +10,59 @@
   background: linear-gradient(white, rgb(0, 110, 255)
   );
 }
+
+.banner {
+  background-image: url("/home/zander618/Development/code/phase-5/Friendo/client/public/banner3.PNG");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+ }
+
+ .text {
+  font-family: monospace;
+  font-size: xx-large;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 4px 4px rgb(0, 0, 0);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(73, 73, 73);
+ }
+
+ .container {
+  display: flex;
+  width: flex;
+  text-align: center;
+  align-items: center;
+  word-spacing: 4px;
+  padding: 50px;
+  margin: 80px;
+}
+
+.side {
+  flex: 3;
+  text-align: center;
+  align-items: center;
+  word-spacing: 4px;
+  padding: 50px;
+  margin: 80px;
+}
+
+.side-content-center {
+  text-align: center;
+  word-wrap: normal;
+  margin: 80px;
+
+}
+
+.picture {
+  height: 300px;
+  width: 400px;
+  border: rgb(22, 19, 19);
+  border-radius: 2ch;
+  border-width: 8;
+}
+
+.learn-more-button {
+  text-align: center;
+}

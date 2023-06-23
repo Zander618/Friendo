@@ -4,57 +4,70 @@ import "./App.css";
 
 const Home = () => {
   return (
-    <div className="background">
-      <h1>Welcome to Friendo</h1>
-      <h3>We aim to find your dog or dogs their new dog best friend.</h3>
-      <p>
-        Anti-social dogs can not only present problems inside the house
-        but they are also more likely to be aggressive outside the house.
-      </p>
-      <h2>Issues related to anti-social behavior</h2>
-      <h3>Inside the home:</h3>
-      <ul>
-        <li>Avoids other dogs or people</li>
-        <li>Pulls or lunges on walks</li>
-        <li>Not respecting personal space</li>
-      </ul>
-      <h3>Outside the home:</h3>
-      <ul>
-        <li>Barking</li>
-        <li>Growling</li>
-        <li>Baring Teeth</li>
-      </ul>
-      <p>Start here by clicking the sign up button. You can also sign up or login using the user icon on the top right.
+    <div>
+      <div className="banner">
+        <br />
+        <h1 className="text">Welcome to Friendo</h1>
+        <h3 className="text">Find your best friend their new best friend.</h3>
         <br/>
-        After signing up or logging in you can add a dog using the same user tab in the top right. 
-        <br/>
-        Once signed in you can explore dogs and start creating meetups.
-      </p>
-      <Link
-        to="/signup"
-        style={{
-          mr: 4,
-          variant: "h4",
-          color: "black",
-          textDecoration: "none",
-          textAlign: "center",
-        }}
-      >
-        <button>Sign Up</button>
-      </Link>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      </div>
+      <div className="container">
+        <div classname="side">
+          <img className="picture" src="SignUp.png" alt="Friendo App"/>
+          <h3>Sign Up</h3>
+          <p>Sign-up with the link below to add your information.</p>
+          <Link
+            to="/signup"
+            style={{
+              mr: 4,
+              variant: "h4",
+              color: "black",
+              textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            <button>Sign Up</button>
+          </Link>
+        </div>
+        <div classname="side">
+        <img className="picture" src="AddDog.png" alt="Friendo App"/>
+          <h3>Add Your Dog</h3>
+          <p>Use this link to add all the information needed to find your dog their perfect match.</p>
+          <Link
+            to="/signup"
+            style={{
+              mr: 4,
+              variant: "h4",
+              color: "black",
+              textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            <button>Sign Up</button>
+          </Link>
+        </div>
+        <div classname="side">
+        <img className="picture" src="FindFriend.png" alt="Friendo App"/>
+          <h3>Find their new friends</h3>
+          <p>Search through the library of other user's dogs and start making friends.</p>
+          <Link
+            to="/signup"
+            style={{
+              mr: 4,
+              variant: "h4",
+              color: "black",
+              textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            <button>Sign Up</button>
+          </Link>
+        </div>
+      </div>
+      <div className="learn-more-button">
+      <button >Learn more</button>
+      </div>
+
     </div>
   );
 };
