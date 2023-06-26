@@ -34,6 +34,7 @@ const Home = () => {
         <img className="picture" src="AddDog.PNG" alt="Friendo App"/>
           <h3>Add Your Dog</h3>
           <p>Use this link to add all the information needed to find your dog their perfect match.</p>
+          {loggedIn ? 
           <Link
             to="/dogs/new"
             style={{
@@ -44,13 +45,14 @@ const Home = () => {
               textAlign: "center",
             }}
           >
-            {loggedIn ? <button>Add Dog</button> : <p>| Please sign in or log in to add your dog. |</p> }
           </Link>
+          : <p>| Please sign in or log in to add your dog. |</p>}
         </div>
         <div classname="side">
         <img className="picture" src="FindFriend.PNG" alt="Friendo App"/>
           <h3>Find their new friends</h3>
           <p>Search through the library of other user's dogs and start making friends.</p>
+          { loggedIn ? 
           <Link
             to="/dogs"
             style={{
@@ -63,6 +65,7 @@ const Home = () => {
           >
             <button>Dogs</button>
           </Link>
+          : <p>| Please sing in or log in to view all dogs. |</p>}
         </div>
       </div>
       <div className="learn-more-button">
