@@ -45,6 +45,7 @@ const Home = () => {
               textAlign: "center",
             }}
           >
+            <button>Add Dog</button>
           </Link>
           : <p>| Please sign in or log in to add your dog. |</p>}
         </div>
