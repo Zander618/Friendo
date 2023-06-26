@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext} from "react";
+import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
 import "./App.css";
 
 const Home = () => {
+  const { loggedIn } = useContext(UserContext);
+
   return (
     <div>
       <div className="banner">
@@ -41,7 +44,7 @@ const Home = () => {
               textAlign: "center",
             }}
           >
-            <button>Add Dog</button>
+            {loggedIn ? <button>Add Dog</button> : <p>| Please sign in or log in to add your dog. |</p> }
           </Link>
         </div>
         <div classname="side">
