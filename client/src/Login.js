@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./App.css";
 
 const Login = () => {
@@ -63,6 +64,18 @@ const Login = () => {
           )}
           <input type="submit" value="Login" />
         </form>
+        <Link
+              to="/signup"
+              style={{
+                mr: 4,
+                variant: "h4",
+                color: "black",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              <button>Sign Up</button>
+            </Link>
       </div>
     </div>
   );

@@ -20,10 +20,10 @@ const Home = () => {
           <div className="container">
             <div classname="side">
               <img className="picture" src="SignUp.PNG" alt="Friendo App" />
-              <h3>Sign Up</h3>
-              <p>Sign-up with the link below to add your information.</p>
+              <h3>Search Locations</h3>
+              <p>View and add locations for your meetups.</p>
               <Link
-                to="/signup"
+                to="/locations"
                 style={{
                   mr: 4,
                   variant: "h4",
@@ -32,7 +32,7 @@ const Home = () => {
                   textAlign: "center",
                 }}
               >
-                <button>Sign Up</button>
+                <button>Locations</button>
               </Link>
             </div>
             <div classname="side">
