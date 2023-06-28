@@ -66,3 +66,17 @@
 .learn-more-button {
   text-align: center;
 }
+
+.login-card {
+  border: solid;
+  border-color: #3852c2;
+  padding: 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  margin: flex;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: larger;
+  color: #1b4392;
+  width: fit-content;
+  display: fit-content
+}

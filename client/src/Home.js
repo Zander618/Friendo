@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
 import "./App.css";
+import Login from "./Login";
 
 const Home = () => {
   const { loggedIn } = useContext(UserContext);
@@ -94,7 +95,7 @@ const Home = () => {
           <br />
         </div>
       ) : (
-        <div></div>
+        <div className="login-card"><Login/></div>
       )}
     </div>
   );
