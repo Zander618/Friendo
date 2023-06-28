@@ -95,7 +95,15 @@ const Home = () => {
           <br />
         </div>
       ) : (
-        <div className="login-card"><Login/></div>
+        <div>
+          <div className="banner">
+            <h1 className="text">Welcome to Friendo!</h1>
+            <h3 className="text">
+              Find your best friend their new best friend.
+            </h3>
+          </div>
+          <Login />
+        </div>
       )}
     </div>
   );

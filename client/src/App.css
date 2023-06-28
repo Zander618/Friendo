@@ -73,10 +73,17 @@
   padding: 5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  margin: flex;
+  margin: 25px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: larger;
   color: #1b4392;
+  width: 350px;
+  height: 200px;
+  justify-content: center;
+}
+
+.card{
+  margin: auto;
   width: fit-content;
-  display: fit-content
+  padding: 20px;
 }
