@@ -8,6 +8,7 @@ const Signup = ( ) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [reenteredPassword, setReenteredPassword] = useState("");
   const [first_name, setFirst_name] = useState("");
   const [county, setCounty] = useState("")
   const [state, setState] = useState("");
@@ -58,6 +59,16 @@ const Signup = ( ) => {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Re-Enter Password: </label>
+          <input 
+                    type="password"
+                    id="password"
+                    value={reenteredPassword}
+                    onChange={(e) => setReenteredPassword(e.target.value)}
                     autoComplete="current-password"
           />
         </div>
