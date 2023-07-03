@@ -108,7 +108,9 @@ const Signup = ( ) => {
                     onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+        {password === reenteredPassword ? 
         <input type="submit" value="Create Account" />
+      : <p>Passwords must match</p>}
       </form>
     </div>
   )
