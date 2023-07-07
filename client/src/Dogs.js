@@ -13,8 +13,10 @@ const Dogs = ({ setDogId }) => {
   const [filterButtonPopup, setFilterButtonPopup] = useState(false);
 
   useEffect(() => {
-    let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
-    setDogsToDisplay(filteredDogs);
+    if (dogs.length > 0) {
+      let filteredDogs = dogs.filter((dog) => dog.user_id !== userId);
+      setDogsToDisplay(filteredDogs);
+    }
   }, [dogs, userId]);
 
   return dogs ? (
