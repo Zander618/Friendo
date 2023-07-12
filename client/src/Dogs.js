@@ -43,7 +43,6 @@ const Dogs = ({ setDogId }) => {
             <div key={dog.id} className="dog-card">
               <div>
                 <div className="text">
-                  <h2>{dog.owner_username}'s dog</h2>
                   <h1>{dog.name}</h1>
                 </div>
                 <img
@@ -60,6 +59,7 @@ const Dogs = ({ setDogId }) => {
                     <p>
                       Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}
                     </p>
+                    <p>Owner's Username: {dog.owner_username}</p>
                     <p>Has sent {dog.sent_invitations.length} invitations</p>
                     <p>
                       Has received {dog.recieved_invitations.length} invitations
