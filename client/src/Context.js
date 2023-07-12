@@ -29,24 +29,33 @@ function UserProvider({ children }) {
 
 
   useEffect(() => {
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          loginUser(user)
+    if (loggedIn) {
+      fetch("/dogs")
+        .then((r) => r.json())
+        .then((data) => {
+          setDogs(data);
         });
-      }
-    });
-
-    fetch("/dogs")
-      .then((r) => r.json())
-      .then((data) => {
-        setDogs(data)
+  
+      fetch("/meetups")
+        .then((r) => r.json())
+        .then((data) => {
+          setMeetups(data);
+        });
+    }
+  
+    fetch("/me")
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => {
+            loginUser(user);
+          });
+        }
+      })
+      .catch((error) => {
+        // Handle error if unable to fetch user data
+        console.error("Error fetching user data:", error);
       });
-
-    fetch("/meetups")
-      .then((r) => r.json())
-      .then(setMeetups);
-  }, []);
+  }, [loggedIn]);
 
 
   return (
