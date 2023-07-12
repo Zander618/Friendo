@@ -42,8 +42,10 @@ const Dogs = ({ setDogId }) => {
           return (
             <div key={dog.id} className="dog-card">
               <div>
-                <h1>{dog.name}</h1>
-                <h2>{dog.owner_username}'s dog</h2>
+                <div className="text">
+                  <h2>{dog.owner_username}'s dog</h2>
+                  <h1>{dog.name}</h1>
+                </div>
                 <img
                   src={dog.uploaded_image ? dog.uploaded_image : "no photo"}
                   alt="Dog not added"

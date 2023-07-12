@@ -1,45 +1,34 @@
-.dogImageSizing{
-  background-position: left;
-  float: left;
-  /* background-repeat: no-repeat;
-  background-size: cover; */
-  width: 20%;
-  height: 5%;
-}
-
-.dogProfileImageSizing{
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 40%;
-  height: 25%;
-}
-
-
 .dog-card {
   border: solid;
   border-color: #3852c2;
-  padding: 5%;
+  padding: 0%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   margin: flex;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: larger;
   color: #1b4392;
-  width: fit-content;
-  display: fit-content
+  width: flex;
+}
+  .text{
+  word-wrap: break-word;
+}
+.dog-card div {
+  display: flex;
+  justify-content: space-between;
 }
 
-.side {
-  flex: 1;
-  padding: 10px;
+.dog-card .dogImageSizing {
+  max-width: 50%;
+  max-height: 50%;
+  object-fit: contain;
+  padding: 1%;
 }
 
 .side-content-center {
   text-align: end;
   word-wrap: normal;
-  /* margin: 80px; */
-
+  padding: 0%;
 }
 
 .dog-card:hover {
