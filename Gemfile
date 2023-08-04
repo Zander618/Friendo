@@ -41,3 +41,5 @@ gem 'redis', '~> 5.0', '>= 5.0.6'
 gem 'actioncable', '~> 7.0.4.1'
 
 gem "active_model_serializers", "~> 0.10.12"
+
+gem 'actionmailer', '~> 6.1.0'
