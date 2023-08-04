@@ -1,7 +1,9 @@
 import React, {useState} from "react";
+import { UserContext } from "./Context";
 import { useParams, useNavigate } from "react-router-dom";
 
-function PasswordReset({ setUser }) {
+function PasswordReset() {
+  const { setUser } = useContext(UserContext);
   const [alerts, setAlerts] = useState([]);
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({

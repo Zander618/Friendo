@@ -47,6 +47,8 @@ function App() {
         <Route path="/learn_more" element={<LearnMore />} />
         {/* <Route path="/chat" element={<Chat currentUser={user} meetupId={meetupId}/>} /> */}
         <Route path="/dogs/new" element={<AddDog />} />
+        <Route path="/passwordrecovery" element={<PasswordForgot />} />
+        <Route path="/reset_password/:token"element={<PasswordReset />}/>
         <Route
           path="/dogs/:id/meetups/new"
           element={
