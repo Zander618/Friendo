@@ -42,4 +42,4 @@ gem 'actioncable', '~> 7.0.4.1'
 
 gem "active_model_serializers", "~> 0.10.12"
 
-gem 'actionmailer', '~> 6.1.0'
+gem 'actionmailer', '~> 7.0.4.1'
