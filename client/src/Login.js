@@ -65,17 +65,30 @@ const Login = () => {
           <input type="submit" value="Login" />
         </form>
         <Link
-              to="/signup"
-              style={{
-                mr: 4,
-                variant: "h4",
-                color: "black",
-                textDecoration: "none",
-                textAlign: "center",
-              }}
-            >
-              <button>Sign Up</button>
-            </Link>
+          to="/signup"
+          style={{
+            mr: 4,
+            variant: "h4",
+            color: "black",
+            textDecoration: "none",
+            textAlign: "center",
+          }}
+        >
+          <button>Sign Up</button>
+        </Link>
+        <Link
+          to="/passwordrecovery"
+          style={{
+            mr: 4,
+            variant: "h4",
+            color: "blue",
+            textDecoration: "underline",
+            textAlign: "right",
+            justify: "center",
+          }}
+        >
+          Forgot Password ?
+        </Link>
       </div>
     </div>
   );
