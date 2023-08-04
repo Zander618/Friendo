@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   delete "/dogimage/:id", to: "images#purge"
+  post "/password/reset", to: "users#reset"
+  post "password/forgot", to: "users#forgot"
 
 end
