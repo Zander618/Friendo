@@ -23,6 +23,16 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || ENV['RENDER'].present?
 
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  host = 'co-opper.onrender.com/'
+  config.action_mailer.default_url_options = { host: host }
+
+  
+  mailer_info = JSON.parse(File.read("/etc/secrets/mailer-info.json"))
+  config.action_mailer.smtp_settings = mailer_info.symbolize_keys
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
