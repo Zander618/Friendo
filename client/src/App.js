@@ -12,6 +12,8 @@ import AddDog from "./AddDog";
 import CreateMeetup from "./CreateMeetup";
 import MyProfile from "./MyProfile";
 import LearnMore from "./LearnMore";
+import PasswordForgot from "./PasswordForgot"
+import PasswordReset from "./PasswordReset"
 // import Chat from "./Chat";
 // import { UserContext } from "./Context";
 
