@@ -46,21 +46,21 @@ const Dogs = ({ setDogId }) => {
                 alt="Dog not added"
               />
               <div className="side-content">
-                <h3>Breed: </h3>
-                <p>{dog.breed}</p>
-                <h3>Personality Traits: </h3>
-                <p>{dog.traits}</p>
-                <h3>Enjoyed Activities: </h3>
-                <p>{dog.enjoyed_activities}</p>
-                <h3>Age: </h3>
-                <p>{dog.age}</p>
-                <h3>Vaccination Status: </h3>
-                <p>{dog.vaccination ? "Yes" : "Not Yet"}</p>
-                <p>Owner's Username: {dog.owner_username}</p>
-                <p>Has sent {dog.sent_invitations.length} invitations</p>
-                <p>
+                <h4>Breed: </h4>
+                <h5>{dog.breed}</h5>
+                <h4>Personality Traits: </h4>
+                <h5>{dog.traits}</h5>
+                <h4>Enjoyed Activities: </h4>
+                <h5>{dog.enjoyed_activities}</h5>
+                <h4>Age: </h4>
+                <h5>{dog.age}</h5>
+                <h4>Vaccination Status: </h4>
+                <h5>{dog.vaccination ? "Yes" : "Not Yet"}</h5>
+                <h5>Owner's Username: {dog.owner_username}</h5>
+                <h5>Has sent {dog.sent_invitations.length} invitations</h5>
+                <h5>
                   Has received {dog.recieved_invitations.length} invitations
-                </p>
+                </h5>
                 <button
                   onClick={() => {
                     setDogId(dog.id);
