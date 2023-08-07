@@ -76,7 +76,8 @@ const Login = () => {
         >
           <button>Sign Up</button>
         </Link>
-        <Link
+      </div>
+      <Link
           to="/passwordrecovery"
           style={{
             mr: 4,
@@ -89,7 +90,6 @@ const Login = () => {
         >
           Forgot Password ?
         </Link>
-      </div>
     </div>
   );
 };

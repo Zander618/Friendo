@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "./Context";
 import { Link } from "react-router-dom";
-import "./App.css";
+import "./Home.css";
 import Login from "./Login";
 
 const Home = () => {

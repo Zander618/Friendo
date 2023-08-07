@@ -41,10 +41,11 @@
 
 .side {
   flex: 3;
-  text-align: center;
+  text-align: flex;
+  word-wrap: normal;
   align-items: center;
-  word-spacing: 4px;
-  padding: 50px;
+  word-spacing: 10px;
+  padding: 70px;
   margin: 80px;
 }
 
@@ -56,8 +57,8 @@
 }
 
 .picture {
-  height: 300px;
-  width: 400px;
+  height: 200px;
+  width: 300px;
   border: rgb(22, 19, 19);
   border-radius: 2ch;
   border-width: 8;
