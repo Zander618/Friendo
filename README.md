@@ -1,57 +1,59 @@
-# Friendo
+# Friendo - Connecting Dogs, Connecting People, & Unleashing the Power of Socialization
 
-# Co-opper 
+# Description
+In a world where remote work has become the norm, our furry friends have also felt the distance. 
+Isolated dogs not only pose challenges within the confines of our homes but can also exhibit aggression 
+when exposed to the outside world. Enter Friendo, a revolutionary solution designed to pair your canine 
+companions with their perfect playmates, ensuring a happier and more socialized life for your pets.
 
-## Description
+# Getting Started
+Follow these steps to set up and run Friendo on your system:
 
-After two years of working from home not only have we spent too much time apart but so have our dogs.
-Anti-social dogs can not only present problems inside the house but they are also more likely to be aggressive outside the house
-so we aim to find your dog/dogs their new dog best friend.
+1. Install Dependencies: Run the following command to install the required dependencies:
 
+bundle install
 
-## Setup
+2. Start PostgreSQL: Ensure that PostgreSQL is up and running before launching the Rails server. 
+Use the following command to start PostgreSQL (if not already started):
 
-FIRST 
-run "bundle install" to install all dependencies
+sudo service postgresql start
 
-SECOND
-have postgres running before starting rails server
-in the terminal run "sudo service postgresql start"
-if postgres is not installed directions are provided below
+Note: If PostgreSQL is not installed, you can refer to the installation instructions provided below.
 
-THIRD
-run "rails db:migrate"
-and then 
-start the rails server
-"rails s"
+3. Run Migrations: Execute the following commands to run database migrations and start the Rails server:
 
-FOURTH
-Use "npm install --prefix client" to get the packages for the frontend.
+rails db:migrate
+rails s
 
-FIFTH
-start the frontend client
-"npm start --prefix client"
+4. Install Frontend Packages: To install frontend packages, use the following command:
+
+npm install --prefix client
+
+5. Start Frontend Client: Launch the frontend client using the following command:
+
+npm start --prefix client
 
 # Usage
 
-## Home
-Offers a brief description of what the application does and is about.
+## Friendo offers a range of features to enhance the lives of you and your dog:
 
-## Dogs
-Shows all the dogs currently in the database minus your own dogs. Allows you to see all the information provided about them and allows you to invite them along with one of 
-your dogs to meet up.
+## Home: 
+Provides a concise overview of the application's purpose and features.
 
-## Create Meetup
-This form will allow you to select a location, your dog, a date, and a time for the requested meetup.
+## Dogs: 
+Displays a comprehensive list of dogs in the database, excluding your own. Invite other dogs to meet up with your furry companion.
 
-## Locations
-Is a list of all the added locations so far. Any use can add and edit in locations. This will create and grow the list of places where all dogs can meet up.
+## Create Meetup: 
+Fill out a form to propose a meetup, including location, date, time, and your dog's information.
 
-## AddDog
-This is the subsection that allows a user to add their dog or dogs.
+## Locations: 
+Explore a collection of added meetup locations. Users can contribute and edit locations, expanding the range of possibilities for dog meetups.
 
-## Profile
-Finally the profile component allows a user to update their information, their dog's information, and add or change a photo of their dog.
+## Add Dog: 
+Seamlessly add your dog's details to the database.
+
+## Profile: 
+Update your personal information, your dog's information, and upload or replace your dog's photo.
 
 #### PostgreSQL Installation for WSL
 
