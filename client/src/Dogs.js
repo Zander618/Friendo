@@ -36,49 +36,45 @@ const Dogs = ({ setDogId }) => {
           setDogsToDisplay={setDogsToDisplay}
         />
       </div>
-      {dogsToDisplay
-        .sort((a, b) => (a.name > b.name ? 1 : -1))
-        .map((dog) => {
+      <div className="dog-cards-container">
+        {dogsToDisplay.map((dog) => {
           return (
             <div key={dog.id} className="dog-card">
-              <div>
-                <div className="text">
-                  <h1>{dog.name}</h1>
-                </div>
-                <img
-                  src={dog.uploaded_image ? dog.uploaded_image : "no photo"}
-                  alt="Dog not added"
-                  className="dogImageSizing"
-                />
-                <div className="side-content-center">
-                  <ol>
-                    <p>Breed: {dog.breed}</p>
-                    <p>Personality Traits: {dog.traits}</p>
-                    <p>Enjoyed Activites: {dog.enjoyed_activities}</p>
-                    <p>Age: {dog.age}</p>
-                    <p>
-                      Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}
-                    </p>
-                    <p>Owner's Username: {dog.owner_username}</p>
-                    <p>Has sent {dog.sent_invitations.length} invitations</p>
-                    <p>
-                      Has received {dog.recieved_invitations.length} invitations
-                    </p>
-                    <button
-                      onClick={() => {
-                        setDogId(dog.id);
-                        navigate(`/dogs/${dog.id}/meetups/new`);
-                      }}
-                      id={dog.id}
-                    >
-                      Request a Meetup
-                    </button>
-                  </ol>
-                </div>
+              <h1>{dog.name}</h1>
+              <img
+                src={dog.uploaded_image ? dog.uploaded_image : "no photo"}
+                alt="Dog not added"
+              />
+              <div className="side-content">
+                <h3>Breed: </h3>
+                <p>{dog.breed}</p>
+                <h3>Personality Traits: </h3>
+                <p>{dog.traits}</p>
+                <h3>Enjoyed Activities: </h3>
+                <p>{dog.enjoyed_activities}</p>
+                <h3>Age: </h3>
+                <p>{dog.age}</p>
+                <h3>Vaccination Status: </h3>
+                <p>{dog.vaccination ? "Yes" : "Not Yet"}</p>
+                <p>Owner's Username: {dog.owner_username}</p>
+                <p>Has sent {dog.sent_invitations.length} invitations</p>
+                <p>
+                  Has received {dog.recieved_invitations.length} invitations
+                </p>
+                <button
+                  onClick={() => {
+                    setDogId(dog.id);
+                    navigate(`/dogs/${dog.id}/meetups/new`);
+                  }}
+                  id={dog.id}
+                >
+                  Request a Meetup
+                </button>
               </div>
             </div>
           );
         })}
+      </div>
     </div>
   ) : (
     <h1>...Loading</h1>

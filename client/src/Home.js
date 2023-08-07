@@ -14,6 +14,10 @@ const Home = () => {
           <div className="banner">
             <h1 className="text">Welcome to Friendo!</h1>
             <h3 className="text">
+            Connecting Dogs, Connecting People, & Unleashing the Power of
+            Socialization.
+            <br/>
+            <br/>
               Find your best friend their new best friend.
             </h3>
           </div>
@@ -35,6 +39,7 @@ const Home = () => {
                 <button>Locations</button>
               </Link>
             </div>
+            <br/>
             <div classname="side">
               <img className="picture" src="AddDog.PNG" alt="Friendo App" />
               <h3>Add Your Dog</h3>
@@ -56,6 +61,7 @@ const Home = () => {
                 <button>Add Dog</button>
               </Link>
             </div>
+            <br/>
             <div classname="side">
               <img className="picture" src="FindFriend.PNG" alt="Friendo App" />
               <h3>Find their new friends</h3>
@@ -77,6 +83,7 @@ const Home = () => {
               </Link>
             </div>
           </div>
+          <br/>
           <div className="learn-more-button">
             <Link
               to="/learn_more"
@@ -99,6 +106,9 @@ const Home = () => {
           <div className="banner">
             <h1 className="text">Welcome to Friendo!</h1>
             <h3 className="text">
+            Connecting Dogs, Connecting People, & Unleashing the Power of
+            Socialization
+            <br/>
               Find your best friend their new best friend.
             </h3>
           </div>
