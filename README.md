@@ -119,4 +119,6 @@ service:
 brew services start postgresql
 ```
 
-
+# Your Dog's Social Adventure Begins!
+Friendo is your gateway to fostering social connections for your furry companions. 
+Watch as your dogs forge new friendships and explore the world together, all thanks to Friendo's innovative platform.

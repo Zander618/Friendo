@@ -23,10 +23,11 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || ENV['RENDER'].present?
 
-  config.action_mailer.perform_caching = false
+  #Action Mailer Settings
 
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'co-opper.onrender.com/'
+  host = 'https://friendo.onrender.com/'
   config.action_mailer.default_url_options = { host: host }
 
   
