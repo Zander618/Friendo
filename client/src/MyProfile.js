@@ -116,20 +116,21 @@ const MyProfile = () => {
                   />
                 )}
                 <br />
+                <br />
                 <img
                   src={dog.uploaded_image}
                   alt="Please Upload Below"
                   className="dog-image"
                 />
-                <ul className="dog-details">
-                  <li>Breed: {dog.breed}</li>
-                  <li>Personality Traits: {dog.traits}</li>
-                  <li>Enjoyed Activities: {dog.enjoyed_activities}</li>
-                  <li>Age: {dog.age}</li>
-                  <li>
+                <div className="dog-details">
+                  <p>Breed: {dog.breed}</p>
+                  <p>Personality Traits: {dog.traits}</p>
+                  <p>Enjoyed Activities: {dog.enjoyed_activities}</p>
+                  <p>Age: {dog.age}</p>
+                  <p>
                     Vaccination Status: {dog.vaccination ? "Yes" : "Not Yet"}
-                  </li>
-                </ul>
+                  </p>
+                </div>
                 {dog.id === editPopUpId && (
                   <EditDog
                     trigger={editButtonPopup}

@@ -13,7 +13,7 @@ const Meetups = ({ setMeetupId }) => {
   const [receivedMeetupCount, setReceivedMeetupCount] = useState("");
   const [showMoreReceivedDetails, setShowMoreReceivedDetails] = useState("");
   const [showMoreSentDetails, setShowMoreSentDetails] = useState("");
-  // const [show, setShow] = useState(true)
+  const [show, setShow] = useState(true)
 
   useEffect(() => {
     let filteredDogsRecievedInvitations = meetups.filter(
@@ -207,7 +207,7 @@ const Meetups = ({ setMeetupId }) => {
           <div key={invitation.id} className="meetup-card">
             <h2>{invitation.invitee.name}</h2>
             <div className="meetup-card-inner">
-              <h3>Received Invition</h3>
+              <h3>Received Invitation</h3>
               <img
                 src={invitation.invitee.uploaded_image}
                 alt="invitee dog"
@@ -223,21 +223,26 @@ const Meetups = ({ setMeetupId }) => {
                 {invitation.invitee.name} is being requested to meet with{" "}
                 {invitation.invitor.name}
               </h3>
+              {show ? 
               <button
                 id={invitation.id}
                 onClick={(e) => {
                   showReceivedDetails(e);
+                  setShow(false)
                 }}
               >
                 Show Details
               </button>
+              :
               <button
                 onClick={() => {
                   hideReceivedDetails();
+                  setShow(true)
                 }}
               >
                 Close Details
               </button>
+      }
               {parseInt(showMoreReceivedDetails) === invitation.id ? (
                 <div>
                   <h3>Date: </h3>
@@ -307,7 +312,7 @@ const Meetups = ({ setMeetupId }) => {
           <div key={invitation.id} className="meetup-card">
             <h2>{invitation.invitor.name}</h2>
             <div className="meetup-card-inner">
-              <h3>Sent Invition</h3>
+              <h3>Sent Invitation</h3>
               <img
                 src={invitation.invitor.uploaded_image}
                 alt="invitee dog"
@@ -323,21 +328,26 @@ const Meetups = ({ setMeetupId }) => {
                 {invitation.invitor.name} is requesting a meeting with{" "}
                 {invitation.invitee.name}
               </h3>
+              {show ? 
               <button
                 id={invitation.id}
                 onClick={(e) => {
                   showSentDetails(e);
+                  setShow(false)
                 }}
               >
                 Show Details
               </button>
+              :
               <button
                 onClick={() => {
                   hideSentDetails();
+                  setShow(true)
                 }}
               >
                 Close Details
               </button>
+              }
               {parseInt(showMoreSentDetails) === invitation.id ? (
                 <div>
                   <h3>Date: </h3>
