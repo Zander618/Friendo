@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
-import "./PopUp.css";
+import "./MyProfile.css";
 
 const EditUser = ({
   trigger,
@@ -125,9 +125,9 @@ const EditUser = ({
   };
 
   return trigger ? (
-    <div className="edit-review-card">
-      <div>
-        <h3 style={{ color: "black" }}>Edit Profile Information</h3>
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
+        <h3>Edit Profile Information</h3>
         <form onSubmit={handleSubmit} id={userId}>
           <label style={{ color: "black" }}>
             Username:
@@ -185,7 +185,7 @@ const EditUser = ({
             />
           </label>
           <br></br>
-          <input type="submit" value="Submit" />
+          <input className="popup-button" type="submit" value="Submit" />
         </form>
         <button className="close-btn" onClick={() => setTrigger(false)}>
           close
