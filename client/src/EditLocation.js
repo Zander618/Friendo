@@ -6,8 +6,6 @@ const EditReview = ({
   trigger,
   setTrigger,
   locationId,
-  locations,
-  setLocations,
   originalName,
   originalAddress,
   originalPhoto
