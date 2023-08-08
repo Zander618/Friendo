@@ -6,28 +6,24 @@ function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [locations, setLocations] = useState([]);
-  const [dogs, setDogs] = useState([])
-  const [userId, setUserId] = useState("")
-  const [meetups, setMeetups] = useState([])
-  const [userDogs, setUserDogs] = useState([])
-
+  const [dogs, setDogs] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [meetups, setMeetups] = useState([]);
+  const [userDogs, setUserDogs] = useState([]);
 
   const loginUser = (currentUser) => {
     setUser(currentUser);
     setLoggedIn(true);
-    setUserId(currentUser.id)
-    setUserDogs(currentUser.dogs)
+    setUserId(currentUser.id);
+    setUserDogs(currentUser.dogs);
   };
 
   const logoutUser = () => {
     setUser({});
     setLoggedIn(false);
-    setUserId("")
-    setUserDogs([])
+    setUserId("");
+    setUserDogs([]);
   };
-  
-
-
 
   useEffect(() => {
     if (loggedIn) {
@@ -36,20 +32,20 @@ function UserProvider({ children }) {
         .then((data) => {
           setDogs(data);
         });
-  
+
       fetch("/meetups")
         .then((r) => r.json())
         .then((data) => {
           setMeetups(data);
         });
 
-        useEffect(() => {
-          fetch("/locations")
-            .then((r) => r.json())
-            .then(setLocations);
-        }, []);
+      fetch("/locations")
+        .then((r) => r.json())
+        .then((data) => {
+          setLocations(data);
+        });
     }
-  
+
     fetch("/me")
       .then((r) => {
         if (r.ok) {
@@ -64,10 +60,25 @@ function UserProvider({ children }) {
       });
   }, [loggedIn]);
 
-
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, locations, setLocations, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs, setUserDogs }}
+      value={{
+        user,
+        setUser,
+        loggedIn,
+        locations,
+        setLocations,
+        setLoggedIn,
+        loginUser,
+        logoutUser,
+        dogs,
+        setDogs,
+        userId,
+        meetups,
+        setMeetups,
+        userDogs,
+        setUserDogs,
+      }}
     >
       {children}
     </UserContext.Provider>
