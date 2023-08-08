@@ -12,7 +12,7 @@ const EditReview = ({
   originalAddress,
   originalPhoto
 }) => {
-  const { meetups, setMeetups } = useContext(UserContext);
+  const { meetups, setMeetups, locations, setLocations } = useContext(UserContext);
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     address: originalAddress,

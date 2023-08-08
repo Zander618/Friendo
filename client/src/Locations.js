@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AddLocation from "./AddLocation";
 import EditLocation from "./EditLocation";
+import { UserContext } from "./Context";
 import "./App.css";
 
-const Locations = ({ locations, setLocations }) => {
+const Locations = () => {
+  const { locations, setLocations } = useContext(UserContext);
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [popUpId, setPopUpId] = useState();

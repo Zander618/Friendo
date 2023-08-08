@@ -12,22 +12,15 @@ import AddDog from "./AddDog";
 import CreateMeetup from "./CreateMeetup";
 import MyProfile from "./MyProfile";
 import LearnMore from "./LearnMore";
-import PasswordForgot from "./PasswordForgot"
-import PasswordReset from "./PasswordReset"
+import PasswordForgot from "./PasswordForgot";
+import PasswordReset from "./PasswordReset";
 // import Chat from "./Chat";
-// import { UserContext } from "./Context";
+import { UserContext } from "./Context";
 
 function App() {
-  const [locations, setLocations] = useState([]);
   const [dogId, setDogId] = useState("");
   // const [meetupId, setMeetupId] = useState("")
   // const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    fetch("/locations")
-      .then((r) => r.json())
-      .then(setLocations);
-  }, []);
 
   return (
     <Router>
@@ -35,13 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dogs" element={<Dogs setDogId={setDogId} />} />
-        <Route
-          path="/locations/*"
-          element={
-            <Locations locations={locations} setLocations={setLocations} />
-          }
-        />
-        {/* <Route path="/meetups" element={<Meetups  setMeetupId={setMeetupId}/>} /> */}
+        <Route path="/locations/*" element={<Locations />} />
         <Route path="/meetups" element={<Meetups />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/signup" element={<Signup />} />
@@ -50,16 +37,10 @@ function App() {
         {/* <Route path="/chat" element={<Chat currentUser={user} meetupId={meetupId}/>} /> */}
         <Route path="/dogs/new" element={<AddDog />} />
         <Route path="/passwordrecovery" element={<PasswordForgot />} />
-        <Route path="/reset_password/:token"element={<PasswordReset />}/>
+        <Route path="/reset_password/:token" element={<PasswordReset />} />
         <Route
           path="/dogs/:id/meetups/new"
-          element={
-            <CreateMeetup
-              dogId={dogId}
-              locations={locations}
-              setLocations={setLocations}
-            />
-          }
+          element={<CreateMeetup dogId={dogId} />}
         />
       </Routes>
     </Router>

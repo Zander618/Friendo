@@ -5,7 +5,7 @@ import Select from "react-select";
 import Calendar from "react-calendar";
 
 
-const CreateMeetup = ({ dogId, locations, setLocations }) => {
+const CreateMeetup = ({ dogId }) => {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedUserDog, setSelectedUserDog] = useState("");
@@ -13,7 +13,7 @@ const CreateMeetup = ({ dogId, locations, setLocations }) => {
   const [selectedDog, setSelectedDog] = useState({})
   const [errors, setErrors] = useState([]);
   const [date, setDate] = useState(new Date());
-  const { dogs, setDogs, meetups, setMeetups, userDogs } = useContext(UserContext);
+  const { dogs, setDogs, meetups, setMeetups, userDogs, locations, setLocations } = useContext(UserContext);
   const {id} = useParams()
 
   useEffect(() => {

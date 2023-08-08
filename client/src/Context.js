@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [locations, setLocations] = useState([]);
   const [dogs, setDogs] = useState([])
   const [userId, setUserId] = useState("")
   const [meetups, setMeetups] = useState([])
@@ -41,6 +42,12 @@ function UserProvider({ children }) {
         .then((data) => {
           setMeetups(data);
         });
+
+        useEffect(() => {
+          fetch("/locations")
+            .then((r) => r.json())
+            .then(setLocations);
+        }, []);
     }
   
     fetch("/me")
@@ -60,7 +67,7 @@ function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs, setUserDogs }}
+      value={{ user, setUser, loggedIn, locations, setLocations, setLoggedIn, loginUser, logoutUser, dogs, setDogs, userId, meetups, setMeetups, userDogs, setUserDogs }}
     >
       {children}
     </UserContext.Provider>

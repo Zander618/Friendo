@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "./Context";
 
-const AddLocation = ({ trigger, setTrigger, locations, setLocations }) => {
+const AddLocation = ({ trigger, setTrigger }) => {
+  const { locations, setLocations } = useContext(UserContext);
   const [formData, setFormData] = useState({
     address: "",
     name: "",
