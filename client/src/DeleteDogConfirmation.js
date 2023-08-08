@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "./Context";
-import "./PopUp.css";
+import "./MyProfile.css";
 
 const DeleteDogConfirmation = ({ trigger, setTrigger, dogId}) => {
   const { user, setUser, dogs, setDogs, meetups, setMeetups } = useContext(UserContext);

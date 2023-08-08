@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import { UserContext } from "./Context";
-import "./PopUp.css";
+import "./MyProfile.css";
 
 const EditImage = ({dogId, trigger, setTrigger}) => {
   const [edittedDogImage, setEdittedDogImage] = useState([]);
@@ -59,7 +59,8 @@ const EditImage = ({dogId, trigger, setTrigger}) => {
 
 
   return trigger ? (
-    <div className="edit-review-card">
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
       <form onSubmit={handleDeleteClick}>
         <h4>upload photo</h4>
         <input
@@ -67,11 +68,12 @@ const EditImage = ({dogId, trigger, setTrigger}) => {
           accept="image/*"
           onChange={(e) => setEdittedDogImage(e.target.files[0])}
         />
-        <input type="submit" />
+        <input className="popup-button" type="submit" value="Submit" />
       </form>
       <button className="close-btn" onClick={() => setTrigger(false)}>
           close
         </button>
+        </div>
     </div>
   ) : (
     ""

@@ -12,14 +12,14 @@ const Home = () => {
       {loggedIn ? (
         <div>
           <div className="banner">
-            <h1 className="text">Welcome to Friendo!</h1>
-            <h3 className="text">
+            <h2 >Welcome to Friendo!</h2>
+            <h4>
             Connecting Dogs, Connecting People, & Unleashing the Power of
             Socialization.
             <br/>
             <br/>
               Find your best friend their new best friend.
-            </h3>
+            </h4>
           </div>
           <div className="container">
             <div classname="side">

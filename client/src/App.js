@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,7 +15,7 @@ import LearnMore from "./LearnMore";
 import PasswordForgot from "./PasswordForgot";
 import PasswordReset from "./PasswordReset";
 // import Chat from "./Chat";
-import { UserContext } from "./Context";
+// import { UserContext } from "./Context";
 
 function App() {
   const [dogId, setDogId] = useState("");

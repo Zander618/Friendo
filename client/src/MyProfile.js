@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./Context";
 import DeleteDogConfirmation from "./DeleteDogConfirmation";
-import "./DogImage.css";
+import "./MyProfile.css";
 import EditDog from "./EditDog";
 import EditImage from "./EditImage";
 import EditUser from "./EditUser";
@@ -16,7 +16,6 @@ const MyProfile = () => {
   const [editImagePopUpId, setEditImagePopUpId] = useState();
   const [editImagePopUp, setEditImagePopUp] = useState(false);
   const [deleteButtonPopup, setDeleteButtonPopup] = useState(false);
-
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
@@ -58,24 +57,24 @@ const MyProfile = () => {
     setDogs(updatedDogs);
   };
 
-
-  return user ?  (
+  return user ? (
     <div className="background">
-      <h1>{user.first_name}'s' Profile</h1>
-      <br></br>
+      <h1 className="profile-title">{user.first_name}'s Profile</h1>
+      <br />
       <button
         id={userId}
         onClick={() => {
           setEditUserPopUp(true);
         }}
+        className="popup-button"
       >
         Edit Profile Details
       </button>
-      <h2>First Name: {user.first_name}</h2>
-      <h2>Username: {user.username}</h2>
-      <h2>State: {user.state}</h2>
-      <h2>County: {user.county}</h2>
-      <h2>Email: {user.email}</h2>
+      <h2 className="profile-info">First Name: {user.first_name}</h2>
+      <h2 className="profile-info">Username: {user.username}</h2>
+      <h2 className="profile-info">State: {user.state}</h2>
+      <h2 className="profile-info">County: {user.county}</h2>
+      <h2 className="profile-info">Email: {user.email}</h2>
       <EditUser
         trigger={editUserPopUp}
         setTrigger={setEditUserPopUp}
@@ -87,28 +86,27 @@ const MyProfile = () => {
         originalEmail={user.email}
         userDogs={user.dogs}
       />
-      <br></br>
-      <br></br>
-      <h1>{user.first_name}'s Dogs</h1>
+      <br />
+      <br />
+      <h1 className="profile-title">{user.first_name}'s Dogs</h1>
       <div>
         {user.dogs
           .sort((a, b) => (a.name > b.name ? 1 : -1))
           .map((dog) => {
             return (
-              <div key={dog.id}>
-                <h2>{dog.name}</h2>
-                {dog.uploaded_image !== "false" ? (
+              <div key={dog.id} className="profile-dog-card">
+                <h2 className="dog-name">{dog.name}</h2>
+                {dog.uploaded_image !== "false" && (
                   <button
                     id={dog.id}
                     onClick={(e) => {
                       setEditImagePopUpId(parseInt(e.target.id));
                       setEditImagePopUp(true);
                     }}
+                    className="dog-button"
                   >
                     Change Photo
                   </button>
-                ) : (
-                  ""
                 )}
                 {dog.id === editImagePopUpId && (
                   <EditImage
@@ -117,13 +115,13 @@ const MyProfile = () => {
                     setTrigger={setEditImagePopUp}
                   />
                 )}
-                <br></br>
+                <br />
                 <img
                   src={dog.uploaded_image}
                   alt="Please Upload Below"
-                  className="dogProfileImageSizing"
+                  className="dog-image"
                 />
-                <ul>
+                <ul className="dog-details">
                   <li>Breed: {dog.breed}</li>
                   <li>Personality Traits: {dog.traits}</li>
                   <li>Enjoyed Activities: {dog.enjoyed_activities}</li>
@@ -146,7 +144,6 @@ const MyProfile = () => {
                     uploaded_image={dog.uploaded_image}
                   />
                 )}
-
                 {dog.uploaded_image !== "false" ? (
                   <button
                     id={dog.id}
@@ -154,21 +151,29 @@ const MyProfile = () => {
                       setEditPopUpId(parseInt(e.target.id));
                       setEditButtonPopup(true);
                     }}
+                    className="dog-button"
                   >
                     Edit Dog Details
                   </button>
                 ) : (
-                  <div>
+                  <div className="popup-form">
                     <h3>Add Photo</h3>
-                    <h6>Once photo is added you may edit you dogs info.</h6>
+                    <h6>
+                      Once a photo is added, you may edit your dog's info.
+                    </h6>
                     <form onSubmit={handleSubmitPhoto} id={dog.id}>
-                      <h4>upload photo</h4>
+                      <h4>Upload a Photo</h4>
                       <input
                         type="file"
                         accept="image/*"
                         onChange={(e) => setDogImage(e.target.files[0])}
+                        className="popup-input"
                       />
-                      <input type="submit" />
+                      <input
+                        type="submit"
+                        value="Upload"
+                        className="popup-submit"
+                      />
                     </form>
                   </div>
                 )}
@@ -178,6 +183,7 @@ const MyProfile = () => {
                     setDeletePopUpId(parseInt(e.target.id));
                     setDeleteButtonPopup(true);
                   }}
+                  className="dog-button"
                 >
                   Remove Dog
                 </button>
@@ -192,7 +198,7 @@ const MyProfile = () => {
             );
           })}
       </div>
-      <br></br>
+      <br />
     </div>
   ) : (
     <h1>... Loading</h1>

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
-import "./PopUp.css";
+import "./MyProfile.css";
 import Select from "react-select";
 
 const EditDog = ({
@@ -140,9 +140,9 @@ const EditDog = ({
   };
 
   return trigger ? (
-    <div className="edit-review-card">
-      <div>
-        <h3 style={{ color: "black" }}>Edit Dog</h3>
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
+        <h3>Edit Dog</h3>
         <form onSubmit={handleSubmit} id={dogId}>
           <label style={{ color: "black" }}>
             Name:
@@ -209,7 +209,7 @@ const EditDog = ({
               autoFocus={true}
             />
           </label>
-          <input type="submit" value="Submit" />
+          <input className="popup-button" type="submit" value="Submit" />
         </form>
         <button className="close-btn" onClick={() => setTrigger(false)}>
           close
