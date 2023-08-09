@@ -227,7 +227,7 @@ const Meetups = ({ setMeetupId }) => {
                     />
                   </div>
                   <h3>
-                    {invitation.invitee.name} is being requested to meet with{" "}
+                    {invitation.invitee.name} received a request to meet with{" "}
                     {invitation.invitor.name}
                   </h3>
                   {show ? (
@@ -340,7 +340,7 @@ const Meetups = ({ setMeetupId }) => {
                     />
                   </div>
                   <h3>
-                    {invitation.invitor.name} is requesting a meeting with{" "}
+                    {invitation.invitor.name} sent a request to meet with{" "}
                     {invitation.invitee.name}
                   </h3>
                   {show ? (
