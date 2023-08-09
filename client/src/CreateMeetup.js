@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "./Context";
 import Select from "react-select";
 import Calendar from "react-calendar";
+import "./CreateMeetup.css";
+
 
 
 const CreateMeetup = ({ dogId }) => {
@@ -209,21 +211,24 @@ const CreateMeetup = ({ dogId }) => {
   };
 
   return selectedDog ? (
-    <div>
-      <h1>
-        You requested a Meetup with "{selectedDog.name}" the {selectedDog.breed}
-      </h1>
-      <label style={{ color: "black" }}>
-        Select Your Location
-        <Select
-          options={locationOptions}
-          autoFocus={true}
-          onChange={handleLocationSelect}
-        />
-      </label>
+    <div className="create-meetup-container">
+      <div className="create-meetup-form">
+        <h1 className="create-meetup-heading">
+          You requested a Meetup with "{selectedDog.name}" the {selectedDog.breed}
+        </h1>
+        <label className="create-meetup-label">
+          Select Your Location
+          <Select
+            className="create-meetup-select"
+            options={locationOptions}
+            autoFocus={true}
+            onChange={handleLocationSelect}
+          />
+        </label>
       <label style={{ color: "black" }}>
         Choose which your dog
         <Select
+        className="create-meetup-select"
           options={userDogOptions}
           autoFocus={true}
           onChange={handleDogSelect}
@@ -236,20 +241,24 @@ const CreateMeetup = ({ dogId }) => {
       <label style={{ color: "black" }}>
         Select Your Time
         <Select
+        className="create-meetup-select"
           options={timeOptions}
           autoFocus={true}
           onChange={handleTimeSelect}
         />
       </label>
-      <button onClick={handleSubmit}>Submit</button>
-      {errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
-      <br></br>
+      <button className="create-meetup-button" onClick={handleSubmit}>
+          Submit
+        </button>
+        {errors.length > 0 && (
+          <ul className="create-meetup-errors">
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
+        <br />
+      </div>
     </div>
   ) : (
     <h1>...Loading</h1>
