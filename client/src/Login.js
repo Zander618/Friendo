@@ -31,65 +31,48 @@ const Login = () => {
   }
 
   return (
-    <div className="card">
-      <div className="login-card">
-        <h1>Log in</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Username: </label>
-            <input
-              type="text"
-              id="username"
-              autoComplete="off"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          {errors.length > 0 && (
-            <ul style={{ color: "red" }}>
-              {errors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          )}
-          <input type="submit" value="Login" />
-        </form>
-        <Link
-          to="/signup"
-          style={{
-            mr: 4,
-            variant: "h4",
-            color: "black",
-            textDecoration: "none",
-            textAlign: "center",
-          }}
-        >
-          <button>Sign Up</button>
-        </Link>
-      </div>
-      <Link
-          to="/passwordrecovery"
-          style={{
-            mr: 4,
-            variant: "h4",
-            color: "blue",
-            textDecoration: "underline",
-            textAlign: "right",
-            justify: "center",
-          }}
-        >
+    <div className="container">
+      <div className="card">
+        <div className="login-card">
+          <h1>Log in</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="username">Username: </label>
+              <input
+                type="text"
+                id="username"
+                autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password: </label>
+              <input
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {errors.length > 0 && (
+              <ul style={{ color: "red" }}>
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+            <input type="submit" value="Login" className="submit-button" />
+          </form>
+          <Link to="/signup" className="signup-link">
+            <button className="signup-button">Sign Up</button>
+          </Link>
+        </div>
+        <Link to="/passwordrecovery" className="forgot-password-link">
           Forgot Password ?
         </Link>
+      </div>
     </div>
   );
 };
