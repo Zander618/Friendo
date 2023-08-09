@@ -293,7 +293,6 @@ const Meetups = ({ setMeetupId }) => {
                             dog={invitation.invitee.id}
                             onClick={(e) => {
                               handleAcceptedClick(e);
-                              setShow(false)
                             }}
                           >
                             Accept
@@ -304,7 +303,6 @@ const Meetups = ({ setMeetupId }) => {
                             dog={invitation.invitee.id}
                             onClick={(e) => {
                               handleDeclinedClick(e);
-                              setShow(false)
                             }}
                           >
                             Decline
@@ -395,7 +393,6 @@ const Meetups = ({ setMeetupId }) => {
                           dog={invitation.invitor.id}
                           onClick={(e) => {
                             handleCancelClick(e);
-                            setShow(false)
                           }}
                         >
                           Cancel

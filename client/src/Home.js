@@ -8,7 +8,7 @@ const Home = () => {
   const { loggedIn } = useContext(UserContext);
 
   return (
-    <div>
+    <div >
       {loggedIn ? (
         <div>
           <div className="banner">
@@ -21,7 +21,8 @@ const Home = () => {
               Find your best friend their new best friend.
             </h4>
           </div>
-          <div className="container">
+
+          <div className="container" style={{ marginTop: '300px' }}>
             <div classname="side">
               <img className="picture" src="SignUp.PNG" alt="Friendo App" />
               <h3>Search Locations</h3>

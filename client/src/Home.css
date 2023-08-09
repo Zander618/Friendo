@@ -1,18 +1,17 @@
-
 .container {
   display: flex;
-  justify-content: space-between; 
-  width: flex;
+  justify-content: space-between;
+  width: 100%;
   text-align: center;
   align-items: center;
   word-spacing: 4px;
-  padding: 50px;
-  margin: 80px;
+  padding: 100px 50px;
+  margin: 80px auto 0;
 }
 
 .side {
   flex: 1;
-  padding: 20px; 
+  padding: 20px;
   border-right: 5px solid #ccc;
   display: flex;
   flex-direction: column;
@@ -21,11 +20,11 @@
 }
 
 .side p {
-  word-wrap:inherit;
+  word-wrap: break-word;
 }
 
 .side:last-child {
-  border-right: none; 
+  border-right: none;
 }
 
 .background {
@@ -37,13 +36,14 @@
   text-align: center;
   padding: 30px 0;
   color: white;
+  overflow-block:auto;
 }
 
 .picture {
-  height: 200px;
-  width: 300px;
-  border: 1px solid rgb(22, 19, 19); 
-  padding: 8px; 
+  max-height: 200px;
+  max-width: 100%;
+  border: 1px solid rgb(22, 19, 19);
+  padding: 8px;
 }
 
 .learn-more-button {
