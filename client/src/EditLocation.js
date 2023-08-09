@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
-import "./PopUp.css";
+import "./Locations.css";
 
-const EditReview = ({
+const EditLocations = ({
   trigger,
   setTrigger,
   locationId,
@@ -82,14 +82,14 @@ const EditReview = ({
   }
 
   return trigger ? (
-    <div className="edit-review-card">
-      <div>
-        <h3 style={{ color: "black" }}>Edit location</h3>
+    <div className="edit-popup">
+      <div className="edit-popup-inner">
+        <h3>Edit Location</h3>
         <form onSubmit={handleSubmit} id={locationId}>
-          <label style={{ color: "black" }}>
+          <label>
             Address:
             <input
-              className="editsubmissionfield"
+              className="edit-submission-field"
               type="text"
               name="address"
               spellCheck="true"
@@ -97,11 +97,11 @@ const EditReview = ({
               onChange={handleChange}
             />
           </label>
-          <br></br>
-          <label style={{ color: "black" }}>
+          <br />
+          <label>
             Name:
             <input
-              className="editsubmissionfield"
+              className="edit-submission-field"
               type="text"
               name="name"
               spellCheck="true"
@@ -109,10 +109,10 @@ const EditReview = ({
               onChange={handleChange}
             />
           </label>
-          <label style={{ color: "black" }}>
+          <label>
             Photo:
             <input
-              className="editsubmissionfield"
+              className="edit-submission-field"
               type="text"
               name="photo"
               spellCheck="true"
@@ -120,24 +120,19 @@ const EditReview = ({
               onChange={handleChange}
             />
           </label>
-          <br></br>
+          <br />
           <input type="submit" value="Submit" />
         </form>
-        <button
-          className="close-btn"
-          onClick={() => {
-            setTrigger(false);
-          }}
-        >
-          close
+        <button className="close-btn" onClick={() => setTrigger(false)}>
+          Close
         </button>
         {errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
+          <ul className="error-list">
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   ) : (
@@ -145,4 +140,4 @@ const EditReview = ({
   );
 };
 
-export default EditReview;
+export default EditLocations;

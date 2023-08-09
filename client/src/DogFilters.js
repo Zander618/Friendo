@@ -254,9 +254,10 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
     setSelectedBreed(selectedOption.label);
   };
   return trigger ? (
-    <div>
+    <div className="dog-image-popup">
+    <div className="dog-image-popup-inner">
       <br />
-      <h3>Filters : </h3>
+      <h3>Filters :</h3>
       <button
         onClick={() => {
           handleClickAllDogs();
@@ -333,10 +334,8 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
           }}
         >
           close
-        </button>
-      {/* <button>Traits</button> */}
-      <br />
-      <br />
+          </button>
+      </div>
     </div>
   ) : (
     ""

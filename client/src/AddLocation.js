@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
+import "./Locations.css";
 
 const AddLocation = ({ trigger, setTrigger }) => {
   const { locations, setLocations } = useContext(UserContext);
@@ -25,13 +26,13 @@ const AddLocation = ({ trigger, setTrigger }) => {
     }).then((resp) => {
       if (resp.ok) {
         resp.json().then((data) => {
-        addNewLocation(data);
-        setTrigger(false);
-      });
-    } else {
-      resp.json().then((errorData) => setErrors(errorData.errors));
-    }
-  })
+          addNewLocation(data);
+          setTrigger(false);
+        });
+      } else {
+        resp.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
     setFormData({
       address: "",
       name: "",
@@ -52,14 +53,14 @@ const AddLocation = ({ trigger, setTrigger }) => {
   };
 
   return trigger ? (
-    <div>
-      <div>
-        <h3 style={{ color: "black" }}>Add Location</h3>
+    <div className="add-popup">
+      <div className="add-popup-inner">
+        <h3>Add Location</h3>
         <form onSubmit={handleSubmit}>
-          <label style={{ color: "black" }}>
+          <label>
             Address:
             <input
-              className="submissionfield"
+              className="submission-field"
               type="text"
               name="address"
               spellCheck="true"
@@ -68,10 +69,11 @@ const AddLocation = ({ trigger, setTrigger }) => {
               onChange={handleChange}
             />
           </label>
-          <br></br>
-          <label style={{ color: "black" }}>
+          <br />
+          <label>
             Name:
             <input
+              className="submission-field"
               type="text"
               name="name"
               placeholder="Name of the Location"
@@ -79,35 +81,31 @@ const AddLocation = ({ trigger, setTrigger }) => {
               onChange={handleChange}
             />
           </label>
-          <br></br>
-          <label style={{ color: "black" }}>
+          <br />
+          <label>
             Photo:
             <input
+              className="submission-field"
               type="text"
               name="photo"
-              placeholder="Copy url of location photo"
+              placeholder="Copy URL of Location Photo"
               value={formData.photo}
               onChange={handleChange}
             />
           </label>
-          <br></br>
+          <br />
           <input type="submit" value="Submit" />
         </form>
-        <button
-          className="close-btn"
-          onClick={() => {
-            setTrigger(false);
-          }}
-        >
-          close
+        <button className="close-btn" onClick={() => setTrigger(false)}>
+          Close
         </button>
         {errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
+          <ul className="error-list">
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   ) : (

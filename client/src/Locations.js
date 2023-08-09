@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import AddLocation from "./AddLocation";
 import EditLocation from "./EditLocation";
 import { UserContext } from "./Context";
-import "./App.css";
+import "./Locations.css";
 
 const Locations = () => {
   const { locations, setLocations } = useContext(UserContext);
@@ -10,16 +10,10 @@ const Locations = () => {
   const [editButtonPopup, setEditButtonPopup] = useState(false);
   const [popUpId, setPopUpId] = useState();
 
-
-
   return (
-    <div>
+    <div className="locations-container">
       <div>
-        <button
-          onClick={() => {
-            setAddButtonPopup(true);
-          }}
-        >
+        <button className="add-button" onClick={() => setAddButtonPopup(true)}>
           Add Location
         </button>
         <AddLocation
@@ -34,23 +28,20 @@ const Locations = () => {
           .sort((a, b) => (a.name > b.name ? 1 : -1))
           .map((location) => {
             return (
-              <div key={location.id}>
-                <ul>
-                  <li>
-                    <h1>{location.name}</h1>
-                    <h2>{location.address}</h2>
-                    <img
-                      src={location.photo}
-                      alt="dog park"
-                      className="dogParkImageSizing"
-                    />
-                    <p>
-                      Has hosted or is hosting a total of{" "}
-                      {location.meetups.length} meetups
-                    </p>
-                  </li>
-                </ul>
+              <div key={location.id} className="location-card">
+                <h1>{location.name}</h1>
+                <h2>{location.address}</h2>
+                <img
+                  src={location.photo}
+                  alt="dog park"
+                  className="dogParkImageSizing"
+                />
+                <p>
+                  Has hosted or is hosting a total of {location.meetups.length}{" "}
+                  meetups
+                </p>
                 <button
+                  className="edit-button"
                   id={location.id}
                   onClick={(e) => {
                     setPopUpId(parseInt(e.target.id));
