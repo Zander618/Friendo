@@ -13,7 +13,8 @@ const Meetups = ({ setMeetupId }) => {
   const [receivedMeetupCount, setReceivedMeetupCount] = useState("");
   const [showMoreReceivedDetails, setShowMoreReceivedDetails] = useState("");
   const [showMoreSentDetails, setShowMoreSentDetails] = useState("");
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(true);
+  const [showReceived, setShowReceived] = useState(true);
 
   useEffect(() => {
     let filteredDogsRecievedInvitations = meetups.filter(
@@ -196,194 +197,217 @@ const Meetups = ({ setMeetupId }) => {
   // };
 
   return (
-    <div>
+    <div className="meetup-container">
       <h1>
         Once an Invite has been accepted you will receive the owner's email
         address
       </h1>
-      <h1>{receivedMeetupCount} Received Invitations:</h1>
-      {userDogsRecievedInvitations.map((invitation) => {
-        return (
-          <div key={invitation.id} className="meetup-card">
-            <h2>{invitation.invitee.name}</h2>
-            <div className="meetup-card-inner">
-              <h3>Received Invitation</h3>
-              <img
-                src={invitation.invitee.uploaded_image}
-                alt="invitee dog"
-                className="meetup-image-left"
-              />
-              <img
-                src={invitation.invitor.uploaded_image}
-                alt="invitee dog"
-                className="meetup-image-right"
-              />
-              <br />
-              <h3>
-                {invitation.invitee.name} is being requested to meet with{" "}
-                {invitation.invitor.name}
-              </h3>
-              {show ? 
-              <button
-                id={invitation.id}
-                onClick={(e) => {
-                  showReceivedDetails(e);
-                  setShow(false)
-                }}
-              >
-                Show Details
-              </button>
-              :
-              <button
-                onClick={() => {
-                  hideReceivedDetails();
-                  setShow(true)
-                }}
-              >
-                Close Details
-              </button>
-      }
-              {parseInt(showMoreReceivedDetails) === invitation.id ? (
-                <div>
-                  <h3>Date: </h3>
-                  <h4>{invitation.date}</h4>
-                  <h3>From: </h3>
-                  <h4>Username: {invitation.invitor_username}</h4>
-                  <h4>Dog name: {invitation.invitor.name}</h4>
-                  <h3>Location: </h3>
-                  <h4>{invitation.location_name}</h4>
-                  <h3>Address:</h3>
-                  <h4>{invitation.location_address}</h4>
-                  <h3>Time: </h3>
-                  <h4>{invitation.time}</h4>
-                  <h3>Status: </h3>
-                  <h4>{returnResponseStatus(invitation.response)}</h4>
-                  <h3>Requester's Email:</h3>
-                  <h4>
-                    {invitation.response === 1
-                      ? invitation.invitor_email
-                      : // <button
-                        //   id={invitation.id}
-                        //   onClick={(e) => {
-                        //     goToMessages(e)
-                        //     setMeetupId(e.target.id);
-                        //   }}
-                        // >
-                        //   Message
-                        // </button>
-
-                        ""}
-                  </h4>
-                  {invitation.response === 3 ? (
-                    ""
+      <button className="meetup-button meetup-button-show" onClick={() => setShowReceived(!showReceived)}>
+        {showReceived ? "Show Sent Invitations" : "Show Received Invitations"}
+      </button>
+      {showReceived ? (
+        <div>
+          <h1>{receivedMeetupCount} Received Invitations:</h1>
+          {userDogsRecievedInvitations.map((invitation) => {
+            return (
+              <div key={invitation.id} className="meetup-card">
+                <h2>{invitation.invitee.name}</h2>
+                <div className="meetup-card-inner">
+                  <h3 className="meetup-title">Received Invitation</h3>
+                  <div className="meetup-image-container">
+                    <img
+                      src={invitation.invitee.uploaded_image}
+                      alt="invitee dog"
+                      className="meetup-image meetup-image-left"
+                    />
+                    <img
+                      src={invitation.invitor.uploaded_image}
+                      alt="invitee dog"
+                      className="meetup-image meetup-image-right"
+                    />
+                  </div>
+                  <h3>
+                    {invitation.invitee.name} is being requested to meet with{" "}
+                    {invitation.invitor.name}
+                  </h3>
+                  {show ? (
+                    <button
+                      id={invitation.id}
+                      className="meetup-button meetup-button-show"
+                      onClick={(e) => {
+                        showReceivedDetails(e);
+                        setShow(false);
+                      }}
+                    >
+                      Show Details
+                    </button>
                   ) : (
-                    <div>
-                      <button
-                        invite={invitation.id}
-                        dog={invitation.invitee.id}
-                        onClick={(e) => {
-                          handleAcceptedClick(e);
-                        }}
-                      >
-                        Accept
-                      </button>
-                      <button
-                        invite={invitation.id}
-                        dog={invitation.invitee.id}
-                        onClick={(e) => {
-                          handleDeclinedClick(e);
-                        }}
-                      >
-                        Decline
-                      </button>
+                    <button
+                      className="meetup-button meetup-button-close"
+                      onClick={() => {
+                        hideReceivedDetails();
+                        setShow(true);
+                      }}
+                    >
+                      Close Details
+                    </button>
+                  )}
+                  {parseInt(showMoreReceivedDetails) === invitation.id ? (
+                    <div className="meetup-details">
+                      <h3>Date: </h3>
+                      <h4>{invitation.date}</h4>
+                      <h3>From: </h3>
+                      <h4>Username: {invitation.invitor_username}</h4>
+                      <h4>Dog name: {invitation.invitor.name}</h4>
+                      <h3>Location: </h3>
+                      <h4>{invitation.location_name}</h4>
+                      <h3>Address:</h3>
+                      <h4>{invitation.location_address}</h4>
+                      <h3>Time: </h3>
+                      <h4>{invitation.time}</h4>
+                      <h3>Status: </h3>
+                      <h4>{returnResponseStatus(invitation.response)}</h4>
+                      <h3>Requester's Email:</h3>
+                      <h4>
+                        {invitation.response === 1
+                          ? invitation.invitor_email
+                          : // <button
+                            //   id={invitation.id}
+                            //   onClick={(e) => {
+                            //     goToMessages(e)
+                            //     setMeetupId(e.target.id);
+                            //   }}
+                            // >
+                            //   Message
+                            // </button>
+
+                            ""}
+                      </h4>
+                      {invitation.response === 3 ? (
+                        ""
+                      ) : (
+                        <div>
+                          <button
+                            className="meetup-button meetup-button-accept"
+                            invite={invitation.id}
+                            dog={invitation.invitee.id}
+                            onClick={(e) => {
+                              handleAcceptedClick(e);
+                            }}
+                          >
+                            Accept
+                          </button>
+                          <button
+                            className="meetup-button meetup-button-decline"
+                            invite={invitation.id}
+                            dog={invitation.invitee.id}
+                            onClick={(e) => {
+                              handleDeclinedClick(e);
+                            }}
+                          >
+                            Decline
+                          </button>
+                        </div>
+                      )}
                     </div>
+                  ) : (
+                    ""
                   )}
                 </div>
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        );
-      })}
-      <h1>{sentMeetupCount} Sent Invitations:</h1>
-      {userDogsSentInvitations.map((invitation) => {
-        return (
-          <div key={invitation.id} className="meetup-card">
-            <h2>{invitation.invitor.name}</h2>
-            <div className="meetup-card-inner">
-              <h3>Sent Invitation</h3>
-              <img
-                src={invitation.invitor.uploaded_image}
-                alt="invitee dog"
-                className="meetup-image-left"
-              />
-              <img
-                src={invitation.invitee.uploaded_image}
-                alt="invitee dog"
-                className="meetup-image-right"
-              />
-              <br />
-              <h3>
-                {invitation.invitor.name} is requesting a meeting with{" "}
-                {invitation.invitee.name}
-              </h3>
-              {show ? 
-              <button
-                id={invitation.id}
-                onClick={(e) => {
-                  showSentDetails(e);
-                  setShow(false)
-                }}
-              >
-                Show Details
-              </button>
-              :
-              <button
-                onClick={() => {
-                  hideSentDetails();
-                  setShow(true)
-                }}
-              >
-                Close Details
-              </button>
-              }
-              {parseInt(showMoreSentDetails) === invitation.id ? (
-                <div>
-                  <h3>Date: </h3>
-                  <h4>{invitation.date}</h4>
-                  <h3>To: </h3>
-                  <h4>Username: {invitation.invitee_username}</h4>
-                  <h4>Dog name: {invitation.invitee.name}</h4>
-                  <h3>Location: </h3>
-                  <h4>{invitation.location_name}</h4>
-                  <h3>Address:</h3>
-                  <h4>{invitation.location_address}</h4>
-                  <h3>Time: </h3>
-                  <h4>{invitation.time}</h4>
-                  <h3>Status: </h3>
-                  <h4>{returnResponseStatus(invitation.response)}</h4>
-                  <h3>Invitee's Email:</h3>
-                  <h4>
-                    {invitation.response === 1 ? invitation.invitee_email : ""}
-                  </h4>
-                  <button
-                    invite={invitation.id}
-                    dog={invitation.invitor.id}
-                    onClick={(e) => {
-                      handleCancelClick(e);
-                    }}
-                  >
-                    Cancel
-                  </button>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div>
+          <h1>{sentMeetupCount} Sent Invitations:</h1>
+          {userDogsSentInvitations.map((invitation) => {
+            return (
+              <div key={invitation.id} className="meetup-card">
+                <h2>{invitation.invitor.name}</h2>
+                <div className="meetup-card-inner">
+                  <h3 className="meetup-title">Sent Invitation</h3>
+                  <div className="meetup-image-container">
+                    <img
+                      src={invitation.invitor.uploaded_image}
+                      alt="invitee dog"
+                      className="meetup-image meetup-image-left"
+                    />
+                    <img
+                      src={invitation.invitee.uploaded_image}
+                      alt="invitee dog"
+                      className="meetup-image meetup-image-right"
+                    />
+                  </div>
+                  <h3>
+                    {invitation.invitor.name} is requesting a meeting with{" "}
+                    {invitation.invitee.name}
+                  </h3>
+                  {show ? (
+                    <button
+                      id={invitation.id}
+                      className="meetup-button meetup-button-show"
+                      onClick={(e) => {
+                        showSentDetails(e);
+                        setShow(false);
+                      }}
+                    >
+                      Show Details
+                    </button>
+                  ) : (
+                    <button
+                      className="meetup-button meetup-button-close"
+                      onClick={() => {
+                        hideSentDetails();
+                        setShow(true);
+                      }}
+                    >
+                      Close Details
+                    </button>
+                  )}
+                  {parseInt(showMoreSentDetails) === invitation.id ? (
+                    <div className="meetup-details">
+                      <h3>Date:</h3>
+                      <h4>{invitation.date}</h4>
+                      <h3>To:</h3>
+                      <h4>Username: {invitation.invitee_username}</h4>
+                      <h4>Dog name: {invitation.invitee.name}</h4>
+                      <h3>Location:</h3>
+                      <h4>{invitation.location_name}</h4>
+                      <h3>Address:</h3>
+                      <h4>{invitation.location_address}</h4>
+                      <h3>Time:</h3>
+                      <h4>{invitation.time}</h4>
+                      <h3>Status:</h3>
+                      <h4>{returnResponseStatus(invitation.response)}</h4>
+                      <h3>Invitee's Email:</h3>
+                      <h4>
+                        {invitation.response === 1
+                          ? invitation.invitee_email
+                          : ""}
+                      </h4>
+                      {invitation.response !== 3 && (
+                        <button
+                          className="meetup-button meetup-button-cancel"
+                          invite={invitation.id}
+                          dog={invitation.invitor.id}
+                          onClick={(e) => {
+                            handleCancelClick(e);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        );
-      })}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
