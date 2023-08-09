@@ -23,6 +23,7 @@ const Dogs = ({ setDogId }) => {
     <div>
       <div>
         <button
+        className="filter-button"
           onClick={() => {
             setFilterButtonPopup(true);
           }}
@@ -62,6 +63,7 @@ const Dogs = ({ setDogId }) => {
                   Has received {dog.recieved_invitations.length} invitations
                 </h5>
                 <button
+                className="filter-button"
                   onClick={() => {
                     setDogId(dog.id);
                     navigate(`/dogs/${dog.id}/meetups/new`);

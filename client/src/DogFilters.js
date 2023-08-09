@@ -273,6 +273,7 @@ const DogFilters = ({ setDogsToDisplay, trigger, setTrigger }) => {
         <label>
           Age:
           <input
+          className="submission-field"
             type="integer"
             name="age"
             placeholder="Enter You Dog's Age"
