@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "./Context";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import "./AddDog.css";
 
 const AddDog = () => {
   const { user, setUser, userId, dogs, setDogs, setUserDogs } =
@@ -51,7 +52,7 @@ const AddDog = () => {
     { value: 28, label: "Mellow" },
     { value: 29, label: "Graceful" },
     { value: 30, label: "Quick" },
-    { value: 31, label: "Caring" }
+    { value: 31, label: "Caring" },
   ];
 
   const breedOptions = [
@@ -213,8 +214,6 @@ const AddDog = () => {
     vaccination: "",
   });
 
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(`/dogs`, {
@@ -286,82 +285,87 @@ const AddDog = () => {
 
   return (
     <div>
-      <h1>Add Dog</h1>
-      <form onSubmit={handleSubmit}>
-        <label style={{ color: "black" }}>
-          Name:
-          <input
-            type="text"
-            name="name"
-            spellCheck="true"
-            placeholder="Enter Dog's Name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </label>
-        <br></br>
-        <label style={{ color: "black" }}>
-          Breed:
-          <Select
-            options={breedOptions}
-            onChange={handleSelectedBreed}
-            autoFocus={true}
-          />
-        </label>
-        <br></br>
-        <label style={{ color: "black" }}>
-          Traits:
-          <Select
-            isMulti
-            name="colors"
-            options={traitOptions}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleSelectedTraits}
-          />
-        </label>
-        <br></br>
-        <label style={{ color: "black" }}>
-          Enjoyed Activities:
-          <Select
-            isMulti
-            name="colors"
-            options={activityOptions}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleSelectedActivities}
-          />
-        </label>
-        <br></br>
-        <label style={{ color: "black" }}>
-          Age:
-          <input
-            type="text"
-            name="age"
-            spellCheck="true"
-            placeholder="Enter You Dog's Age"
-            value={formData.age}
-            onChange={handleChange}
-          />
-        </label>
-        <br></br>
-        <label style={{ color: "black" }}>
-          Vaccination:
-          <Select
-            options={vaccinationOptions}
-            onChange={handleSelectedVaccination}
-            autoFocus={true}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      {errors.length > 0 && (
-        <ul style={{ color: "red" }}>
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
+      <br />
+      <div className="container">
+        <div className="card">
+          <div className="add-dog-card">
+            <h1>Add Dog</h1>
+            <form onSubmit={handleSubmit}>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  spellCheck="true"
+                  placeholder="Enter Dog's Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </label>
+              <br />
+              <label>
+                Breed:
+                <Select
+                  options={breedOptions}
+                  onChange={handleSelectedBreed}
+                  autoFocus={true}
+                />
+              </label>
+              <br />
+              <label>
+                Traits:
+                <Select
+                  isMulti
+                  options={traitOptions}
+                  className="multi-select"
+                  classNamePrefix="select"
+                  onChange={handleSelectedTraits}
+                />
+              </label>
+              <br />
+              <label>
+                Enjoyed Activities:
+                <Select
+                  isMulti
+                  options={activityOptions}
+                  className="multi-select"
+                  classNamePrefix="select"
+                  onChange={handleSelectedActivities}
+                />
+              </label>
+              <br />
+              <label>
+                Age:
+                <input
+                  type="text"
+                  name="age"
+                  spellCheck="true"
+                  placeholder="Enter Your Dog's Age"
+                  value={formData.age}
+                  onChange={handleChange}
+                />
+              </label>
+              <br />
+              <label>
+                Vaccination:
+                <Select
+                  options={vaccinationOptions}
+                  onChange={handleSelectedVaccination}
+                  autoFocus={true}
+                />
+              </label>
+              <input type="submit" value="Submit" className="submit-button" />
+            </form>
+            {errors.length > 0 && (
+              <ul className="error-list">
+                {errors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

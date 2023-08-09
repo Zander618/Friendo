@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.add-dog-card {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: larger;
+  color: #1b4392;
+  padding: 20px;
+}
+
+.add-dog-card h1 {
+  margin-bottom: 20px;
+}
+
+.add-dog-card label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1b4392;
+}
+
+.add-dog-card input,
+.add-dog-card .multi-select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.submit-button {
+  background-color: #1b4392;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-list {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
